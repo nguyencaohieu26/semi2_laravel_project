@@ -1,0 +1,110 @@
+
+/*----------------------------*/
+/*#######  DEFAULT SETTING  #######*/
+a:hover{
+    text-decoration: none;
+}
+
+/*----------------------------*/
+/*#######  HEADER NAV  #######*/
+.header__top-link{
+    font-size: 12px;
+    color: #292929;
+}
+.header__logo-link{
+    font-size: 30px;
+}
+.header__top-link:hover{
+    text-decoration: underline;
+    color: #0c5460;
+}
+.header__top li:hover .header__top-submenu {
+    visibility: visible;
+    opacity: 1;
+    top: calc(100% + 0.5rem);
+}
+.header__top-submenu {
+    min-width: 8rem;
+    z-index: 2;
+    opacity: 0;
+    visibility: hidden;
+    left: -.2rem;
+    transition: all 0.3s ease-out;
+    top: calc(100% + 0.5rem);
+    background-color: rgb(232, 232, 232);
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+}
+.header__top-submenu ul li a {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    font-size: 13px;
+}
+.header__top-submenu::before {
+    content: "";
+    top: -1rem;
+    left: 1.8rem;
+    position: absolute;
+    border-style: solid;
+    border-width: 0.6rem 0.7rem;
+    border-color: transparent transparent rgb(232, 232, 232) transparent;
+}
+.nav__main-link{
+    font-size: 18px;
+    font-weight: 700;
+    color: #0b2c4f !important;
+}
+/*----------------------------*/
+/*#######  FOOTER  #######*/
+footer{
+    background-color: #f8f8f8;
+}
+.footer__social-link{
+    display: inline-block;
+    margin-left: .7rem;
+}
+.footer__social-item:first-child  .footer__social-link{
+    margin-left: 0;
+}
+.footer__social-link i{
+    width: 33px;
+    height: 33px;
+    font-size: 20px;
+    line-height: 33px;
+    text-align: center;
+    border-radius: 50%;
+    border: 1px solid gray;
+}
+.footer__static-1 ul {
+    margin-top: 1rem;
+}
+.footer__static-1 ul li{
+    line-height: 2;
+    transition: all .2s ease-in;
+}
+.footer__static-1 ul li:hover{
+    transform: translateX(8px);
+}
+.footer-copyright{
+    font-weight: 500;
+}
+footer .accordion .accordion-item a{
+    padding: 6px 15px;
+}
+footer .accordion-header:active{
+    background-color: #3988e9;
+    color: white;
+}
+footer .accordion .accordion-item a:hover{
+    background-color: rgb(177, 177, 177);
+    color: white !important;
+}
+footer .accordion .accordion-item a i{
+    font-size: 13px;
+}
+@media only screen and (min-width: 767px){
+    .footer-copyright{
+        text-align: start !important;
+    }
+}
+
+
