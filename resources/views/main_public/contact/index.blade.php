@@ -169,7 +169,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <input type="number" class="form-control mt-2" placeholder="Phone" required>
+                                        <input type="text" class="form-control mt-2" placeholder="Phone" required>
                                     </div>
                                 </div>
                                 <div class="col-12">
