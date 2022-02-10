@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',function (){
     return view('main_public.index');
 });
+Route::get('/contact',function (){
+   return view('main_public.contact.index');
+});
+    Route::get('/aboutus',function (){
+        return view('main_public.aboutus.index');
+    });

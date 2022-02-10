@@ -108,3 +108,71 @@ footer .accordion .accordion-item a i{
 }
 
 
+/*----------------------------*/
+/*#######  CONTACT  #######*/
+.contact__main--underlined{
+    border-bottom: 2px solid #c29a40;
+    width: 5rem;
+    margin-left: 6rem;
+}
+.contact--padd{
+    padding-left: 0!important;
+}
+.contact__items--text{
+    bottom: 16px;
+    background-color: #00253e;
+}
+.letter__spacing{
+    letter-spacing: 1px;
+}
+@media only screen and (max-width: 568px){
+    .contact__main--title h3{
+        padding-left: 0!important;
+    }
+    .contact__main--underlined{
+        margin-left: 3rem;
+    }
+    .contact__items--img{
+        padding-left: 1rem;
+    }
+    .contact__items--text{
+        left: 16px;
+    }
+}
+/*----------------------------*/
+/*####### END CONTACT  #######*/
+
+/*----------------------------*/
+/*#######  ABOUT US  #######*/
+.about__banner--img{
+    max-height: 20rem;
+    width: 100%;
+    max-width: 100%;
+    image-rendering: pixelated;
+    object-fit: cover;
+}
+.about__title{
+    background-color: rgb(241,241,241);
+}
+.about__title--heading{
+    padding: 1% 0%;
+}
+.about__main--underlined{
+    border-bottom: 2px solid #c29a40;
+    width: 5rem;
+}
+.about__items--text{
+    bottom: 25px;
+    background-color: #00253e;
+}
+@media only screen and (max-width: 768px){
+    .about__main--text{
+        width: 100%!important;
+    }
+    .about__main--text, .about__main--heading, .about__title--heading, .about__title--ml {
+        margin-left: 0!important;
+    }
+}
+/*----------------------------*/
+/*####### END ABOUT US  #######*/
+
