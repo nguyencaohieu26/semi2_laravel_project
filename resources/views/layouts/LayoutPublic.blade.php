@@ -5,11 +5,15 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"/>
     {{-- BOOTSTRAP LINK STYLESHEET  --}}
     <link rel="stylesheet" href="{{mix('css/app.css')}}">
     {{--  CUSTOM LINK STYLESHEET  --}}
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    {{--    --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+    {{--    --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css" />
     <title>@yield('page-title')</title>
 </head>
 <body>
@@ -27,7 +31,7 @@
             <div class="px-5">
                 <div class="row px-3">
                     <div class="footer__logo col-md-6 col-lg-3">
-                        <a href="#" class="footer__logo-link">
+                        <a href="/" class="footer__logo-link">
                             <h3>Art's Auction</h3>
                         </a>
                     </div>
@@ -36,23 +40,23 @@
                         <ul class="list-unstyled">
                             <li>
                                 <i class="fas fa-caret-right"></i>
-                                <a href="#">About Sytheby's</a>
+                                <a href="#">About Art's Auction</a>
                             </li>
                             <li>
                                 <i class="fas fa-caret-right"></i>
-                                <a href="#">Location</a>
+                                <a href="{{route('error-page')}}">Location</a>
                             </li>
                             <li>
                                 <i class="fas fa-caret-right"></i>
-                                <a href="#">Blog</a>
+                                <a href="">Blog</a>
                             </li>
                             <li>
                                 <i class="fas fa-caret-right"></i>
-                                <a href="#">Privacy</a>
+                                <a href="{{route('error-page')}}">Privacy</a>
                             </li>
                             <li>
                                 <i class="fas fa-caret-right"></i>
-                                <a href="#">Term & Conditions</a>
+                                <a href="{{route('error-page')}}">Term & Conditions</a>
                             </li>
                         </ul>
                     </div>
@@ -65,15 +69,15 @@
                             </li>
                             <li>
                                 <i class="fas fa-caret-right"></i>
-                                <a href="#">Buy Now</a>
+                                <a href="{{route('error-page')}}">Buy Now</a>
                             </li>
                             <li>
                                 <i class="fas fa-caret-right"></i>
-                                <a href="#">Selling</a>
+                                <a href="{{route('error-page')}}">Selling</a>
                             </li>
                             <li>
                                 <i class="fas fa-caret-right"></i>
-                                <a href="#">Art Finance</a>
+                                <a href="{{route('error-page')}}">Art Finance</a>
                             </li>
                         </ul>
                     </div>
@@ -90,19 +94,19 @@
                             </li>
                             <li>
                                 <i class="fas fa-caret-right"></i>
-                                <a href="#">Payment</a>
+                                <a href="{{route('error-page')}}">Payment</a>
                             </li>
                             <li>
                                 <i class="fas fa-caret-right"></i>
-                                <a href="#">Shipping</a>
+                                <a href="{{route('error-page')}}">Shipping</a>
                             </li>
                             <li>
                                 <i class="fas fa-caret-right"></i>
-                                <a href="#">Buying guides</a>
+                                <a href="{{route('error-page')}}">Buying guides</a>
                             </li>
                             <li>
                                 <i class="fas fa-caret-right"></i>
-                                <a href="#">Selling guides</a>
+                                <a href="{{route('error-page')}}">Selling guides</a>
                             </li>
                             <li>
                                 <i class="fas fa-caret-right"></i>
@@ -129,10 +133,10 @@
                         <div class="card-body">
                             <ul class="list-unstyled">
                                 <li><a class="d-block" href="#"><i class="fas fa-caret-right"></i> <span>About Art's Auction</span> </a></li>
-                                <li><a class="d-block" href="#"><i class="fas fa-caret-right"></i> <span> Location</span></a></li>
+                                <li><a class="d-block" href="{{route('error-page')}}"><i class="fas fa-caret-right"></i> <span> Location</span></a></li>
                                 <li><a class="d-block" href="#"><i class="fas fa-caret-right"></i> <span> Blog</span></a></li>
-                                <li><a class="d-block" href="#"><i class="fas fa-caret-right"></i> <span>Privacy</span> </a></li>
-                                <li><a class="d-block" href="#"><i class="fas fa-caret-right"></i> <span>Term & Conditions</span> </a></li>
+                                <li><a class="d-block" href="{{route('error-page')}}"><i class="fas fa-caret-right"></i> <span>Privacy</span> </a></li>
+                                <li><a class="d-block" href="{{route('error-page')}}"><i class="fas fa-caret-right"></i> <span>Term & Conditions</span> </a></li>
                             </ul>
                         </div>
                     </div>
@@ -150,9 +154,9 @@
                         <div class="card-body">
                             <ul class="list-unstyled">
                                 <li><a class="d-block" href="#"><i class="fas fa-caret-right mr-2"></i><span>Auctions</span></a></li>
-                                <li><a class="d-block" href="#"><i class="fas fa-caret-right mr-2"></i><span>Buy Now</span></a></li>
-                                <li><a class="d-block" href="#"><i class="fas fa-caret-right mr-2"></i><span>Selling</span></a></li>
-                                <li><a class="d-block" href="#"><i class="fas fa-caret-right mr-2"></i><span>Art Finance</span></a></li>
+                                <li><a class="d-block" href="{{route('error-page')}}"><i class="fas fa-caret-right mr-2"></i><span>Buy Now</span></a></li>
+                                <li><a class="d-block" href="{{route('error-page')}}"><i class="fas fa-caret-right mr-2"></i><span>Selling</span></a></li>
+                                <li><a class="d-block" href="{{route('error-page')}}"><i class="fas fa-caret-right mr-2"></i><span>Art Finance</span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -188,16 +192,16 @@
             <div class="container-lg px-5">
                 <div class="row align-items-center">
                     <div class="col-md-6 order-2 mt-2 mt-md-0 order-md-0">
-                        <p class="footer-copyright text-center">&copy; 2021 Sotheby's. All rights reserved.</p>
+                        <p class="footer-copyright text-center">&copy; 2022 Art's Auction. All rights reserved.</p>
                     </div>
                     <div class="col-md-6 order-1">
                         <nav>
                             <ul class="footer__social-list list-unstyled d-flex align-items-center justify-content-center justify-content-md-end">
-                                <li class="footer__social-item"><a href="#" class="footer__social-link"><i class="fab fa-facebook-f"></i></a></li>
-                                <li class="footer__social-item"><a href="#" class="footer__social-link"><i class="fab fa-twitter"></i></a></li>
-                                <li class="footer__social-item"><a href="#" class="footer__social-link"><i class="fab fa-instagram"></i></a></li>
-                                <li class="footer__social-item"><a href="#" class="footer__social-link"><i class="fab fa-youtube-square"></i></a></li>
-                                <li class="footer__social-item"><a href="#" class="footer__social-link"><i class="fab fa-pinterest-p"></i></a></li>
+                                <li class="footer__social-item"><a href="{{route('error-page')}}" class="footer__social-link"><i class="fab fa-facebook-f"></i></a></li>
+                                <li class="footer__social-item"><a href="{{route('error-page')}}" class="footer__social-link"><i class="fab fa-twitter"></i></a></li>
+                                <li class="footer__social-item"><a href="{{route('error-page')}}" class="footer__social-link"><i class="fab fa-instagram"></i></a></li>
+                                <li class="footer__social-item"><a href="{{route('error-page')}}" class="footer__social-link"><i class="fab fa-youtube-square"></i></a></li>
+                                <li class="footer__social-item"><a href="{{route('error-page')}}" class="footer__social-link"><i class="fab fa-pinterest-p"></i></a></li>
                             </ul>
                         </nav>
                     </div>
@@ -207,6 +211,10 @@
     </div>
 </footer>
 <script defer src="{{mix('js/app.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.countdown/2.2.0/jquery.countdown.min.js"></script>
 @yield('script-tag')
 </body>
 </html>

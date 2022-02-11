@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',function (){
-    return view('main_public.index');
-});
+Route::get('/',[HomeController::class,'index']);
+
+Route::get('/products',[ProductController::class,'products_field_filter']);
+
+Route::get('/error-page',function (){
+    return view('main_public.error');
+})->name('error-page');
