@@ -138,12 +138,16 @@ footer .accordion .accordion-item a i{
     .contact__items--text{
         left: 16px;
     }
+    .explore__items::after{
+        left: 60px;
+    }
 }
 /*----------------------------*/
 /*####### END CONTACT  #######*/
 
 /*----------------------------*/
 /*#######  ABOUT US  #######*/
+/* --------- header ---------  */
 .about__banner--img{
     max-height: 20rem;
     width: 100%;
@@ -157,20 +161,51 @@ footer .accordion .accordion-item a i{
 .about__title--heading{
     padding: 1% 0%;
 }
-.about__main--underlined{
-    border-bottom: 2px solid #c29a40;
-    width: 5rem;
+/*-------- End header ----------*/
+
+/*-------- Explore ----------*/
+.explore__items{
+    position: relative;
+    padding: 5px;
 }
-.about__items--text{
-    bottom: 25px;
-    background-color: #00253e;
+.explore__items::after{
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    z-index: -1;
+    box-shadow: 10px 35px 50px -10px rgba(255,188,188,0.5);
+    /*box-shadow: 2px 58px 19px -10px rgb(255 188 188 / 50%);*/
+    transition: all 0.35s cubic-bezier(0.49, -0.07, 0.32, 1.32);
+    width: 140px;
+    height: 140px;
+    bottom: 40px;
 }
+.explore__items:hover{
+    padding: 0!important;
+}
+.explore__items-text h6{
+    font-size: 18px;
+}
+/*-------- end explore --------*/
+
+/*-------- accordion ---------*/
+.accordion .card .card-header{
+    position: relative;
+    display: block;
+    background-color: #fff;
+    border: none;
+}
+.accordion .card .card-header .fa-solid{
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    font-size: 30px;
+}
+/*-------- end accordion -------*/
 @media only screen and (max-width: 768px){
-    .about__main--text{
-        width: 100%!important;
-    }
-    .about__main--text, .about__main--heading, .about__title--heading, .about__title--ml {
-        margin-left: 0!important;
+    /*============= ABOUT ============*/
+    .explore__items::after{
+        left: 100px;
     }
 }
 /*----------------------------*/
