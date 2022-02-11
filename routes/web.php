@@ -21,3 +21,13 @@ Route::get('/products',[ProductController::class,'products_field_filter']);
 Route::get('/error-page',function (){
     return view('main_public.error');
 })->name('error-page');
+
+Route::get('/',function (){
+    return view('main_public.index');
+});
+Route::get('/contact',function (){
+   return view('main_public.contact.index');
+});
+    Route::get('/aboutus',function (){
+        return view('main_public.aboutus.index');
+    });

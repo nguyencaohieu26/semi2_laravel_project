@@ -462,6 +462,7 @@ footer .accordion .accordion-item a i{
     border-radius: 4px;
 }
 
+<<<<<<< HEAD
 /**/
 .lot-filter-container{
     display: none;
@@ -524,3 +525,108 @@ footer .accordion .accordion-item a i{
     display: inline-block;
     background-color: #f8f8f8;
 }
+=======
+/*----------------------------*/
+/*#######  CONTACT  #######*/
+.contact__main--underlined{
+    border-bottom: 2px solid #c29a40;
+    width: 5rem;
+    margin-left: 6rem;
+}
+.contact--padd{
+    padding-left: 0!important;
+}
+.contact__items--text{
+    bottom: 16px;
+    background-color: #00253e;
+}
+.letter__spacing{
+    letter-spacing: 1px;
+}
+@media only screen and (max-width: 568px){
+    .contact__main--title h3{
+        padding-left: 0!important;
+    }
+    .contact__main--underlined{
+        margin-left: 3rem;
+    }
+    .contact__items--img{
+        padding-left: 1rem;
+    }
+    .contact__items--text{
+        left: 16px;
+    }
+    .explore__items::after{
+        left: 60px;
+    }
+}
+/*----------------------------*/
+/*####### END CONTACT  #######*/
+
+/*----------------------------*/
+/*#######  ABOUT US  #######*/
+/* --------- header ---------  */
+.about__banner--img{
+    max-height: 20rem;
+    width: 100%;
+    max-width: 100%;
+    image-rendering: pixelated;
+    object-fit: cover;
+}
+.about__title{
+    background-color: rgb(241,241,241);
+}
+.about__title--heading{
+    padding: 1% 0%;
+}
+/*-------- End header ----------*/
+
+/*-------- Explore ----------*/
+.explore__items{
+    position: relative;
+    padding: 5px;
+}
+.explore__items::after{
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    z-index: -1;
+    box-shadow: 10px 35px 50px -10px rgba(255,188,188,0.5);
+    /*box-shadow: 2px 58px 19px -10px rgb(255 188 188 / 50%);*/
+    transition: all 0.35s cubic-bezier(0.49, -0.07, 0.32, 1.32);
+    width: 140px;
+    height: 140px;
+    bottom: 40px;
+}
+.explore__items:hover{
+    padding: 0!important;
+}
+.explore__items-text h6{
+    font-size: 18px;
+}
+/*-------- end explore --------*/
+
+/*-------- accordion ---------*/
+.accordion .card .card-header{
+    position: relative;
+    display: block;
+    background-color: #fff;
+    border: none;
+}
+.accordion .card .card-header .fa-solid{
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    font-size: 30px;
+}
+/*-------- end accordion -------*/
+@media only screen and (max-width: 768px){
+    /*============= ABOUT ============*/
+    .explore__items::after{
+        left: 100px;
+    }
+}
+/*----------------------------*/
+/*####### END ABOUT US  #######*/
+
+>>>>>>> 8832411e750a01e9eecc2707b526efb2182b41d3
