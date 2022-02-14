@@ -36,8 +36,12 @@
                                 <label for="6">Live Now</label>
                             </div>
                             <div>
-                                <input id="6" class="position-relative" style="top: 2px" type="checkbox">
-                                <label for="6">Upcoming Now</label>
+                                <input id="8" class="position-relative" style="top: 2px" type="checkbox">
+                                <label for="8">Upcoming Now</label>
+                            </div>
+                            <div>
+                                <input id="7" class="position-relative" style="top: 2px" type="checkbox">
+                                <label for="7"></label>
                             </div>
                         </div>
                     </div>

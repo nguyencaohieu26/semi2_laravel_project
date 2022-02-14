@@ -9,40 +9,42 @@ class ArtistController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        return Artist::paginate(10);
     }
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
         //
+        return  view('admin.artists.create');
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+        $validate = $request->validate([
+           "name"           => 'bail|required|max:100',
+           "date_of_birth"  => 'required|date',
+           "description"    => 'required|'
+        ]);
+        $artist = new Artist;
+        $artist->name = $request->name;
+        $artist->date_of_birth = $request->date_of_birth;
+        $artist->description = $request->description;
+        $artist->save();
+        return redirect()->route('admin-artists')->with('create-artist','Create Artist Successfully');
         //
     }
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\Artist  $artist
-     * @return \Illuminate\Http\Response
      */
     public function show(Artist $artist)
     {
@@ -51,35 +53,40 @@ class ArtistController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Artist  $artist
-     * @return \Illuminate\Http\Response
      */
-    public function edit(Artist $artist)
+    public function edit($id)
     {
-        //
+        $artist = Artist::findOrFail($id);
+        return view('admin.artists.edit',compact('artist'));
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Artist  $artist
-     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Artist $artist)
+    public function update(Request $request,$id)
     {
-        //
+        $validate = $request->validate([
+            "name"           => 'bail|required|max:100',
+            "date_of_birth"  => 'required|date',
+            "description"    => 'required|'
+        ]);
+        $artist = Artist::findOrFail($id);
+        $artist->name = $request->name;
+        $artist->date_of_birth = $request->date_of_birth;
+        $artist->description = $request->description;
+        $artist->save();
+        return redirect()->route('admin-artists')->with('edit-artist','Update Artist Successfully');
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Artist  $artist
-     * @return \Illuminate\Http\Response
+
      */
-    public function destroy(Artist $artist)
+    public function destroy($id)
     {
+        Artist::findOrFail($id);
+        $res = Artist::destroy($id);
+        return "Remove Artist Successfully";
         //
     }
 }

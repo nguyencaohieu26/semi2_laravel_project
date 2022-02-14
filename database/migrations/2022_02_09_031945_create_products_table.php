@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->longText('description');
             $table->unsignedBigInteger('artist_id');
             $table->double('start_price');
+            $table->double('current_price')->default(0);
             $table->date('date_start');
             $table->date('date_end');
             $table->unsignedBigInteger('status_id')->default(1);

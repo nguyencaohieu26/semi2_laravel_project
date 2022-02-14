@@ -16,6 +16,7 @@ class CreateProductStatusesTable extends Migration
         Schema::create('product__statuses', function (Blueprint $table) {
             $table->id();
             $table->string('name',100)->unique();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

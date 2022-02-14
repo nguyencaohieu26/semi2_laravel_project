@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+
+/*Pagination*/
+.pagination-custom ul .page-item-custom{
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+    margin-right: 3px;
+    line-height: 20px;
+    border-radius: 3px;
+    text-align: center;
+    border: 1px solid gray;
+    transition: .2s all ease-in-out;
+}
+.pagination-custom ul .page-item-custom:hover,.pagination-custom ul .page-item-custom.active{
+    background-color: #292929;
+    color: white;
+}
+/**/
+.response-message{
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(100px);
+    transition: .3s all ease-in-out;
+}
+.response-message.active{
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+.error-message{
+    margin-top: 3px;
+    font-size: 13px;
+    color: rgba(222, 28, 28, 0.99);
+}
+/**/
+.artist-name,.artist-description,.category-list{
+    font-family: 'Poppins', sans-serif;
+}
+.artist-description{
+    font-size: 13px;
+}
+table tbody tr:hover{
+    cursor: pointer;
+    background-color: rgba(173, 216, 230, 0.2);
+}

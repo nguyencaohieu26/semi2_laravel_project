@@ -4,45 +4,54 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
+        return Category::paginate(5);
         //
     }
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        return view('admin.categories.create');
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+        $validate = $request->validate([
+            'category_code' =>'bail|required|unique:categories,category_code',
+            'name' => 'bail|required|unique:categories,name',
+            'upload_img' => 'bail|required|mimes:jpg,png,jpeg',
+        ]);
+
+        $newImageName = time().'-'.$request->category_code.'.'.$request->upload_img->extension();
+
+        $request->upload_img->move(public_path('images_store/categories'),$newImageName);
+
+        $category = new Category;
+        $category->name = $request->name;
+        $category->category_code = $request->category_code;
+        $category->image = $newImageName;
+        $category->save();
+
+        return redirect()->route('admin-categories')->with('create-category','Create category successfully');
         //
     }
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
      */
     public function show(Category $category)
     {
@@ -51,35 +60,57 @@ class CategoryController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
+        $category = Category::findOrFail($id);
+        return view('admin.categories.edit',compact('category'));
         //
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $id)
     {
-        //
+        if(isset($request->upload_img)){
+            $validate = $request->validate([
+                'category_code' =>['bail','required', Rule::unique('categories')->ignore($id)],
+                'name' => ['bail','required', Rule::unique('categories')->ignore($id)],
+                'upload_img' => 'bail|required|mimes:jpg,png,jpeg',
+            ]);
+
+            $newImageName = time().'-'.$request->category_code.'.'.$request->upload_img->extension();
+
+            $request->upload_img->move(public_path('images_store/categories'),$newImageName);
+
+            $category =  Category::findOrFail($id);
+            $category->name          = $request->name;
+            $category->category_code = $request->category_code;
+            $category->image         = $newImageName;
+            $category->save();
+            return redirect()->route('admin-categories')->with('edit-category','Edit category successfully');
+        }else{
+            $validate = $request->validate([
+                'category_code' =>['bail','required', Rule::unique('categories')->ignore($id)],
+                'name' => ['bail','required', Rule::unique('categories')->ignore($id)],
+            ]);
+            $category =  Category::findOrFail($id);
+            $category->name          = $request->name;
+            $category->category_code = $request->category_code;
+            $category->save();
+            return redirect()->route('admin-categories')->with('edit-category','Edit category successfully');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
+        Category::findOrFail($id);
+        $res = Category::destroy($id);
+        return "Remove Artist Successfully";
         //
     }
 }
