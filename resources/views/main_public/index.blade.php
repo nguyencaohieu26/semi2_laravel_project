@@ -10,7 +10,7 @@
                     <p>
                         Find, sell and <br> collect truly rare artworks
                     </p>
-                    <a class="home-banner-btn" href="#">DISCOVER</a>
+                    <a class="home-banner-btn" href="{{route('products-page')}}">DISCOVER</a>
                 </div>
             </div>
         </section>
@@ -42,7 +42,7 @@
                 <h3 class="main-section-heading position-relative">Trending auctions</h3>
                 <div class="pt-2 d-flex align-items-center justify-content-between">
                     <p class="mt-0">See what's popular across thousands of items</p>
-                    <a href="#">
+                    <a href="{{route('products-page')}}">
                         <span class="mr-1">Views All</span>
                         <i style="font-size: 10px" class="fa-solid fa-arrow-right-long"></i>
                     </a>
@@ -141,7 +141,7 @@
             <div class="px-5 h-100">
                 <div class="row row-bg m-0">
                     <div class="col-sm-12 col-md-7 px-4 py-5">
-                        <a href="#">
+                        <a href="{{route('products-page')}}">
                             <h3>Buy now</h3>
                             <p class="buy__now-text">Buy or sell fine art on your schedule</p>
                             <p class="buy__now-btn mt-4 d-inline-block">Browser Auction Now</p>
@@ -160,7 +160,10 @@
         {{--  FEATURE STORIES & BLOG  --}}
         <section class="p-5">
             <div>
-                <h3 class="main-section-heading position-relative">Feature stories & blog</h3>
+                <div class="d-flex justify-content-between align-items-center">
+                    <h3 class="main-section-heading position-relative">Feature stories & blog</h3>
+                    <a href="{{route('blog-page')}}">View All</a>
+                </div>
                     <div class="mt-4">
                         <div class="row blog-background">
                             <div class="col-md-6">

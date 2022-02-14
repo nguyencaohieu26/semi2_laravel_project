@@ -18,15 +18,17 @@
     |
     */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home-index');
 
 Route::get('/contact',function (){
    return view('main_public.contact.index');
-});
+})->name('contact-page');
 
 Route::get('/aboutus',function (){
         return view('main_public.aboutus.index');
-});
+})->name('about-page');
+
+Route::get('/products',[ProductController::class,'products_field_filter'])->name('products-page');
 
 Route::get('/error-page', function () {
     return view('main_public.error');
@@ -34,10 +36,12 @@ Route::get('/error-page', function () {
 
 Route::get('/blog', function () {
     return view('main_public.blog.index');
-});
+})->name('blog-page');
+
 Route::get('/blog_page2', function () {
     return view('main_public.blog.page2_index');
 });
+
 Route::get('/blog_detail', function () {
     return view('main_public.blog.blog_detail1');
 });

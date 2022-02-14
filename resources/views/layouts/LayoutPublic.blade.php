@@ -32,7 +32,7 @@
             <div class="px-5">
                 <div class="row px-3">
                     <div class="footer__logo col-md-6 col-lg-3">
-                        <a href="/" class="footer__logo-link">
+                        <a href="{{route('home-index')}}" class="footer__logo-link">
                             <h3>Art's Auction</h3>
                         </a>
                     </div>
@@ -41,7 +41,7 @@
                         <ul class="list-unstyled">
                             <li>
                                 <i class="fas fa-caret-right"></i>
-                                <a href="#">About Art's Auction</a>
+                                <a href="{{route('about-page')}}">About Art's Auction</a>
                             </li>
                             <li>
                                 <i class="fas fa-caret-right"></i>
@@ -49,7 +49,7 @@
                             </li>
                             <li>
                                 <i class="fas fa-caret-right"></i>
-                                <a href="">Blog</a>
+                                <a href="{{route('blog-page')}}">Blog</a>
                             </li>
                             <li>
                                 <i class="fas fa-caret-right"></i>
@@ -66,11 +66,11 @@
                         <ul class="list-unstyled">
                             <li>
                                 <i class="fas fa-caret-right"></i>
-                                <a href="#">Auctions</a>
+                                <a href="{{route('products-page')}}">Auctions</a>
                             </li>
                             <li>
                                 <i class="fas fa-caret-right"></i>
-                                <a href="{{route('error-page')}}">Buy Now</a>
+                                <a href="{{route('products-page')}}">Buy Now</a>
                             </li>
                             <li>
                                 <i class="fas fa-caret-right"></i>
@@ -87,11 +87,11 @@
                         <ul class="list-unstyled">
                             <li>
                                 <i class="fas fa-caret-right"></i>
-                                <a href="#">FAQ</a>
+                                <a href="{{route('error-page')}}">FAQ</a>
                             </li>
                             <li>
                                 <i class="fas fa-caret-right"></i>
-                                <a href="#">Contact Us</a>
+                                <a href="{{route('contact-page')}}">Contact Us</a>
                             </li>
                             <li>
                                 <i class="fas fa-caret-right"></i>
@@ -111,7 +111,7 @@
                             </li>
                             <li>
                                 <i class="fas fa-caret-right"></i>
-                                <a href="#">SiteMap</a>
+                                <a href="{{route('error-page')}}">SiteMap</a>
                             </li>
                         </ul>
                     </div>
@@ -155,7 +155,7 @@
                         <div class="card-body">
                             <ul class="list-unstyled">
                                 <li><a class="d-block" href="#"><i class="fas fa-caret-right mr-2"></i><span>Auctions</span></a></li>
-                                <li><a class="d-block" href="{{route('error-page')}}"><i class="fas fa-caret-right mr-2"></i><span>Buy Now</span></a></li>
+                                <li><a class="d-block" href="{{route('products-page')}}"><i class="fas fa-caret-right mr-2"></i><span>Buy Now</span></a></li>
                                 <li><a class="d-block" href="{{route('error-page')}}"><i class="fas fa-caret-right mr-2"></i><span>Selling</span></a></li>
                                 <li><a class="d-block" href="{{route('error-page')}}"><i class="fas fa-caret-right mr-2"></i><span>Art Finance</span></a></li>
                             </ul>
@@ -175,13 +175,13 @@
                     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#footerAccordion">
                         <div class="card-body">
                             <ul class="list-unstyled">
-                                <li><a class="d-block" href="#"><i class="fas fa-caret-right mr-2"></i><span>FAQ</span></a></li>
-                                <li><a class="d-block" href="#"><i class="fas fa-caret-right mr-2"></i><span>Contact Us</span></a></li>
-                                <li><a class="d-block" href="#"><i class="fas fa-caret-right mr-2"></i><span>Payment</span></a></li>
-                                <li><a class="d-block" href="#"><i class="fas fa-caret-right mr-2"></i><span>Shipping</span></a></li>
-                                <li><a class="d-block" href="#"><i class="fas fa-caret-right mr-2"></i><span>Buying guides</span></a></li>
-                                <li><a class="d-block" href="#"><i class="fas fa-caret-right mr-2"></i><span>Selling guides</span></a></li>
-                                <li><a class="d-block" href="#"><i class="fas fa-caret-right mr-2"></i><span>SiteMap</span></a></li>
+                                <li><a class="d-block" href="{{route('error-page')}}"><i class="fas fa-caret-right mr-2"></i><span>FAQ</span></a></li>
+                                <li><a class="d-block" href="{{route('about-page')}}"><i class="fas fa-caret-right mr-2"></i><span>Contact Us</span></a></li>
+                                <li><a class="d-block" href="{{route('error-page')}}"><i class="fas fa-caret-right mr-2"></i><span>Payment</span></a></li>
+                                <li><a class="d-block" href="{{route('error-page')}}"><i class="fas fa-caret-right mr-2"></i><span>Shipping</span></a></li>
+                                <li><a class="d-block" href="{{route('error-page')}}"><i class="fas fa-caret-right mr-2"></i><span>Buying guides</span></a></li>
+                                <li><a class="d-block" href="{{route('error-page')}}"><i class="fas fa-caret-right mr-2"></i><span>Selling guides</span></a></li>
+                                <li><a class="d-block" href="{{route('error-page')}}"><i class="fas fa-caret-right mr-2"></i><span>SiteMap</span></a></li>
                             </ul>
                         </div>
                     </div>

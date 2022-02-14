@@ -7,21 +7,21 @@
                     <a class="header__top-link" href="#">ABOUT</a>
                     <div class="header__top-submenu position-absolute">
                         <ul class="list-unstyled">
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Our Partner</a></li>
+                            <li><a href="{{route('about-page')}}">About Us</a></li>
+                            <li><a href="{{route('error-page')}}">Our Partner</a></li>
                         </ul>
                     </div>
                 </li>
-                <li><a href="#" class="header__top-link">BLOG</a></li>
-                <li><a href="#" class="header__top-link px-3">FAQ</a></li>
-                <li><a href="#" class="header__top-link">CONTACT US</a></li>
+                <li><a href="{{route('blog-page')}}" class="header__top-link">BLOG</a></li>
+                <li><a href="{{route('error-page')}}" class="header__top-link px-3">FAQ</a></li>
+                <li><a href="{{route('contact-page')}}" class="header__top-link">CONTACT US</a></li>
             </ul>
         </nav>
     </div>
     <hr class="my-0 mb-2">
     <div class="header__top--nav px-5 d-flex">
         <nav class="navbar navbar-expand-lg navbar-light flex-grow-1">
-            <a class="navbar-brand header__logo-link" href="#">Art's Auction</a>
+            <a class="navbar-brand header__logo-link" href="{{route('home-index')}}">Art's Auction</a>
             <div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#header__main-nav" aria-controls="header__main-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="text-black-50"><i class="fa-solid fa-bars-staggered"></i></span>
@@ -30,16 +30,16 @@
             <div class="collapse navbar-collapse justify-content-end" id="header__main-nav">
                 <ul class="navbar-nav pr-xl-5 main-nav-ui position-relative">
                     <li class="nav-item">
-                        <a class="nav-link nav__main-link" href="#">AUCTIONS</a>
+                        <a class="nav-link nav__main-link" href="{{route('products-page')}}">AUCTIONS</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav__main-link" href="#">DEPARTMENTS</a>
+                        <a class="nav-link nav__main-link" href="{{route('error-page')}}">DEPARTMENTS</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav__main-link" href="#">BUY NOW</a>
+                        <a class="nav-link nav__main-link" href="{{route('products-page')}}">BUY NOW</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav__main-link" href="#">SELL</a>
+                        <a class="nav-link nav__main-link" href="{{route('products-page')}}">SELL</a>
                     </li>
                 </ul>
                 <div class="my-2 my-lg-0 position-relative search-container">
@@ -49,7 +49,7 @@
             </div>
         </nav>
         <div>
-            <div class="ml-2 border rounded-circle position-relative" style="padding: 6px 8px; cursor: pointer;top: 18px">
+            <div class="ml-2 border rounded-circle position-relative" style="padding: 6px 8px; cursor: pointer;top: 16px">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 6h-2c0-2.76-2.24-5-5-5S7 3.24 7 6H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3H9c0-1.66 1.34-3 3-3zm7 17H5V8h14v12zm-7-8c-1.66 0-3-1.34-3-3H7c0 2.76 2.24 5 5 5s5-2.24 5-5h-2c0 1.66-1.34 3-3 3z"/></svg>
             </div>
         </div>

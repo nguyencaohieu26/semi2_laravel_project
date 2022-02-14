@@ -58,10 +58,11 @@ a:hover{
 /*#######  HEADER NAV  #######*/
 .header__top-link{
     font-size: 12px;
+    text-decoration: none;
     color: #292929;
 }
 .header__logo-link{
-    font-size: 30px;
+    font-size: 30px !important;
 }
 .header__top-link:hover{
     text-decoration: underline;
@@ -347,6 +348,7 @@ footer{
 }
 footer a{
     color: #292929;
+    text-decoration: none;
 }
 .footer__social-link{
     display: inline-block;

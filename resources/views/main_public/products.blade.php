@@ -32,16 +32,16 @@
                         <h5 class="border-bottom pb-2"><i class="fa-brands fa-galactic-republic"></i> <span class="font-weight-bold">Lots Status</span></h5>
                         <div class="form-status">
                             <div>
-                                <input id="6" class="position-relative" style="top: 2px" type="checkbox">
+                                <input id="6" class="position-relative"  type="checkbox">
                                 <label for="6">Live Now</label>
                             </div>
                             <div>
-                                <input id="8" class="position-relative" style="top: 2px" type="checkbox">
+                                <input id="8" class="position-relative" type="checkbox">
                                 <label for="8">Upcoming Now</label>
                             </div>
                             <div>
-                                <input id="7" class="position-relative" style="top: 2px" type="checkbox">
-                                <label for="7"></label>
+                                <input id="7" class="position-relative" type="checkbox">
+                                <label for="7">Result</label>
                             </div>
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                         <div class="form-category">
                             @foreach($categories as $category)
                                 <div>
-                                    <input id="{{$category->category_code}}" name="category" class="position-relative" style="top: 2px" type="checkbox">
+                                    <input id="{{$category->category_code}}" name="category" class="position-relative" type="checkbox">
                                     <label for="{{$category->category_code}}">{{$category->name}}</label>
                                 </div>
                             @endforeach
@@ -67,7 +67,7 @@
                         <div class="form-artist">
                             @foreach($artists as $artist)
                                 <div>
-                                    <input id="{{$artist->name.'-'.$artist->id}}" name="artist" class="position-relative" style="top: 2px" type="checkbox">
+                                    <input id="{{$artist->name.'-'.$artist->id}}" name="artist" class="position-relative" type="checkbox">
                                     <label for="{{$artist->name.'-'.$artist->id}}">{{$artist->name}}</label>
                                 </div>
                             @endforeach

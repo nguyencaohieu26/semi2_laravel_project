@@ -122,8 +122,7 @@
                             $('.pagination-custom ul').append(pageItem);
                         }
                     }else{
-                        $('.no-data-container').show();
-                        $('.no-data-container').html(`
+                        $('.no-data-container').show().html(`
                                 <i style="font-size: 30px" class="ti-package"></i>
                                 <p>No data found</p>
                         `)
