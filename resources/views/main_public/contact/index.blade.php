@@ -172,7 +172,7 @@
                                         <input type="text" class="form-control mt-2" placeholder="Phone" required>
                                     </div>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-lg-12 my-2">
                                     <div class="form-group">
                                         <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Note" rows="3" required></textarea>
                                     </div>
