@@ -20,7 +20,7 @@
     </div>
     <hr class="my-0 mb-2">
     <div class="header__top--nav px-5 d-flex">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light flex-grow-1">
+        <nav class="navbar navbar-expand-lg navbar-light flex-grow-1">
             <a class="navbar-brand header__logo-link" href="#">Art's Auction</a>
             <div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#header__main-nav" aria-controls="header__main-nav" aria-expanded="false" aria-label="Toggle navigation">
