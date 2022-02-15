@@ -13,7 +13,7 @@ class CreateProductStatusesTable extends Migration
      */
     public function up()
     {
-        Schema::create('product__statuses', function (Blueprint $table) {
+        Schema::create('product_statuses', function (Blueprint $table) {
             $table->id();
             $table->string('name',100)->unique();
             $table->softDeletes();
@@ -28,6 +28,6 @@ class CreateProductStatusesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product__statuses');
+        Schema::dropIfExists('product_statuses');
     }
 }

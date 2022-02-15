@@ -5,12 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Account_Deposit extends Model
+class ProductCategory extends Model
 {
     use HasFactory;
     protected $fillable=[
-        'account_id',
         'product_id',
-        'deposit_amount',
+        'category_id',
     ];
 }

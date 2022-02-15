@@ -44,7 +44,7 @@
                         </div>
                         <div class="col-12 col-sm-6 col-md-3">
                             <select class="form-control h-100" aria-label="" name="category">
-                                @php $status_product = \App\Models\Product_Status::all(); @endphp
+                                @php $status_product = \App\Models\ProductStatus::all(); @endphp
                                 @foreach($status_product as $status)
                                     <option value="{{$status->id}}">{{$status->name}}</option>
                                 @endforeach

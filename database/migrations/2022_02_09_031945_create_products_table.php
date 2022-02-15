@@ -25,7 +25,7 @@ class CreateProductsTable extends Migration
             $table->date('date_start');
             $table->date('date_end');
             $table->unsignedBigInteger('status_id')->default(1);
-            $table->foreign('status_id')->references('id')->on('product__statuses');
+            $table->foreign('status_id')->references('id')->on('product_statuses');
             $table->foreign('artist_id')->references('id')->on('artists');
             $table->softDeletes();
             $table->timestamps();

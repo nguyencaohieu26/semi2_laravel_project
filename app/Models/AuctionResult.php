@@ -4,13 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Product_Status extends Model
+class AuctionResult extends Model
 {
     use HasFactory;
-    use SoftDeletes;
     protected $fillable =[
-        'names'
+        'final_auction_price',
+        'product_id',
+        'account_id',
     ];
 }

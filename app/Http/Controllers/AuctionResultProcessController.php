@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Auction_Result_Process;
+use App\Models\AuctionResultProcess;
 use Illuminate\Http\Request;
 
 class AuctionResultProcessController extends Controller
@@ -41,10 +41,10 @@ class AuctionResultProcessController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Auction_Result_Process  $auction_Result_Process
+     * @param  \App\Models\AuctionResultProcess  $auctionResultProcess
      * @return \Illuminate\Http\Response
      */
-    public function show(Auction_Result_Process $auction_Result_Process)
+    public function show(AuctionResultProcess $auctionResultProcess)
     {
         //
     }
@@ -52,10 +52,10 @@ class AuctionResultProcessController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Auction_Result_Process  $auction_Result_Process
+     * @param  \App\Models\AuctionResultProcess  $auctionResultProcess
      * @return \Illuminate\Http\Response
      */
-    public function edit(Auction_Result_Process $auction_Result_Process)
+    public function edit(AuctionResultProcess $auctionResultProcess)
     {
         //
     }
@@ -64,10 +64,10 @@ class AuctionResultProcessController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Auction_Result_Process  $auction_Result_Process
+     * @param  \App\Models\AuctionResultProcess  $auctionResultProcess
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Auction_Result_Process $auction_Result_Process)
+    public function update(Request $request, AuctionResultProcess $auctionResultProcess)
     {
         //
     }
@@ -75,10 +75,10 @@ class AuctionResultProcessController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Auction_Result_Process  $auction_Result_Process
+     * @param  \App\Models\AuctionResultProcess  $auctionResultProcess
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Auction_Result_Process $auction_Result_Process)
+    public function destroy(AuctionResultProcess $auctionResultProcess)
     {
         //
     }

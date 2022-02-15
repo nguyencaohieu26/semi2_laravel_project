@@ -38,7 +38,7 @@
                             <input id="category_code-input" name="code" class="form-control" aria-label="category_code" placeholder="Search by category code">
                         </div>
                         <div class="col-12 col-sm-6 col-md-3 mt-2 mt-md-0">
-                            <select class="form-control h-100" aria-label="status" name="status">
+                            <select class="form-control" aria-label="status" name="status">
                                 <option value="1">Active</option>
                                 <option value="0">Inactive</option>
                             </select>

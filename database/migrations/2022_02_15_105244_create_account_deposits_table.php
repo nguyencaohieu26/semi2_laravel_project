@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAuctionResultsTable extends Migration
+class CreateAccountDepositsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateAuctionResultsTable extends Migration
      */
     public function up()
     {
-        Schema::create('auction__results', function (Blueprint $table) {
+        Schema::create('account_deposits', function (Blueprint $table) {
             $table->id();
-            $table->double('final_auction_price');
-            $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('account_id');
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->unsignedBigInteger('product_id');
             $table->foreign('account_id')->references('id')->on('accounts');
-            $table->integer('status')->default(0);
+            $table->foreign('product_id')->references('id')->on('products');
+            $table->double('deposit_amount');
             $table->timestamps();
         });
     }
@@ -32,6 +31,6 @@ class CreateAuctionResultsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('auction__results');
+        Schema::dropIfExists('account_deposits');
     }
 }

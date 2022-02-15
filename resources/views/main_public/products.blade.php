@@ -80,8 +80,10 @@
                 {{--    --}}
                 <div class="col-12 col-xl-10">
                     <div class="row">
+
                         @for($i = 0; $i < 8; $i++)
                             <div class="col-12 col-sm-6 col-md-3 col-xl-4">
+
                                 <div class="auction-lot-item mb-3">
                                     <a href="#">
                                         <div class="lot-thumbnail position-relative overflow-hidden">
