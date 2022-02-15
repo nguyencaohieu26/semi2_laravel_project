@@ -31,26 +31,31 @@
                         <div class="col-12 col-sm-6 col-md-2">
                             <input name="id" class="form-control" aria-label="product_id" placeholder="Search by product id"/>
                         </div>
-                        <div class="col-12 col-sm-6 col-md-2">
+                        <div class="col-12 col-sm-6 col-md-3">
                             <input name="name" class="form-control" aria-label="" placeholder="Search by name">
                         </div>
                         <div class="col-12 col-sm-6 col-md-3">
                             <select class="form-control h-100" aria-label="" name="category">
-                                @php $categories = \App\Models\Category::all(); @endphp
                                 @foreach($categories as $category)
                                     <option value="{{$category->id}}">{{$category->name}}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-12 col-sm-6 col-md-3">
+                        <div class="col-12 col-sm-6 col-md-2">
                             <select class="form-control h-100" aria-label="" name="category">
-                                @php $status_product = \App\Models\ProductStatus::all(); @endphp
-                                @foreach($status_product as $status)
+                                @foreach($productStatus as $status)
                                     <option value="{{$status->id}}">{{$status->name}}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-2">
+                        <div class="col-12 col-sm-6 col-md-2">
+                            <select class="form-control h-100" aria-label="" name="artist">
+                                @foreach($artists as $artist)
+                                    <option value="{{$artist->id}}">{{$artist->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-2 mt-2">
                             <button type="submit" class="btn btn-primary font-weight-bold">Search</button>
                         </div>
                     </div>
@@ -71,20 +76,7 @@
                                 <th scope="col">Action</th>
                             </tr>
                             </thead>
-                            <tbody class="">
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                                <td class="d-flex">
-                                    <div class="text-success"><i class="ti-pencil-alt2"></i></div>
-                                    <div class="text-danger" onclick="deleteProduct(1)"><i class="ti-trash"></i></div>
-                                </td>
-                            </tr>
-                            </tbody>
+                            <tbody class="product-list position-relative"></tbody>
                         </table>
                     </div>
                 </div>
@@ -103,14 +95,65 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        getProducts();
+        let productFieldSearch = {
+            "name":1,
+            "id":undefined,
+            "status":undefined,
+            "price":undefined,
+            "artist":undefined,
+            "size":undefined,
+            "page":1,
+        }
+        getProducts(productFieldSearch);
 
-        function getProducts(){
+        function getProducts(search){
             $.ajax({
                 url:'/products_resource',
+                data:{
+                    name:search.name,
+                    page:search.page,
+                    id:search.id,
+                    size:search.size,
+                    price:search.price,
+                    status:search.status,
+                    artist:search.artist,
+                },
                 method:'GET',
                 success:(result)=>{
-                    console.log(result);
+                    if(result.data.length > 0){
+                        $('.product-list').html('');
+                        $('.no-data-container').hide();
+                        result.data.forEach((product)=>{
+                            let item = `
+                                <tr class="">
+                                   <th scope="row" style="line-height: 70px">${product.id}</th>
+                                   <td class="category-image">
+                                    <img width="70px" style="height: 50px" class="rounded mt-2" src="/images_store/products/${product.image}" alt=""/>
+                                   </td>
+                                   <td class="category-name" style="line-height: 70px">${product.name}</td>
+                                    <td class="d-flex" style="line-height: 70px">
+                                        <div><a class="text-success" href="#"><i class="ti-pencil-alt2"></i></a></div>
+                                        <div class="text-danger" ><i class="ti-trash"></i></div>
+                                   </td>
+                                <tr>
+                            `
+                            $('.product-list').append(item);
+                        });
+
+                        $('.pagination-custom ul').html('');
+                        const totalPage = result.total;
+                        const numberPerPage = result.per_page;
+                        for(let i =1; i<=Math.ceil(totalPage/numberPerPage);i++){
+                            let classPageActive = i === search.page ? "active" : "";
+                            let pageItem = `<li onclick="getProducts({name:${search.name},id:${search.id},status:${search.status},page: ${i},price:${search.price},artist:${search.artist},size:${search.size}})" class="page-item-custom ${classPageActive}">${i}</li>`;
+                            $('.pagination-custom ul').append(pageItem);
+                        }
+                    }else{
+                        $('.no-data-container').show().html(`
+                                <i style="font-size: 30px" class="ti-package"></i>
+                                <p>No data found</p>
+                        `)
+                    }
                 }
             })
         }
@@ -119,7 +162,7 @@
                 url:'/products_resource/1',
                 method:'DELETE',
                 success:(result)=>{
-                    console.log(result);
+                  console.log(result);
                 }
             })
         }

@@ -14,9 +14,28 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+//        if(isset($request->name)){
+//            echo 'in';
+//        }
+//        if(isset($request->id)){
+//            echo 'in';
+//        }
+//        if(isset($request->status)){
+//            echo 'in';
+//        }
+//        if(isset($request->price)){
+//            echo 'in';
+//        }
+//        if(isset($request->artist)){
+//            echo 'in';
+//        }
+//        if(isset($request->size)){
+//            echo 'in';
+//        }
 
+        return Product::paginate(10);
     }
 
     public function products_field_filter(){

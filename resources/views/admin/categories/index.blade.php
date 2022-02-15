@@ -86,10 +86,10 @@
         });
 
         let categoryFieldSearch = {
-            "name":'',
-            "id":'',
-            "status":'',
-            "code":'',
+            "name":undefined,
+            "id":undefined,
+            "status":undefined,
+            "code":undefined,
             "page":1,
         }
 
@@ -101,7 +101,6 @@
                 data:{name:search.name,page:search.page,id:search.id,status:search.status,category_code:search.code},
                 method:'GET',
                 success:(result)=>{
-                    console.log(result.data);
                     if(result.data.length > 0){
                         $('.category-list').html('');
                         $('.no-data-container').hide();
@@ -128,7 +127,7 @@
                         const totalPage = result.total;
                         const numberPerPage = result.per_page;
                         for(let i =1; i<=Math.ceil(totalPage/numberPerPage);i++){
-                            let pageItem = `<li onclick="getCategories({name:'',id:'',status:'',page: ${i},code:''})" class="page-item-custom ${i === search.page ? "active" : ""}">${i}</li>`;
+                            let pageItem = `<li onclick="getCategories({name:${search.name},id:${search.id},status:${search.status},page: ${i},code:${search.code}})" class="page-item-custom ${i === search.page ? "active" : ""}">${i}</li>`;
                             $('.pagination-custom ul').append(pageItem);
                         }
                     }else{

@@ -53,7 +53,10 @@ Route::get('/admin/dashboard',function (){
 })->name('admin-home-index');
 
 Route::get('/admin/products',function (){
-    return view('admin.products.index');
+    $artists = \App\Models\Artist::all();
+    $productStatus = \App\Models\ProductStatus::all();
+    $categories = \App\Models\Category::all();
+    return view('admin.products.index',compact('artists','productStatus','categories'));
 })->name('admin-products');
 
 Route::get('/admin/artists',function (){
