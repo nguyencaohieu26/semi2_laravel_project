@@ -31,24 +31,24 @@
                         <div class="col-12 col-sm-6 col-md-2">
                             <input name="id" class="form-control" aria-label="product_id" placeholder="Search by product id"/>
                         </div>
-                        <div class="col-12 col-sm-6 col-md-3">
+                        <div class="col-12 col-sm-6 col-md-3 mt-2 mt-sm-0">
                             <input name="name" class="form-control" aria-label="" placeholder="Search by name">
                         </div>
-                        <div class="col-12 col-sm-6 col-md-3">
+                        <div class="col-12 col-sm-6 col-md-3 mt-2 mt-md-0">
                             <select class="form-control h-100" aria-label="" name="category">
                                 @foreach($categories as $category)
                                     <option value="{{$category->id}}">{{$category->name}}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-12 col-sm-6 col-md-2">
+                        <div class="col-12 col-sm-6 col-md-2 mt-2 mt-md-0">
                             <select class="form-control h-100" aria-label="" name="category">
                                 @foreach($productStatus as $status)
                                     <option value="{{$status->id}}">{{$status->name}}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-12 col-sm-6 col-md-2">
+                        <div class="col-12 col-sm-6 col-md-2 mt-2 mt-md-0">
                             <select class="form-control h-100" aria-label="" name="artist">
                                 @foreach($artists as $artist)
                                     <option value="{{$artist->id}}">{{$artist->name}}</option>
@@ -67,9 +67,10 @@
                         <table class="table">
                             <thead class="thead-light">
                             <tr>
-                                <th scope="col">Stt</th>
+                                <th scope="col">IDs</th>
                                 <th scope="col">Thumbnail</th>
                                 <th scope="col">Name</th>
+                                <th scope="col">Artist</th>
                                 <th scope="col">Category</th>
                                 <th scope="col">Price</th>
                                 <th scope="col">Auction Status</th>
@@ -82,10 +83,27 @@
                 </div>
                 <div class="no-data-container p-3 text-center"></div>
             </div>
-            <div class="pagination-custom">
+            <div class="pagination-custom pb-4">
                 <ul class="d-flex"></ul>
             </div>
         </div>
+        <section>
+            <!-- Modal -->
+            <div class="modal fade" id="modalDetailProduct" tabindex="-1" aria-labelledby="product-modal-label" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header border-0">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+                        </div>
+                        <div class="modal-body border-0" id="modal-product-detail"></div>
+                        <div class="modal-footer border-0">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </section>
 @endsection
 @section('script_tag')
@@ -94,6 +112,10 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
+        });
+        let formatter = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
         });
         let productFieldSearch = {
             "name":1,
@@ -126,14 +148,19 @@
                         result.data.forEach((product)=>{
                             let item = `
                                 <tr class="">
-                                   <th scope="row" style="line-height: 70px">${product.id}</th>
-                                   <td class="category-image">
-                                    <img width="70px" style="height: 50px" class="rounded mt-2" src="/images_store/products/${product.image}" alt=""/>
+                                   <th scope="row">${product.id}</th>
+                                   <td class="product-image">
+                                        <img width="70px" style="height: 50px" class="rounded" src="/images_store/products/${product.image}" alt=""/>
                                    </td>
-                                   <td class="category-name" style="line-height: 70px">${product.name}</td>
-                                    <td class="d-flex" style="line-height: 70px">
-                                        <div><a class="text-success" href="#"><i class="ti-pencil-alt2"></i></a></div>
-                                        <div class="text-danger" ><i class="ti-trash"></i></div>
+                                    <td class="product-name" >${product.name}</td>
+                                    <td class="product-name" >artist</td>
+                                    <td class="product-name" >category</td>
+                                    <td class="product-start-price font-italic" style="font-size: 12px;color: #68329b">${formatter.format(product.start_price)}</td>
+                                    <td class="product-status" >status</td>
+                                    <td class="d-flex" >
+                                        <div><a class="text-success" href="#" onclick="viewProductDetail(${product.id})" data-toggle="modal" data-target="#modalDetailProduct"><i class="ti-eye border-right pr-1"></i></a></div>
+                                        <div><a class="text-primary" href="#"><i class="ti-pencil-alt2 border-right px-1"></i></a></div>
+                                        <div class="text-danger" onclick="deleteProduct(${product.id})"><i class="ti-trash pl-1"></i></div>
                                    </td>
                                 <tr>
                             `
@@ -157,12 +184,61 @@
                 }
             })
         }
-        function deleteProduct(){
+        //
+        function deleteProduct(id){
             $.ajax({
-                url:'/products_resource/1',
+                url:`/products_resource/${id}`,
                 method:'DELETE',
                 success:(result)=>{
                   console.log(result);
+                }
+            })
+        }
+        //
+        function viewProductDetail(id){
+            $.ajax({
+                url:`/products_resource/${id}`,
+                method:'GET',
+                success:(product)=>{
+                    console.log(product);
+                    let productDetail = `
+                        <div class="">
+                            <div class="row">
+                                <div class="col-12 col-lg-5 position-relative">
+                                    <img width="100%" src="/images_store/products/${product.image}" alt="${product.name}"/>
+                                    <p class="product-detail-status text-white position-absolute bg-dark rounded" style="top: 10px; left: 1.5rem;padding: 3px 10px"><span style="font-size: 12px">Live Now</span></p>
+                                </div>
+                                <div class="col-12 col-lg-7">
+                                    <h4>${product.name}</h4>
+                                    <p class="mb-0 mt-2 font-italic"><span>Artist: </span> <span>${product.artist_id}</span></p>
+                                    <div class="d-flex justify-content-between">
+                                        <p><span>Date Start:</span><span class="font-italic font-weight-bold ml-2 text-secondary" style="font-size: 12px">${new Date(product.date_start).toLocaleDateString("en-US",{ year: 'numeric', month: 'long', day: 'numeric' })}</span></p>
+                                        <p><span>Date End:</span><span class="font-italic font-weight-bold ml-2 text-secondary" style="font-size: 12px">${new Date(product.date_end).toLocaleDateString("en-US",{ year: 'numeric', month: 'long', day: 'numeric' })}</span></p>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <p class="mb-0"><span>Size: </span> <span style="font-size: 13px">${product.size}</span></p>
+                                        <p class="mb-0"><span>Start Price:</span> <span class="ml-2 text-success font-italic" style="font-size: 13px">${formatter.format(product.start_price)}</span></p>
+                                        <p class="mb-0"><span>Current Bid:</span><span class="ml-2 text-danger font-italic" style="font-size: 13px">${(product.current_price > product.start_price) ? formatter.format(product.current_price) : "No Bid"}</span></p></div>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="">
+                               <div class="product-detail-content mt-2">
+                                   <h6 class="mb-2">Description</h6>
+                                   <div style="max-height: 300px;overflow-y: scroll" >
+                                            ${product.description}
+                                   </div>
+                               </div>
+                               </div>
+                            </div>
+                        </div>
+                    `
+                    $('#modal-product-detail').html('').append(productDetail);
                 }
             })
         }
