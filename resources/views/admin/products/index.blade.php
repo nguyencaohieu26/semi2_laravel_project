@@ -71,7 +71,6 @@
                                 <th scope="col">Thumbnail</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Artist</th>
-                                <th scope="col">Category</th>
                                 <th scope="col">Price</th>
                                 <th scope="col">Auction Status</th>
                                 <th scope="col">Action</th>
@@ -95,7 +94,9 @@
                         <div class="modal-header border-0">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
                         </div>
+
                         <div class="modal-body border-0" id="modal-product-detail"></div>
+
                         <div class="modal-footer border-0">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
@@ -118,7 +119,7 @@
             currency: 'USD',
         });
         let productFieldSearch = {
-            "name":1,
+            "name":undefined,
             "id":undefined,
             "status":undefined,
             "price":undefined,
@@ -146,6 +147,11 @@
                         $('.product-list').html('');
                         $('.no-data-container').hide();
                         result.data.forEach((product)=>{
+                            let cateList = ``;
+                            for(let i = 0; i < product.categories.length;i++){
+                                let cate = `<p style="font-size: 13px">${product.categories[i].name}</p>`
+                                cateList +=cate;
+                            }
                             let item = `
                                 <tr class="">
                                    <th scope="row">${product.id}</th>
@@ -153,13 +159,12 @@
                                         <img width="70px" style="height: 50px" class="rounded" src="/images_store/products/${product.image}" alt=""/>
                                    </td>
                                     <td class="product-name" >${product.name}</td>
-                                    <td class="product-name" >artist</td>
-                                    <td class="product-name" >category</td>
+                                    <td class="product-name" >${product.artists.name}</td>
                                     <td class="product-start-price font-italic" style="font-size: 12px;color: #68329b">${formatter.format(product.start_price)}</td>
-                                    <td class="product-status" >status</td>
+                                    <td class="product-status" >${product.product_status.name}</td>
                                     <td class="d-flex" >
                                         <div><a class="text-success" href="#" onclick="viewProductDetail(${product.id})" data-toggle="modal" data-target="#modalDetailProduct"><i class="ti-eye border-right pr-1"></i></a></div>
-                                        <div><a class="text-primary" href="#"><i class="ti-pencil-alt2 border-right px-1"></i></a></div>
+                                        <div><a class="text-primary" href="/products_resource/${product.id}/edit "><i class="ti-pencil-alt2 border-right px-1"></i></a></div>
                                         <div class="text-danger" onclick="deleteProduct(${product.id})"><i class="ti-trash pl-1"></i></div>
                                    </td>
                                 <tr>
@@ -186,14 +191,32 @@
         }
         //
         function deleteProduct(id){
-            $.ajax({
-                url:`/products_resource/${id}`,
-                method:'DELETE',
-                success:(result)=>{
-                  console.log(result);
+            $.confirm({
+                title: `<h5>Remove Product</h5>`,
+                content: `<div>
+                            <p>Are you sure to delete the product!</p>
+                          </div>`,
+                autoClose: 'cancelAction|8000',
+                buttons: {
+                    confirm: function () {
+                        $.ajax({
+                            url:`/products_resource/${id}`,
+                            method:'POST',
+                            data:{id:id,_method:"DELETE"},
+                            success:(result)=>{
+                                getProducts(productFieldSearch);
+                                $('.response-message').html('').addClass('active').append(`
+                                    <div class="alert alert-success">${result}</div>
+                                `);
+                                setTimeout(()=>{$('.response-message').removeClass('active')},2000);
+                            }
+                        })
+                    },
+                    cancelAction: function () {},
                 }
-            })
+            });
         }
+
         //
         function viewProductDetail(id){
             $.ajax({
@@ -206,11 +229,11 @@
                             <div class="row">
                                 <div class="col-12 col-lg-5 position-relative">
                                     <img width="100%" src="/images_store/products/${product.image}" alt="${product.name}"/>
-                                    <p class="product-detail-status text-white position-absolute bg-dark rounded" style="top: 10px; left: 1.5rem;padding: 3px 10px"><span style="font-size: 12px">Live Now</span></p>
+                                    <p class="product-detail-status text-white position-absolute bg-dark rounded" style="top: 10px; left: 1.5rem;padding: 3px 10px"><span style="font-size: 12px">${product.product_status.name}</span></p>
                                 </div>
                                 <div class="col-12 col-lg-7">
                                     <h4>${product.name}</h4>
-                                    <p class="mb-0 mt-2 font-italic"><span>Artist: </span> <span>${product.artist_id}</span></p>
+                                    <p class="mb-0 mt-2 font-italic"><span>Artist: </span> <span>${product.artists.name}</span></p>
                                     <div class="d-flex justify-content-between">
                                         <p><span>Date Start:</span><span class="font-italic font-weight-bold ml-2 text-secondary" style="font-size: 12px">${new Date(product.date_start).toLocaleDateString("en-US",{ year: 'numeric', month: 'long', day: 'numeric' })}</span></p>
                                         <p><span>Date End:</span><span class="font-italic font-weight-bold ml-2 text-secondary" style="font-size: 12px">${new Date(product.date_end).toLocaleDateString("en-US",{ year: 'numeric', month: 'long', day: 'numeric' })}</span></p>
@@ -242,5 +265,12 @@
                 }
             })
         }
+        //
+        setTimeout(clearMessage,1000);
+        function clearMessage(){
+            $('.response-message').addClass('active')
+            setTimeout(()=>{$('.response-message').removeClass('active')},2000);
+        }
+
     </script>
 @endsection

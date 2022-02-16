@@ -111,6 +111,5 @@ class CategoryController extends Controller
         Category::findOrFail($id);
         $res = Category::destroy($id);
         return "Remove Artist Successfully";
-        //
     }
 }

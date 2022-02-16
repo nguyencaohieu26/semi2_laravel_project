@@ -21,4 +21,18 @@ class Product extends Model
         'date_end',
         'description'
     ];
+
+//    protected $with = ['categories'];
+
+    public function categories(){
+        return $this->belongsToMany(Category::class, 'product_categories', 'product_id','category_id');
+    }
+
+    public function artists(){
+        return $this->hasOne(Artist::class,'id','artist_id');
+    }
+
+    public function product_status(){
+        return $this->hasOne(ProductStatus::class,'id','status_id');
+    }
 }
