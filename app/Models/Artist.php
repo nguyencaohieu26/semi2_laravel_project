@@ -15,4 +15,8 @@ class Artist extends Model
         'date_of_birth',
         'description'
     ];
+
+    public function products(){
+        return $this->belongsToMany(Product::class,'products');
+    }
 }

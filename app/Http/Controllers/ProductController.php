@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductStatus;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -34,8 +35,9 @@ class ProductController extends Controller
 //        if(isset($request->size)){
 //            echo 'in';
 //        }
+//        $product = Product::with(['categories','artists','product_status'])->where('id', $id)->first();
 
-        return Product::paginate(10);
+        return Product::with(['categories','artists','product_status'])->paginate(10);
     }
 
     public function products_field_filter(){
@@ -54,6 +56,7 @@ class ProductController extends Controller
         $categories     = Category::all();
         return view('admin.products.create',compact('artists','product_status','categories'));
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -106,23 +109,28 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
+    public function show($id)
     {
+        return Product::with(['categories','artists','product_status'])->where('id', $id)->first();
         //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
+        $product = Product::with(['categories','artists','product_status'])->where('id', $id)->first();
+//        $product = Product::query()->where('id', $id)->first();
+
+        return view('admin.products.edit',compact('product'));
         //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -132,6 +140,9 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        return 'hello';
+        Product::findOrFail($id);
+        $res = Product::destroy($id);
+        DB::table('product_categories')->where('product_id',$id)->delete();
+        return "Delete Product Successfully";
     }
 }
