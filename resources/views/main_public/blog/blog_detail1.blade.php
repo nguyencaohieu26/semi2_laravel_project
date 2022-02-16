@@ -9,7 +9,7 @@
                     <h1 class="text-capitalize mb-0 d-inline">
                         <a href="{{asset('blog')}}" class="font-weight-bold text-dark">blog</a>
                     </h1>
-                    <span class="font-weight-bold">
+                    <span class="font-weight-bold text-capitalize">
                          <i class="fa-solid fa-angles-right blog__icon--fz"></i>
                         blog detail
                     </span>
