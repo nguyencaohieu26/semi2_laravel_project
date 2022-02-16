@@ -29,13 +29,16 @@
                 <form id="blog-search-form">
                     <div class="row">
                         <div class="col-12 col-sm-6 col-md-3">
-                            <input id="blog_id-input" name="id" class="form-control" aria-label="artists_id" placeholder="Search by blog id"/>
+                            <input id="blog_id-input" name="id" class="form-control" aria-label="artists_id"
+                                   placeholder="Search by blog id"/>
                         </div>
                         <div class="col-12 col-sm-6 col-md-3 mt-2 mt-md-0">
-                            <input id="blog_name-input" name="name" class="form-control" aria-label="artists_name" placeholder="Search by blog title">
+                            <input id="blog_name-input" name="name" class="form-control" aria-label="artists_name"
+                                   placeholder="Search by blog title">
                         </div>
                         <div class="col-12 col-sm-6 col-md-3 mt-2 mt-md-0">
-                            <input id="blog_name-input" type="date" name="name" class="form-control" aria-label="artists_name" placeholder="Search by blog title">
+                            <input id="blog_name-input" type="date" name="name" class="form-control"
+                                   aria-label="artists_name" placeholder="Search by blog title">
                         </div>
                         <div class="col-12 col-sm-6 col-md-3 mt-2 mt-md-0">
                             <select class="form-control h-100" aria-label="status" name="status">
@@ -45,7 +48,9 @@
                         </div>
                         <div class="col-2 d-flex mt-2">
                             <button type="submit" class="btn btn-primary font-weight-bold">Search</button>
-                            <button id="btn-clear-search--2" type="button" class="btn btn-outline-secondary font-weight-bold ml-2">Clear</button>
+                            <button id="btn-clear-search--2" type="button"
+                                    class="btn btn-outline-secondary font-weight-bold ml-2">Clear
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -58,11 +63,11 @@
                             <tr>
                                 <th scope="col">IDs</th>
                                 <th scope="col">Title</th>
-                                <th scope="col">Thumbnail</th>
                                 <th scope="col">Author</th>
-                                <th scope="col">Tag</th>
+                                <th scope="col">Thumbnail</th>
+                                {{--                                <th scope="col">Tag</th>--}}
                                 <th scope="col">Status</th>
-                                <th scope="col">Action</th>
+                                <th scope="col" class="text-right pr-3">Action</th>
                             </tr>
                             </thead>
                             <tbody class="blogs-list position-relative"></tbody>
@@ -86,108 +91,117 @@
         });
 
         let blogFieldSearch = {
-            "id":'',
-            "title":'',
-            "author":'',
-            "status":'',
-            'created_at':'',
-            "page":1,
+            "id": '',
+            "title": '',
+            "author": '',
+            "status": '',
+            'created_at': '',
+            "page": 1,
         }
 
-        // getBlogs(blogFieldSearch);
+        getBlogs(blogFieldSearch);
 
-        // function getArtists(search){
-        //     $.ajax({
-        //         url:'/artists_resource',
-        //         data:{name:search.name,page:search.page,id:search.id,status:search.status},
-        //         method:'GET',
-        //         success:(result)=>{
-        //             if(result.data.length > 0){
-        //                 $('.blogs-list').html('');
-        //                 $('.no-data-container').hide();
-        //                 result.data.forEach(artist=>{
-        //                     let item = `
-        //                         <tr>
-        //                             <th scope="row">${artist.id}</th>
-        //                             <td class="artist-name">${artist.name}</td>
-        //                             <td class="font-italic" style="font-size: 12px">${new Date(artist.date_of_birth).toLocaleDateString("en-US",{ year: 'numeric', month: 'long', day: 'numeric' })}</td>
-        //                             <td class="artist-description">${artist.description}</td>
-        //                             <td style="font-size: 13px" class="font-weight-bold ${artist.status === 1 ? "text-success" : "text-danger"}">${artist.status === 1 ? "Active" : "Inactive"}</td>
-        //                             <td class="d-flex">
-        //                                 <div><a class="text-success" href="/artists_resource/${artist.id}/edit "><i class="ti-pencil-alt2"></i></a></div>
-        //                                 <div class="text-danger" onclick="deleteArtist(${artist.id})"><i class="ti-trash"></i></div>
-        //                             </td>
-        //                         <tr>
-        //                     `
-        //                     $('.artists-list').append(item);
-        //                 });
-        //                 $('.pagination-custom ul').html('');
-        //                 const totalPage = result.total;
-        //                 const numberPerPage = result.per_page;
-        //                 for(let i =1; i<=Math.ceil(totalPage/numberPerPage);i++){
-        //                     let pageItem = `<li onclick="getArtists({name:'',id:'',status:'',page: ${i}})" class="page-item-custom ${i === search.page ? "active" : ""}">${i}</li>`;
-        //                     $('.pagination-custom ul').append(pageItem);
-        //                 }
-        //             }else{
-        //                 $('.no-data-container').show();
-        //                 $('.no-data-container').html(`
-        //                         <i style="font-size: 30px" class="ti-package"></i>
-        //                         <p>No data found</p>
-        //                 `)
-        //             }
-        //         }
-        //     })
-        // }
-        //
-        // function deleteBlog(id){
-        //     $.confirm({
-        //         title: `<h5>Remove Artist</h5>`,
-        //         content: `<div>
-        //                     <p>Are you sure to delete the artist!</p>
-        //                   </div>`,
-        //         autoClose: 'cancelAction|8000',
-        //         buttons: {
-        //             confirm: function () {
-        //                 console.log('run');
-        //                 $.ajax({
-        //                     url:`/artists_resource/${id}`,
-        //                     method:'POST',
-        //                     data:{id:id,_method:"DELETE"},
-        //                     success:(result)=>{
-        //                         getArtists(artistFieldSearch);
-        //                         $('.response-message').html('').addClass('active').append(`
-        //                             <div class="alert alert-success">${result}</div>
-        //                         `);
-        //                         setTimeout(()=>{$('.response-message').removeClass('active')},2000);
-        //                     }
-        //                 })
-        //             },
-        //             cancelAction: function () {},
-        //         }
-        //     });
-        // }
+        function getBlogs(search) {
+            $.ajax({
+                url: '/blogs_resource',
+                data: {name: search.name, page: search.page, id: search.id, status: search.status},
+                method: 'GET',
+                success: (result) => {
+                    if (result.data.length > 0) {
+                        $('.blogs-list').html('');
+                        $('.no-data-container').hide();
+                        result.data.forEach(blogs => {
+                            let item = `
+                                <tr>
+                                    <th scope="row">${blogs.id}</th>
+                                    <td class="artist-name">${blogs.title}</td>
+                                    <td class="artist-description">${blogs.author}</td>
+                                    <td class="blogs-image">
+                                    <img width="70px" style="height: 50px" class="rounded mt-2" src="/images_store/blogs/${blogs.image}" alt=""/>
+                                   </td>
+                                    <td style="font-size: 13px" class="font-weight-bold ${blogs.status === 1 ? "text-success" : "text-danger"}">${blogs.status === 1 ? "Active" : "Inactive"}</td>
+                                    <td class="d-flex">
+                                        <div><a class="text-success" href="/artists_resource/${blogs.id}/edit "><i class="ti-pencil-alt2"></i></a></div>
+                                        <div class="text-danger" onclick="deleteBlog(${blogs.id})"><i class="ti-trash"></i></div>
+                                    </td>
+                                <tr>
+                            `
+                            $('.blogs-list').append(item);
+                        });
+                        $('.pagination-custom ul').html('');
+                        const totalPage = result.total;
+                        const numberPerPage = result.per_page;
+                        for (let i = 1; i <= Math.ceil(totalPage / numberPerPage); i++) {
+                            let pageItem = `<li onclick="getBlogs({name:'',id:'',status:'',page: ${i}})" class="page-item-custom ${i === search.page ? "active" : ""}">${i}</li>`;
+                            $('.pagination-custom ul').append(pageItem);
+                        }
+                    } else {
+                        $('.no-data-container').show();
+                        $('.no-data-container').html(`
+                                <i style="font-size: 30px" class="ti-package"></i>
+                                <p>No data found</p>
+                        `)
+                    }
+                }
+            })
+        }
 
-        //Search
-        // $('#blog-search-form').submit(event=>{
-        //     event.preventDefault();
-        //     let formData = $('#artist-search-form').serializeArray();
-        //     let nameSearch   = formData[1].value;
-        //     let idSearch     = formData[0].value;
-        //     let statusSearch = formData[2].value;
-        //     getArtists({name:nameSearch,id:idSearch,status:statusSearch,page:1});
-        // });
+        function deleteBlog(id) {
+            $.confirm({
+                title: `<h5>Remove Artist</h5>`,
+                content: `<div>
+                            <p>Are you sure to delete the artist!</p>
+                          </div>`,
+                autoClose: 'cancelAction|8000',
+                buttons: {
+                    confirm: function () {
+                        console.log('run');
+                        $.ajax({
+                            url: `/blogs_resource/${id}`,
+                            method: 'POST',
+                            data: {id: id, _method: "DELETE"},
+                            success: (result) => {
+                                getArtists(artistFieldSearch);
+                                $('.response-message').html('').addClass('active').append(`
+                                    <div class="alert alert-success">${result}</div>
+                                `);
+                                setTimeout(() => {
+                                    $('.response-message').removeClass('active')
+                                }, 2000);
+                            }
+                        })
+                    },
+                    cancelAction: function () {
+                    },
+                }
+            });
+        }
 
-        //Clear search
-        // $('#btn-clear-search--2').click(()=>{
-        //     getBlogs(artistFieldSearch);
-        //     $('#artist_id-input').val('');
-        //     $('#artist_name-input').val('');
-        // });
+        Search
+        $('#blog-search-form').submit(event => {
+            event.preventDefault();
+            let formData = $('#blog-search-form').serializeArray();
+            let nameSearch = formData[1].value;
+            let idSearch = formData[0].value;
+            let statusSearch = formData[2].value;
+            getArtists({name: nameSearch, id: idSearch, status: statusSearch, page: 1});
+        });
 
-        // setTimeout(clearMessage,1000);
-        // function clearMessage(){
-        //     $('.response-message').addClass('active')
-        //     setTimeout(()=>{$('.response-message').removeClass('active')},2000);
-        // }
+        Clear
+        search
+        $('#btn-clear-search--2').click(() => {
+            getBlogs(artistFieldSearch);
+            $('#artist_id-input').val('');
+            $('#artist_name-input').val('');
+        });
+
+        setTimeout(clearMessage, 1000);
+
+        function clearMessage() {
+            $('.response-message').addClass('active')
+            setTimeout(() => {
+                $('.response-message').removeClass('active')
+            }, 2000);
+        }
     </script>
 @endsection

@@ -12,9 +12,8 @@ class Blog extends Model
     use SoftDeletes;
     protected $fillable=[
         'title',
-        'content',
-        'thumbnail',
-        'tag',
-        'author_name'
+        'content_post',
+        'image',
+        'author'
     ];
 }

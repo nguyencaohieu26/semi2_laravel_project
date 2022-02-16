@@ -69,37 +69,37 @@
             <div class="about__explore mb-5">
                 <h2 class="about__explore--heading font-weight-bold pb-5">Explore our industries</h2>
                 <div class="row">
-                    <div class="col-sm-2">
+                    <div class="col-md-2 col-sm-4">
                         <div class="explore__items">
                             <div class="explore__items--image">
-                                <img class="w-100" src="https://images.unsplash.com/photo-1576495169018-bd2414046c6b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGFydCUyMHBhaW50aW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=700&q=60">
+                                <img class="w-100" src="https://idsb.tmgrup.com.tr/ly/uploads/images/2021/09/04/141879.jpg">
                             </div>
                             <div class="explore__items-text">
                                 <h6 class="text-center pt-1">Arts</h6>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-md-2 col-sm-4">
                         <div class="explore__items">
                             <div class="explore__items--image">
-                                <img class="w-100" src="https://sothebys-com.brightspotcdn.com/dims4/default/58e62fa/2147483647/strip/false/crop/2000x1518+0+0/resize/421x320!/quality/90/?url=https%3A%2F%2Fsothebys-md.brightspotcdn.com%2Fbe%2F11%2Fad4918a74dc695e896a7d380798d%2Fhk1189-bmysm-1-cropped-t3.jpg">
+                                <img class="w-100" src="https://cdn.vjshop.vn/tin-tuc/nhiep-anh-my-thuat-fine-art-photography-la-gi/fine-art-photography-la-gi-5.jpg">
                             </div>
                             <div class="explore__items-text">
                                 <h6 class="text-center pt-1">Collectibles</h6>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-md-2 col-sm-4">
                         <div class="explore__items">
                             <div class="explore__items--image">
-                                <img class="w-100" src="https://sothebys-com.brightspotcdn.com/dims4/default/262c2c9/2147483647/strip/false/crop/2000x1516+0+0/resize/421x319!/quality/90/?url=https%3A%2F%2Fsothebys-md.brightspotcdn.com%2Fa3%2F8a%2F2ee6e7344f38ad0dba4b18535663%2Fhk1189-c3cf5-1-cropped-t3.jpg">
+                                <img class="w-100" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9zwmTxUeCfXXqmpTGmRdme1VRfyNWu3VWD6OGaQgI8hseiUu4DBNZCcJd6HwNZeXFXu0&usqp=CAU">
                             </div>
                             <div class="explore__items-text">
                                 <h6 class="text-center pt-1">Photography</h6>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-md-2 col-sm-4">
                         <div class="explore__items">
                             <div class="explore__items--image">
                                 <img class="w-100" src="https://images.unsplash.com/photo-1551732998-9573f695fdbb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDN8fGFydHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=700&q=60">
@@ -109,7 +109,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-md-2 col-sm-4">
                         <div class="explore__items">
                             <div class="explore__items--image">
                                 <img class="w-100" src="https://images.unsplash.com/photo-1640622299541-8c8ab8a098f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxzZWFyY2h8MXx8YXJ0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=700&q=60">
@@ -119,10 +119,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-md-2 col-sm-4">
                         <div class="explore__items">
                             <div class="explore__items--image">
-                                <img class="w-100" src="https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGFydHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=700&q=60">
+                                <img class="w-100" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBwvwkeC5uFwpktHpVr8lJRrvGesY-7FWnDw&usqp=CAU">
                             </div>
                             <div class="explore__items-text">
                                 <h6 class="text-center pt-1">Virtual Worlds</h6>
