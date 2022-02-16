@@ -104,7 +104,6 @@
                 </div>
             </div>
         </section>
-
     </section>
 @endsection
 @section('script_tag')
