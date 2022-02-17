@@ -1,80 +1,136 @@
 @extends('layouts.LayoutAdmin')
 
 {{-- Custom name for location pages --}}
-@section('location_page','Dashboard')
+@section('location_page','Create Blog')
 
 @section('navbar')
-    @include('components.navbarUser')
+    @include('components.navbarAdmin')
 @endsection
 
 @section('header')
-    @include('components.headerUser')
+    @include('components.headerAdmin')
 @endsection
 
 @section('content')
-    <!-- main content area start -->
-    <div class="main-content-inner">
-        <div class="response-message position-fixed" style="right: 1rem;top: 5.5rem;z-index: 1000">
-            @if(session('create-user'))
-                <div class="alert alert-success">{{session('create-user')}}</div>
-            @endif
-            @if(session('edit-user'))
-                <div class="alert alert-success">{{session('edit-user')}}</div>
-            @endif
-        </div>
-        <div class="px-4 pt-3"><a href="{{route('accounts_resource.create')}}">Create User</a></div>
-        <div class="pt-3 d-flex flex-column">
-            <div class="user-admin-filter">
-                <form id="user-search-form">
-                    <div class="row">
-                        <div class="col-12 col-sm-6 col-md-3">
-                            <input id="blog_id-input" name="id" class="form-control" aria-label="artists_id"
-                                   placeholder="Search by blog id"/>
+    <div class="form-user px-3">
+        <form method="post" action="" enctype="multipart/form-data" class="needs-validation pt-3" novalidate>
+            @csrf
+            {{--                first + last--}}
+            <div class="form-row">
+                {{--                    first name--}}
+                <div class="col-md-6">
+                    <label for="firstname" class="text-capitalize font-weight-bold text-dark">first name</label>
+                    <input type="text" name="f_name" class="form-control" id="firstname" placeholder="First Name"
+                           value="{{old('f_name')}}" required>
+                    <div class="valid-feedback">look good!</div>
+                    @error('f_name')
+                    <div class="error-message">{{$message}}</div>
+                    @enderror
+                </div>
+                {{--                    last name--}}
+                <div class="col-md-6">
+                    <label for="lastname" class="text-capitalize font-weight-bold text-dark">last name</label>
+                    <input type="text" name="l_name" class="form-control" id="firstname" placeholder="Last Name"
+                           value="{{old('l_name')}}" required>
+                    <div class="valid-feedback">look good!</div>
+                    @error('l_name')
+                    <div class="error-message">{{$message}}</div>
+                    @enderror
+                </div>
+            </div>
+            {{--                date + email--}}
+            <div class="form-row">
+                {{--                    email--}}
+                <div class="col-md-6">
+                    <label for="email" class="text-capitalize font-weight-bold text-dark">email</label>
+                    <input type="email" name="email" class="form-control" id="email" placeholder="Email"
+                           value="{{old('email')}}" required>
+                    <div class="valid-feedback">look good!</div>
+                    @error('email')
+                    <div class="error-message">{{$message}}</div>
+                    @enderror
+                </div>
+                {{--                    birthday--}}
+                <div class="col-md-6">
+                    <label for="birthday" class="text-capitalize font-weight-bold text-dark">birthday</label>
+                    <input type="date" name="birthday" class="form-control" id="birthday"
+                           value="{{old('birthday')}}" required>
+                    @error('birthday')
+                    <div class="error-message">{{$message}}</div>
+                    @enderror
+                </div>
+            </div>
+            {{--                gender + avatar--}}
+            <div class="form-row">
+                {{--                avatar--}}
+                <div class="col-md-6">
+                    <label for="" class="text-dark text-capitalize font-weight-bold">Upload Image</label>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" value="{{old('upload_img')}}" name="upload_img"
+                               id="upload_img">
+                        <label class="custom-file-label" for="upload_img">Choose file</label>
+                        <div class="invalid-feedback">Image is required</div>
+                    </div>
+                    @error('upload_img')
+                    <div class="error-message">{{$message}}</div>
+                    @enderror
+                </div>
+                {{--                    gender--}}
+                <div class="col-md-6">
+                    <label for="gender" class="text-capitalize font-weight-bold text-dark">gender</label><br>
+                    <div class="d-flex mt-2">
+                        <div class="form-check">
+                            <input type="radio" name="gender" class="form-check-input" id="male" value="{{old('gender')}}">
+                            <label for="male" class="form-check-label">Male</label>
                         </div>
-                        <div class="col-12 col-sm-6 col-md-3 mt-2 mt-md-0">
-                            <input id="blog_name-input" name="name" class="form-control" aria-label="artists_name"
-                                   placeholder="Search by blog title">
+                        <div class="form-check ml-3">
+                            <input type="radio" name="gender" class="form-check-input" id="female" value="{{old('gender')}}">
+                            <label for="female" class="form-check-label">Female</label>
                         </div>
-                        <div class="col-12 col-sm-6 col-md-3 mt-2 mt-md-0">
-                            <input id="blog_name-input" type="date" name="name" class="form-control"
-                                   aria-label="artists_name" placeholder="Search by blog title">
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-3 mt-2 mt-md-0">
-                            <select class="form-control h-100" aria-label="status" name="status">
-                                <option value="1">Active</option>
-                                <option value="0">Inactive</option>
-                            </select>
-                        </div>
-                        <div class="col-2 d-flex mt-2">
-                            <button type="submit" class="btn btn-primary font-weight-bold">Search</button>
-                            <button id="btn-clear-search--2" type="button"
-                                    class="btn btn-outline-secondary font-weight-bold ml-2">Clear
-                            </button>
+                        <div class="form-check ml-3">
+                            <input type="radio" name="gender" class="form-check-input" id="other" value="{{old('gender')}}">
+                            <label for="other" class="form-check-label">Other</label>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
-        </div>
-        <div class="user-admin-list py-3 ">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead class="thead-light">
-                        <tr>
-                            <th scope="col">IDs</th>
-                            <th scope="col">FirstName</th>
-                            <th scope="col">LastName</th>
-                            <th scope="col" class="text-capitalize">date_of_birthday</th>
-                            <th scope="col" class="text-capitalize">gender</th>
-                            <th scope="col" class="text-capitalize">email</th>
-                            <th scope="col" class="text-capitalize">avatar</th>
-                            <th scope="col" class="text-capitalize">password</th>
-                            <th scope="col" class="text-capitalize">balance</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                </table>
+            {{--                balance + password--}}
+            <div class="form-row">
+                {{--                    balance--}}
+                <div class="col-md-6">
+                    <label for="balance" class="text-dark text-capitalize font-weight-bold">balance</label>
+                    <input type="text" name="balance" class="form-control" id="balance" placeholder="Balance"
+                           value="{{old('balance')}}" required>
+                    <div class="valid-feedback">Look good!</div>
+                    @error('balance')
+                    <div class="error-message">{{$message}}</div>
+                    @enderror
+                </div>
+                {{--                    password--}}
+                <div class="col-md-6 mx-auto">
+                    <label for="password" class="text-dark text-capitalize font-weight-bold">password</label>
+                    <input type="password" name="password" class="form-control" id="password" placeholder="password"
+                           value="{{old('password')}}" required>
+                    <div class="valid-feedback">Look good!</div>
+                    @error('balance')
+                    <div class="error-message">{{$message}}</div>
+                    @enderror
+                </div>
             </div>
-        </div>
+            <button type="submit" class="btn btn-primary mt-3">submit</button>
+        </form>
     </div>
 @endsection
+
+@section('script_tag')
+    <script>
+        $(".custom-file-input").on("change", function () {
+            let fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+@endsection
+
+
+
 
