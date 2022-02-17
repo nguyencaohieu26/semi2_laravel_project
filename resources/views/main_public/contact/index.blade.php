@@ -17,15 +17,15 @@
     <Section class="contact__main">
         <div class="container">
             <div class="row">
-                <div class="col-md-7">
+                <div class="col-lg-7 col-md-12">
                     <div class="contact__main--title ml-5">
                         <h3 class="text-capitalize ml-5 pb-2 pl-5 font-weight-bold">helpful links</h3>
                         <p class="contact__main--underlined"></p>
                     </div>
                     <!--helpful__links-->
-                    <div class="contact__items my-3">
+                    <div class="contact__items my-4">
                         <div class="row">
-                            <div class="col-sm-4 contact--padd">
+                            <div class="col-md-4 col-sm-6 contact--padd">
                                 <a href="#" class="position-relative d-block">
                                     <img class="contact__items--img w-100 mb-3" src="https://sothebys-com.brightspotcdn.com/dims4/default/24cf9aa/2147483647/strip/true/crop/3840x2357+0+0/resize/448x275!/format/webp/quality/90/?url=http%3A%2F%2Fsothebys-brightspot.s3.amazonaws.com%2Fdotcom%2F67%2Fa3%2F2bfb9241488690b8d097ef713a96%2F4-211014-sothebys-haydonperrior.jpg">
                                     <div class="contact__items--text position-absolute">
@@ -33,7 +33,7 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="col-sm-4 contact--padd">
+                            <div class="col-md-4 col-sm-6 contact--padd">
                                 <a href="#" class="position-relative d-block">
                                     <img class="contact__items--img w-100 mb-3" src="https://sothebys-com.brightspotcdn.com/dims4/default/f89ca6d/2147483647/strip/true/crop/586x360+54+0/resize/448x275!/format/webp/quality/90/?url=http%3A%2F%2Fsothebys-brightspot.s3.amazonaws.com%2Fdotcom%2F02%2F55%2Fd188f99a4ae3b20ac79daca992f7%2Frecirc-051817-sothebys-contemporary-evening-sale-897-1.jpg">
                                     <div class="contact__items--text position-absolute">
@@ -41,7 +41,7 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="col-sm-4 contact--padd">
+                            <div class="col-md-4 col-sm-6 contact--padd">
                                 <a href="#" class="position-relative d-block">
                                     <img class="contact__items--img w-100 mb-3" src="https://sothebys-com.brightspotcdn.com/dims4/default/191074a/2147483647/strip/true/crop/1831x1124+0+76/resize/448x275!/format/webp/quality/90/?url=http%3A%2F%2Fsothebys-brightspot.s3.amazonaws.com%2Fdotcom%2F61%2F4a%2F86d8b7c741a883dc71488cebeb8d%2Fabout-us-image.jpg">
                                     <div class="contact__items--text position-absolute">
@@ -49,7 +49,7 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="col-sm-4 contact--padd">
+                            <div class="col-md-4 col-sm-6 contact--padd">
                                 <a href="#" class="position-relative d-block">
                                     <img class="contact__items--img w-100 mb-3" src="https://sothebys-com.brightspotcdn.com/dims4/default/5678ce4/2147483647/strip/true/crop/1420x872+0+84/resize/448x275!/format/webp/quality/90/?url=http%3A%2F%2Fsothebys-brightspot.s3.amazonaws.com%2Fdotcom%2Ff3%2Fb2%2F960d317e43a78f46b41a198ab1c9%2F21693106-sell-with-sothebys-webbanners-1420x1040-banner2.jpg">
                                     <div class="contact__items--text position-absolute">
@@ -57,7 +57,7 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="col-sm-4 contact--padd">
+                            <div class="col-md-4 col-sm-6 contact--padd">
                                 <a href="#" class="position-relative d-block">
                                     <img class="contact__items--img w-100 mb-3" src="https://sothebys-com.brightspotcdn.com/dims4/default/2e08073/2147483647/strip/true/crop/554x340+0+0/resize/448x275!/format/webp/quality/90/?url=http%3A%2F%2Fsothebys-brightspot.s3.amazonaws.com%2Fdotcom%2F25%2Fe3%2F74f9b7254c1789678cd432a216f0%2F1514931659634.jpg">
                                     <div class="contact__items--text position-absolute">
@@ -65,7 +65,7 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="col-sm-4 contact--padd">
+                            <div class="col-md-4 col-sm-6 contact--padd">
                                 <a href="#" class="position-relative d-block">
                                     <img class="contact__items--img w-100 mb-3" src="https://sothebys-com.brightspotcdn.com/dims4/default/fbf6cc1/2147483647/strip/true/crop/1278x784+0+75/resize/448x275!/format/webp/quality/90/?url=http%3A%2F%2Fsothebys-brightspot.s3.amazonaws.com%2Fdotcom%2F03%2Ffe%2F8b72850548078e30cd92e1baff22%2Fsothebys-wine.jpg">
                                     <div class="contact__items--text position-absolute">
@@ -73,7 +73,7 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="col-sm-4 contact--padd">
+                            <div class="col-md-4 col-sm-6 contact--padd">
                                 <a href="#" class="position-relative d-block">
                                     <img class="contact__items--img w-100 mb-3" src="https://sothebys-com.brightspotcdn.com/dims4/default/47e94dc/2147483647/strip/true/crop/733x450+27+0/resize/448x275!/format/webp/quality/90/?url=http%3A%2F%2Fsothebys-brightspot.s3.amazonaws.com%2Fdotcom%2F1c%2Fb2%2F26e8e2644463b9ab904c445a8f3e%2F802-edit.jpg">
                                     <div class="contact__items--text position-absolute">
@@ -81,7 +81,7 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="col-sm-4 contact--padd">
+                            <div class="col-md-4 col-sm-6 contact--padd">
                                 <a href="#" class="position-relative d-block">
                                     <img class="contact__items--img w-100 mb-3" src="https://sothebys-com.brightspotcdn.com/dims4/default/f57e064/2147483647/strip/true/crop/699x429+151+0/resize/448x275!/format/webp/quality/90/?url=http%3A%2F%2Fsothebys-brightspot.s3.amazonaws.com%2Fdotcom%2F9f%2F92%2Fd7825ed649498529ce24b511daf5%2Fsea-team.jpg">
                                     <div class="contact__items--text position-absolute">
@@ -89,7 +89,7 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="col-sm-4 contact--padd">
+                            <div class="col-md-4 col-sm-6 contact--padd">
                                 <a href="#" class="position-relative d-block">
                                     <img class="contact__items--img w-100 mb-3" src="https://sothebys-com.brightspotcdn.com/dims4/default/fb17524/2147483647/strip/true/crop/595x365+14+0/resize/448x275!/format/webp/quality/90/?url=http%3A%2F%2Fsothebys-brightspot.s3.amazonaws.com%2Fdotcom%2F47%2F24%2F2b5de52c4c2c81b237a4634242a1%2F1424674635257.jpg">
                                     <div class="contact__items--text position-absolute">
@@ -100,7 +100,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-5 pl-4">
+                <div class="col-lg-5 col-md-12 mb-5 pl-4">
                     <div class="row">
                         <div class="col-md-6 col-5">
                             <div class="contact__info--phone letter__spacing ml-5">
