@@ -14,15 +14,15 @@
 @section('content')
     <section class="create-blog-container">
         <div class="pt-3 px-4">
-            <form method="POST" action="/blogs_resource/{{$blog->id}}" id="form-create-blog"
+            <form method="POST" action="/blogs_resource/{{$blog->id}}" id="form-edit-blog"
                   class="needs-validation" novalidate enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="FormTitle" class="text-dark text-capitalize font-weight-bold">title</label>
-                        <input type="text" name="title" class="form-control" id="FormTitle" placeholder="Enter Title..."
-                               value="{{old ('title', optional($blog ?? null)->title)}}" required>
+                        <label for="title" class="text-dark text-capitalize font-weight-bold">Title</label>
+                        <input type="text" name="title" class="form-control" id="title" placeholder="Enter title..."
+                               value="{{old ('title',optional($blog ?? null)->title)}}" required>
                         <div class="valid-feedback">Looks good!</div>
                         <div class="invalid-feedback">Title is required</div>
                         @error('title')
@@ -31,57 +31,51 @@
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label for="FormAuthor" class="text-dark text-capitalize font-weight-bold">Author Name</label>
-                        <input type="text" name="author" class="form-control" placeholder="Enter Author ..."
-                               value="{{old ('author', optional($blog ?? null)->author)}}" required>
+                        <label for="author_name" class="text-dark text-capitalize font-weight-bold">Author Name</label>
+                        <input type="text" id="author_name" name="name" class="form-control" placeholder="Enter author ..."
+                               value="{{old ('name',optional($blog ?? null)->author)}}" required>
                         <div class="valid-feedback">Looks good!</div>
                         <div class="invalid-feedback">Author is required</div>
-                        @error('author')
+                        @error('name')
                         <div class="error-message">{{$message}}</div>
                         @enderror
                     </div>
                 </div>
-
                 <div class="form-row">
-                    <div class="form-group col-md-12">
+                    <div class="form-group col-md-6">
                         <label for="" class="text-dark text-capitalize font-weight-bold">Upload Image</label>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" value="{{old('upload_img',optional($blog ?? null)->image)}}" name="upload_img" id="upload_img" required>
-                            <label class="custom-file-label" for="upload_img">Choose file</label>
+                            <input type="file" class="custom-file-input" value="{{old('upload_img',optional($blog ?? null)->image)}}" name="upload_img" id="upload_img">
+                            <label class="custom-file-label" for="upload_img">{{old('upload_img',optional($blog ?? null)->image)}}</label>
                             <div class="invalid-feedback">Image is required</div>
                         </div>
                         @error('upload_img')
+                            <div class="error-message">{{$message}}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-6">
+                        <label for="author_tag" class="text-dark text-capitalize font-weight-bold">Tag</label>
+                        <input id="author_tag" class="form-control" type="text" placeholder="Enter tag..." value="{{old('tag',optional($blog ?? null)->tag)}}" name="tag" required/>
+                        <div class="invalid-feedback">Tag is required</div>
+                        @error('tag')
                         <div class="error-message">{{$message}}</div>
                         @enderror
                     </div>
-{{--                    <div class="form-group col-md-6">--}}
-{{--                        <label for="exampleFormControlSelect1"--}}
-{{--                               class="text-dark text-capitalize font-weight-bold">Status</label>--}}
-{{--                        <select class="custom-select" id="validationDefault04" required>--}}
-{{--                            <option selected disabled value="">Choose...</option>--}}
-{{--                            <option>...</option>--}}
-{{--                        </select>--}}
-{{--                        <div class="invalid-feedback">--}}
-{{--                            Please select a valid status--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-12">
-                        <label for="exampleFormControlTextarea1" class="text-dark text-capitalize font-weight-bold">content
-                            title</label>
-                        <textarea class="form-control" name="content" id="exampleFormControlTextarea1" rows="3"
-                                  placeholder="Content..." required>{{old('upload_img',optional($blog ?? null)->content_post)}}</textarea>
-                        <div class="invalid-feedback">
-                            Content is required
-                        </div>
-                        @error('content')
-                        <div class="error-message">{{$message}}</div>
+                        <label for="content_post" class="text-dark text-capitalize font-weight-bold">Content</label>
+                        <textarea class="form-control" name="content_post" id="content_post" rows="5"
+                                  placeholder="Content..." required>{{old('content_post',optional($blog ?? null)->content_post)}}</textarea>
+                        <div class="invalid-feedback">Content look good</div>
+                        <div class="valid-feedback">Looks good!</div>
+                        @error('content_post')
+                        <div class="valid-feedback">Looks good!</div>
                         @enderror
                     </div>
                 </div>
-                <button class="btn btn-primary" type="submit">Submit form</button>
+                <button class="btn btn-primary font-weight-bold" type="submit">Submit form</button>
             </form>
         </div>
     </section>

@@ -29,25 +29,29 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-//        dd($request->all());
-        $request->validate([
-           'title' => 'required',
-            'author' => 'required',
-            'upload_img' => 'required',
-            'content_post' => 'required',
+       $validate = $request->validate([
+           'title'          => 'bail|required|unique:blogs,title',
+           'name'           => 'bail|required',
+           'tag'            => 'bail|required',
+           'upload_img'     => 'bail|required',
+           'content_post'   => 'bail|required',
         ]);
-        $newImageName = time().'.'.$request->upload_img->extension();
+
+        $newImageName = time().$request->title.'.'.$request->upload_img->extension();
+
         $request->upload_img->move(public_path('images_store/blogs'),$newImageName);
 
         $blog = new Blog;
-        $blog->title = $request->title;
-        $blog->author = $request->author;
-        $blog->image = $newImageName;
+        $blog->title        = $request->title;
+        $blog->author       = $request->name;
+
+        $blog->tag          = $request->tag;
+        $blog->image        = $newImageName;
         $blog->content_post = $request->content_post;
+
         $blog->save();
 
-//        return redirect()->route('admin-blogs')->with('create-blogs','Create category successfully');
-        return redirect('blogs_resource');
+      return redirect()->route('admin-blogs')->with('create-blog','Create blog successfully');
     }
 
     /**
@@ -72,43 +76,53 @@ class BlogController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (isset($request->upload_img)){
+        if(isset($request->upload_img)){
             $validate = $request->validate([
-                'title' => 'required',
-                'author' => 'required',
-                'upload_img' => 'required|image|mimes:jpeg,png,jpg',
-                'content_post' => 'required',
+                'name'           => 'bail|required',
+                'tag'            => 'bail|required',
+                'content_post'   => 'bail|required',
+                'title'          => ['bail','required', Rule::unique('blogs')->ignore($id)],
+                'upload_img'     => 'bail|required|mimes:jpg,png,jpeg',
             ]);
-            $newImageName = time().'.'.$request->upload_img->extension();
+
+            $newImageName = time().'-'.$request->name.'.'.$request->upload_img->extension();
+
             $request->upload_img->move(public_path('images_store/blogs'),$newImageName);
 
-            $blog = new Blog;
-            $blog->title = $request->title;
-            $blog->author = $request->author;
-            $blog->image = $newImageName;
+            $blog =  Blog::findOrFail($id);
+            $blog->title        = $request->title;
+            $blog->author       = $request->name;
+            $blog->tag          = $request->tag;
+            $blog->image        = $newImageName;
             $blog->content_post = $request->content_post;
+
             $blog->save();
-            return redirect()->route('admin-blogs')->with('edit-blogs','Edit blogs successfully');
-        } else{
+            return redirect()->route('admin-blogs')->with('edit-blog','Edit blog successfully');
+        }else{
             $validate = $request->validate([
-                'category_code' =>['required', Rule::unique('blogs')->ignore($id)],
-                'name' => ['required', Rule::unique('blogs')->ignore($id)],
+                'name'           => 'bail|required',
+                'tag'            => 'bail|required',
+                'content_post'   => 'bail|required',
+                'title'          => ['bail','required', Rule::unique('blogs')->ignore($id)],
             ]);
-            $blog =  Category::findOrFail($id);
-            $blog->title = $request->title;
-            $blog->author_name = $request->author_name;
-//            $blog->image = $newImageName;
+            $blog =  Blog::findOrFail($id);
+            $blog->title        = $request->title;
+            $blog->author       = $request->name;
+            $blog->tag          = $request->tag;
             $blog->content_post = $request->content_post;
             $blog->save();
-            return redirect()->route('admin-blogs')->with('edit-blogs','Edit blogs successfully');
+            return redirect()->route('admin-blogs')->with('edit-blog','Edit blog successfully');
         }
     }
 
     /**
      * Remove the specified resource from storage.s
      */
-    public function destroy(Blog $blog)
+    public function destroy($id)
     {
+        Blog::findOrFail($id);
+        $res = Blog::destroy($id);
+        return "Remove blog successfully";
         //
     }
 }

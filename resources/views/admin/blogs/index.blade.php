@@ -62,10 +62,10 @@
                             <thead class="thead-light">
                             <tr>
                                 <th scope="col">IDs</th>
+                                <th scope="col">Thumbnail</th>
                                 <th scope="col">Title</th>
                                 <th scope="col">Author</th>
-                                <th scope="col">Thumbnail</th>
-                                {{--                                <th scope="col">Tag</th>--}}
+                                <th scope="col">Tag</th>
                                 <th scope="col">Status</th>
                                 <th scope="col" class="text-right pr-3">Action</th>
                             </tr>
@@ -107,22 +107,24 @@
                 data: {name: search.name, page: search.page, id: search.id, status: search.status},
                 method: 'GET',
                 success: (result) => {
+                    console.log(result.data);
                     if (result.data.length > 0) {
                         $('.blogs-list').html('');
                         $('.no-data-container').hide();
-                        result.data.forEach(blogs => {
+                        result.data.forEach(blog => {
                             let item = `
                                 <tr>
-                                    <th scope="row">${blogs.id}</th>
-                                    <td class="artist-name">${blogs.title}</td>
-                                    <td class="artist-description">${blogs.author}</td>
+                                    <th scope="row">${blog.id}</th>
                                     <td class="blogs-image">
-                                    <img width="70px" style="height: 50px" class="rounded mt-2" src="/images_store/blogs/${blogs.image}" alt=""/>
+                                        <img  style="height: 50px" class="rounded mt-2" src="/images_store/blogs/${blog.image}" alt="${blog.title}"/>
                                    </td>
-                                    <td style="font-size: 13px" class="font-weight-bold ${blogs.status === 1 ? "text-success" : "text-danger"}">${blogs.status === 1 ? "Active" : "Inactive"}</td>
-                                    <td class="d-flex">
-                                        <div><a class="text-success" href="/artists_resource/${blogs.id}/edit "><i class="ti-pencil-alt2"></i></a></div>
-                                        <div class="text-danger" onclick="deleteBlog(${blogs.id})"><i class="ti-trash"></i></div>
+                                    <td class="blog-name">${blog.title}</td>
+                                    <td class="blog-author">${blog.author}</td>
+                                    <td class="blog-tag">${blog.tag}</td>
+                                    <td style="font-size: 13px" class="${blog.status === 1 ? "text-success" : "text-danger"}">${blog.status === 1 ? "Active" : "Inactive"}</td>
+                                    <td class="d-flex justify-content-end">
+                                        <div><a class="text-success" href="/blogs_resource/${blog.id}/edit"><i class="ti-pencil-alt2 pr-1 border-right"></i></a></div>
+                                        <div class="text-danger" onclick="deleteBlog(${blog.id})"><i class="ti-trash pl-1"></i></div>
                                     </td>
                                 <tr>
                             `
@@ -136,8 +138,9 @@
                             $('.pagination-custom ul').append(pageItem);
                         }
                     } else {
-                        $('.no-data-container').show();
-                        $('.no-data-container').html(`
+                        $('.blogs-list').html('');
+                        $('.pagination-custom ul').html('');
+                        $('.no-data-container').show().html(`
                                 <i style="font-size: 30px" class="ti-package"></i>
                                 <p>No data found</p>
                         `)
@@ -148,9 +151,9 @@
 
         function deleteBlog(id) {
             $.confirm({
-                title: `<h5>Remove Artist</h5>`,
+                title: `<h5>Remove Blog</h5>`,
                 content: `<div>
-                            <p>Are you sure to delete the artist!</p>
+                            <p>Are you sure to delete the blog!</p>
                           </div>`,
                 autoClose: 'cancelAction|8000',
                 buttons: {
@@ -161,7 +164,7 @@
                             method: 'POST',
                             data: {id: id, _method: "DELETE"},
                             success: (result) => {
-                                getArtists(artistFieldSearch);
+                                getBlogs(blogFieldSearch);
                                 $('.response-message').html('').addClass('active').append(`
                                     <div class="alert alert-success">${result}</div>
                                 `);
@@ -177,23 +180,21 @@
             });
         }
 
-        Search
-        $('#blog-search-form').submit(event => {
-            event.preventDefault();
-            let formData = $('#blog-search-form').serializeArray();
-            let nameSearch = formData[1].value;
-            let idSearch = formData[0].value;
-            let statusSearch = formData[2].value;
-            getArtists({name: nameSearch, id: idSearch, status: statusSearch, page: 1});
-        });
-
-        Clear
-        search
-        $('#btn-clear-search--2').click(() => {
-            getBlogs(artistFieldSearch);
-            $('#artist_id-input').val('');
-            $('#artist_name-input').val('');
-        });
+        //Search
+        // $('#blog-search-form').submit(event => {
+        //     event.preventDefault();
+        //     let formData = $('#blog-search-form').serializeArray();
+        //     let nameSearch = formData[1].value;
+        //     let idSearch = formData[0].value;
+        //     let statusSearch = formData[2].value;
+        //     getArtists({name: nameSearch, id: idSearch, status: statusSearch, page: 1});
+        // });
+        //
+        // $('#btn-clear-search--2').click(() => {
+        //     getBlogs(blogFieldSearch);
+        //     $('#artist_id-input').val('');
+        //     $('#artist_name-input').val('');
+        // });
 
         setTimeout(clearMessage, 1000);
 
