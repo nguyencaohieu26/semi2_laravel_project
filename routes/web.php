@@ -83,6 +83,10 @@ Route::get('/admin/auctions-result',function (){
     return view('admin.auction_results.index');
 })->name('admin-auction-result');
 
+Route::get('/user', function (){
+   return view('user.index');
+});
+
 Route::resource('/products_resource',ProductController::class);
 
 Route::resource('accounts_resource',\App\Http\Controllers\AccountsController::class);
