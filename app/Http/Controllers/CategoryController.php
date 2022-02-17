@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class CategoryController extends Controller
@@ -11,9 +12,23 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Category::paginate(5);
+        $query = Category::where('deleted_at' ,'=', null);
+
+        if(isset($request->id)){
+            $query = $query->getbyid($request->id);
+        }
+        if(isset($request->name)){
+            $query = $query->getbyname($request->name);
+        }
+        if(isset($request->status)){
+            $query  = $query->getbystatus($request->status);
+        }
+        if(isset($request->code)){
+            $query = $query->getbycategorycode($request->code);
+        }
+        return $query->paginate(5);
         //
     }
 

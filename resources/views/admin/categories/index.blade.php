@@ -31,21 +31,22 @@
                         <div class="col-12 col-sm-6 col-md-3">
                             <input id="category_id-input" name="id" class="form-control" aria-label="category_id" placeholder="Search by category id"/>
                         </div>
-                        <div class="col-12 col-sm-6 col-md-3">
+                        <div class="col-12 col-sm-6 col-md-3 mt-2 mt-sm-0">
                             <input id="category_name-input" name="name" class="form-control" aria-label="category_name" placeholder="Search by name">
                         </div>
                         <div class="col-12 col-sm-6 col-md-3 mt-2 mt-md-0">
                             <input id="category_code-input" name="code" class="form-control" aria-label="category_code" placeholder="Search by category code">
                         </div>
                         <div class="col-12 col-sm-6 col-md-3 mt-2 mt-md-0">
-                            <select class="form-control" aria-label="status" name="status">
+                            <select class="form-control h-100" aria-label="status" name="status">
+                                <option value="" selected>Choose status</option>
                                 <option value="1">Active</option>
                                 <option value="0">Inactive</option>
                             </select>
                         </div>
-                        <div class="col-2 d-flex mt-2">
-                            <button type="submit" class="btn btn-primary font-weight-bold">Search</button>
-                            <button id="btn-clear-search--1" type="button" class="btn btn-outline-secondary font-weight-bold ml-2">Clear</button>
+                        <div class="col-12 d-flex mt-2 justify-content-end">
+                            <button type="submit" class="btn btn-submit font-weight-bold">Search</button>
+                            <button id="btn-clear-search--1" type="button" class="btn btn-clear font-weight-bold ml-2">Clear</button>
                         </div>
                     </div>
                 </form>
@@ -84,7 +85,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-
+        //
         let categoryFieldSearch = {
             "name":undefined,
             "id":undefined,
@@ -92,15 +93,16 @@
             "code":undefined,
             "page":1,
         }
-
+        //
         getCategories(categoryFieldSearch);
-
+        //
         function getCategories(search){
             $.ajax({
                 url:'/categories_resource',
-                data:{name:search.name,page:search.page,id:search.id,status:search.status,category_code:search.code},
+                data:{name:search.name,page:search.page,id:search.id,status:search.status,code:search.code},
                 method:'GET',
                 success:(result)=>{
+                    console.log(result.data);
                     if(result.data.length > 0){
                         $('.category-list').html('');
                         $('.no-data-container').hide();
@@ -131,6 +133,8 @@
                             $('.pagination-custom ul').append(pageItem);
                         }
                     }else{
+                        $('.category-list').html('');
+                        $('.pagination-custom ul').html('');
                         $('.no-data-container').show().html(`
                                 <i style="font-size: 30px" class="ti-package"></i>
                                 <p>No data found</p>
@@ -167,26 +171,22 @@
                 }
             });
         }
-
         //Search
         $('#category-search-form').submit(event=>{
             event.preventDefault();
             let formData = $('#category-search-form').serializeArray();
-            console.log(formData);
-            let nameSearch   = formData[1].value;
-            let idSearch     = formData[0].value;
-            let codeSearch = formData[2].value;
-            let statusSearch = formData[3].value;
+            let nameSearch   = formData[1].value ? formData[1].value : undefined;
+            let idSearch     = formData[0].value ? formData[0].value : undefined;
+            let codeSearch = formData[2].value ? formData[2].value : undefined;
+            let statusSearch = formData[3].value ? formData[3].value : undefined;
             getCategories({name:nameSearch,id:idSearch,status:statusSearch ,page: 1,code:codeSearch})
         });
         //Clear search
         $('#btn-clear-search--1').click(()=>{
+            $('#category-search-form')[0].reset();
             getCategories(categoryFieldSearch);
-            $('#category_id-input').val('');
-            $('#category_name-input').val('');
-            $('#category_code-input').val('');
         });
-
+        //
         setTimeout(clearMessage,1000);
         function clearMessage(){
             $('.response-message').addClass('active')

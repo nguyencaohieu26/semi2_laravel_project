@@ -17,27 +17,27 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-//        if(isset($request->name)){
-//            echo 'in';
-//        }
-//        if(isset($request->id)){
-//            echo 'in';
-//        }
-//        if(isset($request->status)){
-//            echo 'in';
-//        }
+        $query = Product::with(['categories','artists','product_status'])->where('deleted_at' ,'=', null);
+        if(isset($request->name)){
+            $query = $query->getbyname($request->name);
+        }
+        if(isset($request->id)){
+            $query = $query->getbyid($request->id);
+        }
+        if(isset($request->category)){
+            $query = $query->getbycategory($request->category);
+        }
+        if(isset($request->status)){
+            $query = $query->getbystatus($request->status);
+        }
+        if(isset($request->artist)){
+            $query = $query->getbyartist($request->artist);
+        }
 //        if(isset($request->price)){
 //            echo 'in';
 //        }
-//        if(isset($request->artist)){
-//            echo 'in';
-//        }
-//        if(isset($request->size)){
-//            echo 'in';
-//        }
-//        $product = Product::with(['categories','artists','product_status'])->where('id', $id)->first();
 
-        return Product::with(['categories','artists','product_status'])->paginate(10);
+        return $query->paginate(10);
     }
 
     public function products_field_filter(){

@@ -26,40 +26,53 @@
         {{--  main  --}}
         <div class="pt-3 px-4">
             <div class="products-admin-filter">
-                <form>
-                    <div class="row">
-                        <div class="col-12 col-sm-6 col-md-2">
-                            <input name="id" class="form-control" aria-label="product_id" placeholder="Search by product id"/>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-3 mt-2 mt-sm-0">
-                            <input name="name" class="form-control" aria-label="" placeholder="Search by name">
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-3 mt-2 mt-md-0">
-                            <select class="form-control h-100" aria-label="" name="category">
-                                @foreach($categories as $category)
-                                    <option value="{{$category->id}}">{{$category->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-2 mt-2 mt-md-0">
-                            <select class="form-control h-100" aria-label="" name="category">
-                                @foreach($productStatus as $status)
-                                    <option value="{{$status->id}}">{{$status->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-2 mt-2 mt-md-0">
-                            <select class="form-control h-100" aria-label="" name="artist">
-                                @foreach($artists as $artist)
-                                    <option value="{{$artist->id}}">{{$artist->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-2 mt-2">
-                            <button type="submit" class="btn btn-primary font-weight-bold">Search</button>
+                <div class=" position-relative">
+                    <div class="d-sm-none d-flex align-items-center mb-2">
+                        <p class="mr-2">Filter</p>
+                        <div class="btn-product-filter">
+                            <span class="product-filter-status position-absolute d-inline-block"></span>
+                            <svg class="border rounded" xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/></svg>
                         </div>
                     </div>
-                </form>
+                    <form id="product-filter-form" class="product-filter-form">
+                        <div class="form-row">
+                            <div class="col-12 col-sm-6 col-md-4">
+                                <input name="id" class="form-control" aria-label="product_id" placeholder="Search by product id"/>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4 mt-2 mt-sm-0">
+                                <input name="name" class="form-control" aria-label="" placeholder="Search by name">
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4 mt-2 mt-md-0">
+                                <select class="form-control h-100" aria-label="" name="category">
+                                    <option value="">Choose category</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4 mt-2">
+                                <select class="form-control h-100" aria-label="" name="status">
+                                    <option value="">Choose status</option>
+                                    @foreach($productStatus as $status)
+                                        <option value="{{$status->id}}">{{$status->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4 mt-2">
+                                <select class="form-control h-100" aria-label="" name="artist">
+                                    <option value="" selected>Choose artist</option>
+                                    @foreach($artists as $artist)
+                                        <option value="{{$artist->id}}">{{$artist->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-sm-6 col-md-4 mt-2 d-flex align-items-start justify-content-end">
+                                <button type="submit" class="btn btn-submit font-weight-bold mr-2">Search</button>
+                                <button type="button" class="btn btn-clear font-weight-bold clear-search">Clear</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
             <div class=" mt-3">
                 <div class="products-admin-list">
@@ -82,7 +95,7 @@
                 </div>
                 <div class="no-data-container p-3 text-center"></div>
             </div>
-            <div class="pagination-custom pb-4">
+            <div class="pagination-custom pb-4 mt-4">
                 <ul class="d-flex"></ul>
             </div>
         </div>
@@ -96,7 +109,7 @@
                         </div>
                         <div class="modal-body border-0" id="modal-product-detail"></div>
                         <div class="modal-footer border-0">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary clear-search" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
@@ -120,12 +133,12 @@
             "id":undefined,
             "status":undefined,
             "price":undefined,
+            "category":undefined,
             "artist":undefined,
-            "size":undefined,
             "page":1,
         }
         getProducts(productFieldSearch);
-
+        //s
         function getProducts(search){
             $.ajax({
                 url:'/products_resource',
@@ -133,6 +146,7 @@
                     name:search.name,
                     page:search.page,
                     id:search.id,
+                    category:search.category,
                     size:search.size,
                     price:search.price,
                     status:search.status,
@@ -178,6 +192,8 @@
                             $('.pagination-custom ul').append(pageItem);
                         }
                     }else{
+                        $('.product-list').html('');
+                        $('.pagination-custom ul').html('');
                         $('.no-data-container').show().html(`
                                 <i style="font-size: 30px" class="ti-package"></i>
                                 <p>No data found</p>
@@ -211,14 +227,12 @@
                 }
             });
         }
-
         //
         function viewProductDetail(id){
             $.ajax({
                 url:`/products_resource/${id}`,
                 method:'GET',
                 success:(product)=>{
-                    console.log(product);
                     let categoryList = ``;
                     product.categories.forEach(cate =>{
                        let categoryItem = `<p class="mb-0 product-category-item">${cate.name}</p>`
@@ -233,7 +247,7 @@
                                 </div>
                                 <div class="col-12 mt-2 mt-lg-0 col-lg-7">
                                     <h4>${product.name}</h4>
-                                    <div class="d-flex mt-1">
+                                    <div class="d-flex flex-wrap mt-1">
                                            ${categoryList}
                                     </div>
                                     <p class="mb-0 mt-2 font-italic"><span>Artist: </span> <span>${product.artists.name}</span></p>
@@ -269,6 +283,39 @@
             $('.response-message').addClass('active')
             setTimeout(()=>{$('.response-message').removeClass('active')},2000);
         }
-
+        //
+        $('#product-filter-form').submit(e =>{
+            e.preventDefault();
+            let formData = $('#product-filter-form').serializeArray();
+            getProducts({
+                "name":formData[1].value ? formData[1].value : undefined,
+                "id":formData[0].value ? formData[0].value : undefined,
+                "category":formData[2].value ? formData[2].value : undefined,
+                "status":formData[3].value ? formData[3].value : undefined,
+                "price":undefined,
+                "artist":formData[4].value ? formData[4].value : undefined,
+                "page":1,
+            });
+            $('.product-filter-status').addClass('addBG').html(countFilter(formData));
+            $('.product-filter-form').removeClass('active');
+        });
+        function countFilter(arr){
+            let count = 0;
+            for(let i = 0; i< arr.length;i++){
+                if(arr[i].value !== "")count++;
+            }
+            return count;
+        }
+        //
+        $('.clear-search').click(()=>{
+           $('#product-filter-form')[0].reset();
+            getProducts(productFieldSearch);
+            $('.product-filter-status').removeClass('addBG').html(countFilter(productFieldSearch));
+            $('.product-filter-form').removeClass('active');
+        });
+        //
+        $('.btn-product-filter').click(function (){
+            $('.product-filter-form').toggleClass('active');
+        });
     </script>
 @endsection

@@ -16,7 +16,7 @@
     background-color: #292929;
     color: white;
 }
-/**/
+/*Response Message */
 .response-message{
     opacity: 0;
     visibility: hidden;
@@ -59,4 +59,58 @@ table tbody tr:hover{
     cursor: pointer;
     background: darkblue;
     border: 1px solid darkblue;
+}
+
+.btn-product-filter{
+    cursor: pointer;
+    top: 3px;
+    position: relative;
+}
+@media only screen and (max-width: 576px){
+    .product-filter-form{
+        z-index: 10;
+        padding: 1rem;
+        opacity: 0;
+        background: white;
+        visibility: hidden;
+        position: absolute;
+        transition: .3s all ease-in-out;
+    }
+    .product-filter-form.active{
+        opacity: 1;
+        visibility: visible;
+    }
+    .product-filter-status{
+        top: -10px;
+        width: 15px;
+        right: -10px;
+        height: 15px;
+        color: white;
+        font-size: 10px;
+        text-align: center;
+        border-radius: 50%;
+    }
+    .product-filter-status.addBG{
+        background: red;
+    }
+}
+/**/
+.btn-submit,.btn-clear{
+    color: white;
+    outline: none;
+    padding: 5px 15px;
+    border-color: currentColor;
+}
+.btn-clear{
+    background: #969696;
+}
+.btn-submit:hover{
+    background: #0f77e5;
+}
+.btn-clear:hover{
+    background: #777;
+}
+.btn-submit{
+    background: #1c82e7;
+
 }

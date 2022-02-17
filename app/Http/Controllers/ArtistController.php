@@ -12,7 +12,17 @@ class ArtistController extends Controller
      */
     public function index(Request $request)
     {
-        return Artist::paginate(10);
+        $query = Artist::where('deleted_at' ,'=', null);
+        if(isset($request->id)){
+            $query = $query->getbyid($request->id);
+        }
+        if(isset($request->name)){
+            $query = $query->getbyname($request->name);
+        }
+        if(isset($request->status)){
+            $query = $query->getbystatus($request->status);
+        }
+        return $query->paginate(10);
     }
 
     /**

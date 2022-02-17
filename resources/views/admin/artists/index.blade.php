@@ -31,18 +31,19 @@
                         <div class="col-12 col-sm-6 col-md-3">
                             <input id="artist_id-input" name="id" class="form-control" aria-label="artists_id" placeholder="Search by artist id"/>
                         </div>
-                        <div class="col-12 col-sm-6 col-md-3">
+                        <div class="col-12 col-sm-6 col-md-3 mt-2 mt-sm-0">
                             <input id="artist_name-input" name="name" class="form-control" aria-label="artists_name" placeholder="Search by name">
                         </div>
                         <div class="col-12 col-sm-6 col-md-3 mt-2 mt-md-0">
                             <select class="form-control h-100" aria-label="status" name="status">
-                               <option value="1">Active</option>
+                                <option value="">Choose status</option>
+                                <option value="1">Active</option>
                                 <option value="0">Inactive</option>
                             </select>
                         </div>
-                        <div class="col-2 d-flex mt-2 mt-md-0">
-                            <button type="submit" class="btn btn-primary font-weight-bold">Search</button>
-                            <button id="btn-clear-search" type="button" class="btn btn-outline-secondary font-weight-bold ml-2">Clear</button>
+                        <div class="col-2 d-flex mt-2 mt-md-0 align-items-start">
+                            <button type="submit" class="btn btn-submit font-weight-bold">Search</button>
+                            <button id="btn-clear-search" type="button" class="btn btn-clear font-weight-bold ml-2">Clear</button>
                         </div>
                     </div>
                 </form>
@@ -82,9 +83,9 @@
         });
 
         let artistFieldSearch = {
-            "name":'',
-            "id":'',
-            "status":'',
+            "name":undefined,
+            "id":undefined,
+            "status":undefined,
             "page":1,
         }
 
@@ -92,7 +93,12 @@
         function getArtists(search){
             $.ajax({
                 url:'/artists_resource',
-                data:{name:search.name,page:search.page,id:search.id,status:search.status},
+                data:{
+                    name:search.name,
+                    page:search.page,
+                    id:search.id,
+                    status:search.status
+                },
                 method:'GET',
                 success:(result)=>{
                     if(result.data.length > 0){
@@ -118,10 +124,12 @@
                         const totalPage = result.total;
                         const numberPerPage = result.per_page;
                         for(let i =1; i<=Math.ceil(totalPage/numberPerPage);i++){
-                            let pageItem = `<li onclick="getArtists({name:'',id:'',status:'',page: ${i}})" class="page-item-custom ${i === search.page ? "active" : ""}">${i}</li>`;
+                            let pageItem = `<li onclick="getArtists({name:${search.name},id:${search.id},status:${search.status},page: ${i}})" class="page-item-custom ${i === search.page ? "active" : ""}">${i}</li>`;
                             $('.pagination-custom ul').append(pageItem);
                         }
                     }else{
+                        $('.artists-list').html('');
+                        $('.pagination-custom ul').html('');
                         $('.no-data-container').show().html(`
                                 <i style="font-size: 30px" class="ti-package"></i>
                                 <p>No data found</p>
@@ -169,9 +177,9 @@
         });
         //Clear search
         $('#btn-clear-search').click(()=>{
+            $('#artist-search-form')[0].reset();
             getArtists(artistFieldSearch);
-            $('#artist_id-input').val('');
-            $('#artist_name-input').val('');
+
         });
         setTimeout(clearMessage,1000);
         function clearMessage(){

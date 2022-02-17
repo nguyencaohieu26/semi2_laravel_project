@@ -19,4 +19,13 @@ class Artist extends Model
     public function products(){
         return $this->belongsToMany(Product::class,'products');
     }
+    public function scopegetbyid($query,$id){
+        $query->where('id','=',$id);
+    }
+    public function scopegetbyname($query,$name){
+        $query->where('name','like','%'.$name.'%');
+    }
+    public function scopegetbystatus($query,$status){
+        $query->where('status','=',$status);
+    }
 }
