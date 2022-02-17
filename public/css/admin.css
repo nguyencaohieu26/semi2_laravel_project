@@ -34,7 +34,7 @@
     color: rgba(222, 28, 28, 0.99);
 }
 /**/
-.artist-name,.artist-description,.category-list,.products-admin-list{
+.artist-name,.artist-description,.category-list,.products-admin-list,.product-category-item,.blogs-admin-list{
     font-family: 'Poppins', sans-serif;
 }
 .artist-description{
@@ -43,4 +43,20 @@
 table tbody tr:hover{
     cursor: pointer;
     background-color: rgba(173, 216, 230, 0.2);
+}
+/* admin-products */
+.product-category-item{
+    font-size: 11px;
+    padding: 3px 10px;
+    margin-right: 10px;
+    border-radius: 3px;
+    line-height: 1.6;
+    transition: .3s all ease-in-out;
+    border: 1px solid #c5c5c5;
+}
+.product-category-item:hover{
+    color: white;
+    cursor: pointer;
+    background: darkblue;
+    border: 1px solid darkblue;
 }

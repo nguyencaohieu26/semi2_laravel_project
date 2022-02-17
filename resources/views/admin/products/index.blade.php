@@ -94,9 +94,7 @@
                         <div class="modal-header border-0">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
                         </div>
-
                         <div class="modal-body border-0" id="modal-product-detail"></div>
-
                         <div class="modal-footer border-0">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
@@ -192,9 +190,7 @@
         function deleteProduct(id){
             $.confirm({
                 title: `<h5>Remove Product</h5>`,
-                content: `<div>
-                            <p>Are you sure to delete the product!</p>
-                          </div>`,
+                content: `<div><p>Are you sure to delete the product!</p></div>`,
                 autoClose: 'cancelAction|8000',
                 buttons: {
                     confirm: function () {
@@ -223,6 +219,11 @@
                 method:'GET',
                 success:(product)=>{
                     console.log(product);
+                    let categoryList = ``;
+                    product.categories.forEach(cate =>{
+                       let categoryItem = `<p class="mb-0 product-category-item">${cate.name}</p>`
+                        categoryList +=categoryItem;
+                    });
                     let productDetail = `
                         <div class="">
                             <div class="row">
@@ -230,10 +231,13 @@
                                     <img width="100%" src="/images_store/products/${product.image}" alt="${product.name}"/>
                                     <p class="product-detail-status text-white position-absolute bg-dark rounded" style="top: 10px; left: 1.5rem;padding: 3px 10px"><span style="font-size: 12px">${product.product_status.name}</span></p>
                                 </div>
-                                <div class="col-12 col-lg-7">
+                                <div class="col-12 mt-2 mt-lg-0 col-lg-7">
                                     <h4>${product.name}</h4>
+                                    <div class="d-flex mt-1">
+                                           ${categoryList}
+                                    </div>
                                     <p class="mb-0 mt-2 font-italic"><span>Artist: </span> <span>${product.artists.name}</span></p>
-                                    <div class="d-flex justify-content-between">
+                                    <div class="d-flex justify-content-between mt-2">
                                         <p><span>Date Start:</span><span class="font-italic font-weight-bold ml-2 text-secondary" style="font-size: 12px">${new Date(product.date_start).toLocaleDateString("en-US",{ year: 'numeric', month: 'long', day: 'numeric' })}</span></p>
                                         <p><span>Date End:</span><span class="font-italic font-weight-bold ml-2 text-secondary" style="font-size: 12px">${new Date(product.date_end).toLocaleDateString("en-US",{ year: 'numeric', month: 'long', day: 'numeric' })}</span></p>
                                     </div>
@@ -241,11 +245,6 @@
                                         <p class="mb-0"><span>Size: </span> <span style="font-size: 13px">${product.size}</span></p>
                                         <p class="mb-0"><span>Start Price:</span> <span class="ml-2 text-success font-italic" style="font-size: 13px">${formatter.format(product.start_price)}</span></p>
                                         <p class="mb-0"><span>Current Bid:</span><span class="ml-2 text-danger font-italic" style="font-size: 13px">${(product.current_price > product.start_price) ? formatter.format(product.current_price) : "No Bid"}</span></p></div>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <div>
-
-                                        </div>
                                     </div>
                                 </div>
                             </div>

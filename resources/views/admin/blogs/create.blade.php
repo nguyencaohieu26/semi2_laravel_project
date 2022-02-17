@@ -19,8 +19,8 @@
                 @csrf
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="FormTitle" class="text-dark text-capitalize font-weight-bold">title</label>
-                        <input type="text" name="title" class="form-control" id="FormTitle" placeholder="Enter Title..."
+                        <label for="title" class="text-dark text-capitalize font-weight-bold">Title</label>
+                        <input type="text" name="title" class="form-control" id="title" placeholder="Enter title..."
                                value="{{old ('title')}}" required>
                         <div class="valid-feedback">Looks good!</div>
                         <div class="invalid-feedback">Title is required</div>
@@ -30,19 +30,18 @@
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label for="FormAuthor" class="text-dark text-capitalize font-weight-bold">Author Name</label>
-                        <input type="text" name="author_name" class="form-control" placeholder="Enter Author ..."
-                               value="{{old ('author_name')}}" required>
+                        <label for="author_name" class="text-dark text-capitalize font-weight-bold">Author Name</label>
+                        <input type="text" id="author_name" name="name" class="form-control" placeholder="Enter author ..."
+                               value="{{old ('name')}}" required>
                         <div class="valid-feedback">Looks good!</div>
                         <div class="invalid-feedback">Author is required</div>
-                        @error('author_name')
-                        <div class="error-message">{{$message}}</div>
+                        @error('name')
+                            <div class="error-message">{{$message}}</div>
                         @enderror
                     </div>
                 </div>
-
                 <div class="form-row">
-                    <div class="form-group col-md-12">
+                    <div class="form-group col-md-6">
                         <label for="" class="text-dark text-capitalize font-weight-bold">Upload Image</label>
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" value="{{old('upload_img')}}" name="upload_img" id="upload_img">
@@ -50,6 +49,14 @@
                             <div class="invalid-feedback">Image is required</div>
                         </div>
                         @error('upload_img')
+                            <div class="error-message">{{$message}}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-6">
+                        <label for="author_tag" class="text-dark text-capitalize font-weight-bold">Tag</label>
+                        <input id="author_tag" class="form-control" type="text" placeholder="Enter tag..." value="{{old('tag')}}" name="tag" required/>
+                        <div class="invalid-feedback">Tag is required</div>
+                        @error('tag')
                         <div class="error-message">{{$message}}</div>
                         @enderror
                     </div>
@@ -57,15 +64,13 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-12">
-                        <label for="exampleFormControlTextarea1" class="text-dark text-capitalize font-weight-bold">content
-                            title</label>
-                        <textarea class="form-control" name="content_post" id="exampleFormControlTextarea1" rows="3"
+                        <label for="content_post" class="text-dark text-capitalize font-weight-bold">Content</label>
+                        <textarea class="form-control" name="content_post" id="content_post" rows="5"
                                   placeholder="Content..." required>{{old('content_post')}}</textarea>
-                        <div class="invalid-feedback">
-                            Content is required
-                        </div>
+                        <div class="invalid-feedback">Content look good</div>
+                        <div class="valid-feedback">Looks good!</div>
                         @error('content_post')
-                        <div class="error-message">{{$message}}</div>
+                        <div class="valid-feedback">Looks good!</div>
                         @enderror
                     </div>
                 </div>
