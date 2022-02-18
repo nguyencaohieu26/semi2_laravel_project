@@ -80,38 +80,34 @@
                 {{--    --}}
                 <div class="col-12 col-xl-10">
                     <div class="row">
-
-                        @for($i = 0; $i < 8; $i++)
-                            <div class="col-12 col-sm-6 col-md-3 col-xl-4">
-
-                                <div class="auction-lot-item mb-3">
-                                    <a href="#">
-                                        <div class="lot-thumbnail position-relative overflow-hidden">
-                                            <img class="border" style="max-height: 300px" width="100%" src="https://art.art/wp-content/uploads/2021/09/fatcat_art.jpg" alt=""/>
-                                            <div class="lot-id-container d-flex mb-2 position-absolute" style="top: 1rem;left: 10px">
-                                                <p class="m-0 border p-1 font-weight-bold text-white rounded" style="background: rgba(0,0,0,0.3)">LOT <span class="lot-id">1</span></p>
-                                            </div>
-                                            <div class="count-down-container count-down-container--lot position-absolute p-0"  data-countdown="2022/02/16"></div>
-                                            <div class="auction-lot-item-btn position-absolute"><button class="border-0 rounded">View bid</button></div>
-                                        </div>
-                                        <div class="lot-content mt-2">
-                                            <h5 class="lot-content-name font-weight-bold">Konstantin Dmitriyevich Balmont (1867-1942)</h5>
-                                            <p class="lot-content-artist font-italic text-secondary mb-2">A postcard from American. 1905</p>
-                                            <div class="d-flex justify-content-between">
-                                                <p class="lot-content-start-price mb-3">
-                                                    <span class="font-weight-bold mr-1 d-inline-block" style="width: 80px;color: black;font-size: 13px">Starting bid: </span>
-                                                    <span class="text-success font-italic border border-success p-1 rounded font-weight-bold" style="font-size: 12px">$<span class="price">1000</span></span>
-                                                </p>
-                                                <p class="lot-content-current-bid">
-                                                    <span class="font-weight-bold mr-1 d-inline-block" style="width: 80px;color: black;font-size: 13px">Current bid:</span>
-                                                    <span class="text-danger font-italic font-weight-bold border rounded border-danger p-1" style="font-size: 12px">$<span class="price">1200</span></span>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        @endfor
+{{--                            <div class="col-12 col-sm-6 col-md-3 col-xl-4">--}}
+{{--                                <div class="auction-lot-item mb-3">--}}
+{{--                                    <a href="#">--}}
+{{--                                        <div class="lot-thumbnail position-relative overflow-hidden">--}}
+{{--                                            <img class="border" style="max-height: 300px" width="100%" src="https://art.art/wp-content/uploads/2021/09/fatcat_art.jpg" alt=""/>--}}
+{{--                                            <div class="lot-id-container d-flex mb-2 position-absolute" style="top: 1rem;left: 10px">--}}
+{{--                                                <p class="m-0 border p-1 font-weight-bold text-white rounded" style="background: rgba(0,0,0,0.3)">LOT <span class="lot-id">1</span></p>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="count-down-container count-down-container--lot position-absolute p-0"  data-countdown="2022/02/16"></div>--}}
+{{--                                            <div class="auction-lot-item-btn position-absolute"><button class="border-0 rounded">View bid</button></div>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="lot-content mt-2">--}}
+{{--                                            <h5 class="lot-content-name font-weight-bold">Konstantin Dmitriyevich Balmont (1867-1942)</h5>--}}
+{{--                                            <p class="lot-content-artist font-italic text-secondary mb-2">A postcard from American. 1905</p>--}}
+{{--                                            <div class="d-flex justify-content-between">--}}
+{{--                                                <p class="lot-content-start-price mb-3">--}}
+{{--                                                    <span class="font-weight-bold mr-1 d-inline-block" style="width: 80px;color: black;font-size: 13px">Starting bid: </span>--}}
+{{--                                                    <span class="text-success font-italic border border-success p-1 rounded font-weight-bold" style="font-size: 12px">$<span class="price">1000</span></span>--}}
+{{--                                                </p>--}}
+{{--                                                <p class="lot-content-current-bid">--}}
+{{--                                                    <span class="font-weight-bold mr-1 d-inline-block" style="width: 80px;color: black;font-size: 13px">Current bid:</span>--}}
+{{--                                                    <span class="text-danger font-italic font-weight-bold border rounded border-danger p-1" style="font-size: 12px">$<span class="price">1200</span></span>--}}
+{{--                                                </p>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </a>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                     </div>
                 </div>
             </div>
@@ -120,6 +116,7 @@
 @endsection
 @section('script-tag')
     <script>
+
         $('[data-countdown]').each(function() {
             let $this = $(this), finalDate = $(this).data('countdown');
             $this.countdown(finalDate, function(event) {
@@ -133,6 +130,14 @@
                 $this.html(countDownTimeEle);
             });
         });
+
+        function getProducts(){
+            $.ajax({
+                url:``,
+                method:'GET',
+
+            })
+        }
     </script>
     <script>
         const openFilterButtonEle = document.querySelector('.auction-lot-filter-btn');

@@ -11,9 +11,25 @@ class BlogController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Blog::paginate(5);
+        $query = Blog::where('deleted_at' ,'=', null);
+        if(isset($request->id)){
+            $query = $query->getbyid($request->id);
+        }
+        if(isset($request->name)){
+            $query = $query->getbytitle($request->name);
+        }
+        if(isset($request->status)){
+            $query = $query->getbystatus($request->status);
+        }
+        if(isset($request->date_start)){
+            $query = $query->getbydatestart($request->date_start);
+        }
+        if(isset($request->date_end)){
+            $query = $query->getbydateend($request->date_end);
+        }
+        return $query->paginate(10);
     }
 
     /**
@@ -57,9 +73,39 @@ class BlogController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Blog $blog)
+    public function show($id)
     {
-        //
+
+    }
+
+    public function getDetailBlogPage($id){
+        $blog = Blog::findOrFail($id);
+        return view('main_public.blog.blog_detail',compact('blog'));
+    }
+
+    public function getBlogsList(Request $request){
+        $query =Blog::where('deleted_at','=',null)->where('status','=',1);
+        if(isset($request->sortType)){
+            switch ($request->sortType){
+                case 0:
+                    $query = $query->orderBy('created_at','DESC');
+                    break;
+                case 1:
+                    $query = $query->orderBy('created_at','ASC');
+                    break;
+                case 2:
+                    $query = $query->orderBy('title','ASC');
+                    break;
+                case 3:
+                    $query = $query->orderBy('title','DESC');
+                    break;
+                default: echo 'error';
+            }
+        }
+        if(isset($request->title)){
+            $query->getbytitle($request->title);
+        }
+        return $query->paginate(3);
     }
 
     /**

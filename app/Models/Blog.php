@@ -17,4 +17,20 @@ class Blog extends Model
         'author',
         'tag'
     ];
+
+    public function scopegetbyid($query,$id){
+        $query->where('id','=',$id);
+    }
+    public function scopegetbytitle($query,$title){
+        $query->where('title','like','%'.$title.'%');
+    }
+    public function scopegetbystatus($query,$status){
+        $query->where('status','=',$status);
+    }
+    public function scopegetbydatestart($query,$date){
+        $query->where('created_at','>=',$date);
+    }
+    public function scopegetbydateend($query,$date){
+        $query->where('created_at','<=',$date);
+    }
 }

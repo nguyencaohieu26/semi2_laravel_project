@@ -15,6 +15,7 @@
                             <li class="active"><a href="{{route('admin-home-index')}}">dashboard</a></li>
                         </ul>
                     </li>
+
                     <li>
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-user"></i><span>Users</span></a>
                         <ul class="collapse">

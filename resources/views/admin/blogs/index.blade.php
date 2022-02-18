@@ -24,32 +24,37 @@
         </div>
         <div class="px-4 pt-3"><a href="{{route('blogs_resource.create')}}">Create Blog</a></div>
         {{--        --}}
-        <div class="pt-3 px-4 d-flex flex-column">
+        <div class="py-3 px-4 d-flex flex-column">
             <div class="artists-admin-filter">
                 <form id="blog-search-form">
-                    <div class="row">
-                        <div class="col-12 col-sm-6 col-md-3">
-                            <input id="blog_id-input" name="id" class="form-control" aria-label="artists_id"
+                    <div class="form-row">
+                        <div class="col-12 col-sm-6 col-md-4">
+                            <input id="blog_id-input" name="id" class="form-control" aria-label="blog_id"
                                    placeholder="Search by blog id"/>
                         </div>
-                        <div class="col-12 col-sm-6 col-md-3 mt-2 mt-md-0">
-                            <input id="blog_name-input" name="name" class="form-control" aria-label="artists_name"
+                        <div class="col-12 col-sm-6 col-md-4 mt-2 mt-sm-0">
+                            <input id="blog_name-input" name="name" class="form-control" aria-label="blog_title"
                                    placeholder="Search by blog title">
                         </div>
-                        <div class="col-12 col-sm-6 col-md-3 mt-2 mt-md-0">
-                            <input id="blog_name-input" type="date" name="name" class="form-control"
-                                   aria-label="artists_name" placeholder="Search by blog title">
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-3 mt-2 mt-md-0">
+                        <div class="col-12 col-md-4 mt-2 mt-md-0">
                             <select class="form-control h-100" aria-label="status" name="status">
+                                <option value="">Choose status</option>
                                 <option value="1">Active</option>
                                 <option value="0">Inactive</option>
                             </select>
                         </div>
-                        <div class="col-2 d-flex mt-2">
-                            <button type="submit" class="btn btn-primary font-weight-bold">Search</button>
+                        <div class="col-12 col-sm-6 col-md-4 mt-2">
+                            <label>Date Start</label>
+                            <input  type="date" name="date_start" class="form-control" aria-label="date_start">
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 mt-2">
+                            <label>Date End</label>
+                            <input  type="date" name="date_end" class="form-control" aria-label="date_end">
+                        </div>
+                        <div class="col-4 d-flex mt-2 justify-content-end align-items-end">
+                            <button type="submit" class="btn btn-submit font-weight-bold">Search</button>
                             <button id="btn-clear-search--2" type="button"
-                                    class="btn btn-outline-secondary font-weight-bold ml-2">Clear
+                                    class="btn btn-clear font-weight-bold ml-2">Clear
                             </button>
                         </div>
                     </div>
@@ -67,6 +72,7 @@
                                 <th scope="col">Author</th>
                                 <th scope="col">Tag</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">Create At</th>
                                 <th scope="col" class="text-right pr-3">Action</th>
                             </tr>
                             </thead>
@@ -91,11 +97,11 @@
         });
 
         let blogFieldSearch = {
-            "id": '',
-            "title": '',
-            "author": '',
-            "status": '',
-            'created_at': '',
+            "id": undefined,
+            "name": undefined,
+            "date_start":undefined,
+            "date_end":undefined,
+            "status": undefined,
             "page": 1,
         }
 
@@ -104,10 +110,17 @@
         function getBlogs(search) {
             $.ajax({
                 url: '/blogs_resource',
-                data: {name: search.name, page: search.page, id: search.id, status: search.status},
+                data: {
+                    name: search.name,
+                    page: search.page,
+                    date_start:search.date_start,
+                    date_end:search.date_end,
+                    id: search.id,
+                    status: search.status
+                },
                 method: 'GET',
                 success: (result) => {
-                    console.log(result.data);
+                    console.log(result);
                     if (result.data.length > 0) {
                         $('.blogs-list').html('');
                         $('.no-data-container').hide();
@@ -116,12 +129,13 @@
                                 <tr>
                                     <th scope="row">${blog.id}</th>
                                     <td class="blogs-image">
-                                        <img  style="height: 50px" class="rounded mt-2" src="/images_store/blogs/${blog.image}" alt="${blog.title}"/>
+                                        <img width="100%" style="height:80px" class="rounded" src="/images_store/blogs/${blog.image}" alt="${blog.title}"/>
                                    </td>
                                     <td class="blog-name">${blog.title}</td>
                                     <td class="blog-author">${blog.author}</td>
                                     <td class="blog-tag">${blog.tag}</td>
                                     <td style="font-size: 13px" class="${blog.status === 1 ? "text-success" : "text-danger"}">${blog.status === 1 ? "Active" : "Inactive"}</td>
+                                    <td class="" style="font-size: 12px">${new Date(blog.created_at).toLocaleDateString("en-US",{ year: 'numeric', month: 'long', day: 'numeric' })}</td>
                                     <td class="d-flex justify-content-end">
                                         <div><a class="text-success" href="/blogs_resource/${blog.id}/edit"><i class="ti-pencil-alt2 pr-1 border-right"></i></a></div>
                                         <div class="text-danger" onclick="deleteBlog(${blog.id})"><i class="ti-trash pl-1"></i></div>
@@ -134,7 +148,7 @@
                         const totalPage = result.total;
                         const numberPerPage = result.per_page;
                         for (let i = 1; i <= Math.ceil(totalPage / numberPerPage); i++) {
-                            let pageItem = `<li onclick="getBlogs({name:'',id:'',status:'',page: ${i}})" class="page-item-custom ${i === search.page ? "active" : ""}">${i}</li>`;
+                            let pageItem = `<li onclick="getBlogs({name:${search.name},id:${search.id},status:${search.status},date_start:${search.date_start},date_end:${search.date_end},page: ${i}})" class="page-item-custom ${i === search.page ? "active" : ""}">${i}</li>`;
                             $('.pagination-custom ul').append(pageItem);
                         }
                     } else {
@@ -181,20 +195,21 @@
         }
 
         //Search
-        // $('#blog-search-form').submit(event => {
-        //     event.preventDefault();
-        //     let formData = $('#blog-search-form').serializeArray();
-        //     let nameSearch = formData[1].value;
-        //     let idSearch = formData[0].value;
-        //     let statusSearch = formData[2].value;
-        //     getArtists({name: nameSearch, id: idSearch, status: statusSearch, page: 1});
-        // });
+        $('#blog-search-form').submit(event => {
+            event.preventDefault();
+            let formData = $('#blog-search-form').serializeArray();
+            let nameSearch = formData[1].value ? formData[1].value : undefined;
+            let idSearch = formData[0].value ? formData[0].value : undefined;
+            let statusSearch = formData[2].value ? formData[2].value :undefined;
+            let date_startSearch = formData[3].value ? formData[3].value : undefined;
+            let date_endSearch = formData[4].value ? formData[4].value : undefined;
+            getBlogs({name: nameSearch, id: idSearch, status: statusSearch,date_start:date_startSearch,date_end:date_endSearch ,page: 1});
+        });
         //
-        // $('#btn-clear-search--2').click(() => {
-        //     getBlogs(blogFieldSearch);
-        //     $('#artist_id-input').val('');
-        //     $('#artist_name-input').val('');
-        // });
+        $('#btn-clear-search--2').click(() => {
+            $('#blog-search-form')[0].reset();
+            getBlogs(blogFieldSearch);
+        });
 
         setTimeout(clearMessage, 1000);
 

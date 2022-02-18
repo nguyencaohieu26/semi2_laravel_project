@@ -1,10 +1,10 @@
 @extends('layouts.LayoutAdmin')
 
 {{-- Custom name for location pages --}}
-@section('location_page','Create Blog')
+@section('location_page','User Info')
 
 @section('navbar')
-    @include('components.navbarAdmin')
+    @include('components.navbarUser')
 @endsection
 
 @section('header')
@@ -15,42 +15,37 @@
     <div class="form-user px-3">
         <form method="post" action="" enctype="multipart/form-data" class="needs-validation pt-3" novalidate>
             @csrf
-            {{--                first + last--}}
-            <div class="form-row">
-                {{--                    first name--}}
+            @method('PUT')
+            {{--  first + last  --}}
+            <div class="form-row mb-2">
+                {{--  first name  --}}
                 <div class="col-md-6">
                     <label for="firstname" class="text-capitalize font-weight-bold text-dark">first name</label>
                     <input type="text" name="f_name" class="form-control" id="firstname" placeholder="First Name"
                            value="{{old('f_name')}}" required>
                     <div class="valid-feedback">look good!</div>
-                    @error('f_name')
-                    <div class="error-message">{{$message}}</div>
-                    @enderror
+                    @error('f_name')<div class="error-message">{{$message}}</div>@enderror
                 </div>
-                {{--                    last name--}}
+                {{-- last name  --}}
                 <div class="col-md-6">
                     <label for="lastname" class="text-capitalize font-weight-bold text-dark">last name</label>
                     <input type="text" name="l_name" class="form-control" id="firstname" placeholder="Last Name"
                            value="{{old('l_name')}}" required>
                     <div class="valid-feedback">look good!</div>
-                    @error('l_name')
-                    <div class="error-message">{{$message}}</div>
-                    @enderror
+                    @error('l_name')<div class="error-message">{{$message}}</div>@enderror
                 </div>
             </div>
-            {{--                date + email--}}
-            <div class="form-row">
-                {{--                    email--}}
+            {{--  date + email  --}}
+            <div class="form-row mb-2">
+                {{--  email  --}}
                 <div class="col-md-6">
                     <label for="email" class="text-capitalize font-weight-bold text-dark">email</label>
                     <input type="email" name="email" class="form-control" id="email" placeholder="Email"
                            value="{{old('email')}}" required>
                     <div class="valid-feedback">look good!</div>
-                    @error('email')
-                    <div class="error-message">{{$message}}</div>
-                    @enderror
+                    @error('email')<div class="error-message">{{$message}}</div>@enderror
                 </div>
-                {{--                    birthday--}}
+                {{--  birthday  --}}
                 <div class="col-md-6">
                     <label for="birthday" class="text-capitalize font-weight-bold text-dark">birthday</label>
                     <input type="date" name="birthday" class="form-control" id="birthday"
@@ -60,9 +55,9 @@
                     @enderror
                 </div>
             </div>
-            {{--                gender + avatar--}}
-            <div class="form-row">
-                {{--                avatar--}}
+            {{-- gender + avatar  --}}
+            <div class="form-row mb-2">
+                {{--  avatar  --}}
                 <div class="col-md-6">
                     <label for="" class="text-dark text-capitalize font-weight-bold">Upload Image</label>
                     <div class="custom-file">
@@ -75,7 +70,7 @@
                     <div class="error-message">{{$message}}</div>
                     @enderror
                 </div>
-                {{--                    gender--}}
+                {{-- gender  --}}
                 <div class="col-md-6">
                     <label for="gender" class="text-capitalize font-weight-bold text-dark">gender</label><br>
                     <div class="d-flex mt-2">
@@ -94,30 +89,7 @@
                     </div>
                 </div>
             </div>
-            {{--                balance + password--}}
-            <div class="form-row">
-                {{--                    balance--}}
-                <div class="col-md-6">
-                    <label for="balance" class="text-dark text-capitalize font-weight-bold">balance</label>
-                    <input type="text" name="balance" class="form-control" id="balance" placeholder="Balance"
-                           value="{{old('balance')}}" required>
-                    <div class="valid-feedback">Look good!</div>
-                    @error('balance')
-                    <div class="error-message">{{$message}}</div>
-                    @enderror
-                </div>
-                {{--                    password--}}
-                <div class="col-md-6 mx-auto">
-                    <label for="password" class="text-dark text-capitalize font-weight-bold">password</label>
-                    <input type="password" name="password" class="form-control" id="password" placeholder="password"
-                           value="{{old('password')}}" required>
-                    <div class="valid-feedback">Look good!</div>
-                    @error('balance')
-                    <div class="error-message">{{$message}}</div>
-                    @enderror
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary mt-3">submit</button>
+            <button type="submit" class="btn btn-submit mt-3">submit</button>
         </form>
     </div>
 @endsection

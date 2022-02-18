@@ -2,11 +2,11 @@
 @section('page-title','Blog')
 @section('content')
     {{--    ========= header ========--}}
-    <header class="blog__header">
+   <header class="blog__header">
         <div class="about__title p-5">
             <div class="container about__title--ml ml-5">
                 <div class="about__title--heading ml-5">
-                    <h1 class="text-capitalize mb-0 font-weight-bold">blog</h1>
+                    <h1 class="text-capitalize mb-0 font-weight-bold">blogs</h1>
                 </div>
             </div>
         </div>
@@ -16,184 +16,63 @@
     <section class="blog__main mt-5">
         <div class="container">
             <div class="row">
-                <div class="col-md-8">
-                    {{--post 1--}}
-                    <div class="about__title mb-5">
-                        <div class="blog__post--image">
-                            <img class="w-100"
-                                 src="https://bidpro.webdevia.com/nft-marketplace/wp-content/uploads/sites/4/2021/09/nft-13-1066x500.jpg">
-                        </div>
-                        <div class="blog__post--content py-4 px-3">
-                            <ul class="post__list list-unstyled">
-                                <li class="d-inline-block pr-2">december 28, 2018</li>
-                                <li class="d-inline-block px-2">By: Alex Ali</li>
-                                <li class="d-inline-block px-2">Freebies, News</li>
-                                <li class="d-inline-block px-2">3 comments</li>
-                            </ul>
-                            <div class="post__content--heading">
-                                <h2 class="font-weight-bold">keeping yourself safe when buying NFTs in 2022</h2>
-                                <p class="post__content--text">Apparently we had reached a great height in the
-                                    atmosphere, for the sky was a dead black, and the stars had ceased to twinkle. By
-                                    the same illusion which lifts the horizon of the sea to the level of the spectator
-                                    on a hillside, the sable cloud beneath was dished out, and the car seemed to float
-                                    in the middle… </p>
-                                <p class="blog__link--detail">
-                                    <a href="{{asset('blog_detail')}}" class="text-capitalize font-weight-bold text-muted">read more
-                                        <i class="fa-solid fa-angle-right blog__icon--fz pl-2"></i></a>
-                                </p>
-                            </div>
+                <div class="col-12 col-lg-9 order-2 order-lg-0" >
+                    <div class="mb-2 ml-auto select-div">
+                        <select id="select-sort-type" name="sortType" class="form-control" aria-label="sortType">
+                            <option value="" selected>Unsorted</option>
+                            <option value="0">Newest</option>
+                            <option value="1">Oldest</option>
+                            <option value="2">Title Ascending</option>
+                            <option value="3">Title Descending</option>
+                        </select>
+                    </div>
+                    <div id="blog-main-list">
+                        <div class="text-center mt-5">
+                            <i class="fas fa-box-open fa-2x"></i>
+                            <h5>No Blogs Found</h5>
                         </div>
                     </div>
-                    {{--post 2--}}
-                    <div class="about__title mb-5">
-                        <div class="blog__post--image">
-                            <img class="w-100"
-                                 src="https://bidpro.webdevia.com/nft-marketplace/wp-content/uploads/sites/4/2018/12/designer-1008x500.jpg">
-                        </div>
-                        <div class="blog__post--content py-4 px-3">
-                            <ul class="post__list list-unstyled">
-                                <li class="d-inline-block pr-2">december 28, 2018</li>
-                                <li class="d-inline-block px-2">By: Alex Ali</li>
-                                <li class="d-inline-block px-2">Freebies, News</li>
-                                <li class="d-inline-block px-2">3 comments</li>
-                            </ul>
-                            <div class="post__content--heading">
-                                <h2 class="font-weight-bold">The beginner’s guide to creating & selling digital art
-                                    NFTs</h2>
-                                <p class="post__content--text">Setting up a Small Office Home Office is not as difficult
-                                    to
-                                    get started as you may have imagined. If you have a new business idea and need to
-                                    work
-                                    from home, yet still need to collaborate, then a SoHo solution is for you. However
-                                    if
-                                    you find even Small Office Home Office business communications a minefield, help is
-                                    at… </p>
-                                <p class="blog__link--detail">
-                                    <a href="#" class="text-capitalize font-weight-bold text-muted">read more
-                                        <i class="fa-solid fa-angle-right blog__icon--fz pl-2"></i></a>
-                                </p>
-                            </div>
-                        </div>
+                    <div id="pagination-custom" class="pagination-custom mt-auto">
+                        <ul class="d-flex list-unstyled"></ul>
                     </div>
-                    {{--post 3--}}
-                    <div class="about__title mb-5">
-                        <div class="blog__post--image">
-                            <img class="w-100"
-                                 src="https://bidpro.webdevia.com/nft-marketplace/wp-content/uploads/sites/4/2018/12/flower-1008x500.jpg">
-                        </div>
-                        <div class="blog__post--content py-4 px-3">
-                            <ul class="post__list list-unstyled">
-                                <li class="d-inline-block pr-2">december 28, 2018</li>
-                                <li class="d-inline-block px-2">By: Alex Ali</li>
-                                <li class="d-inline-block px-2">Freebies, News</li>
-                                <li class="d-inline-block px-2">3 comments</li>
-                            </ul>
-                            <div class="post__content--heading">
-                                <h2 class="font-weight-bold">How to Improve Customer Journey for Better Experience</h2>
-                                <p class="post__content--text">Setting up a Small Office Home Office is not as difficult
-                                    to
-                                    get started as you may have imagined. If you have a new business idea and need to
-                                    work
-                                    from home, yet still need to collaborate, then a SoHo solution is for you. However
-                                    if
-                                    you find even Small Office Home Office business communications a minefield, help is
-                                    at… </p>
-                                <p class="blog__link--detail">
-                                    <a href="#" class="text-capitalize font-weight-bold text-muted">read more
-                                        <i class="fa-solid fa-angle-right blog__icon--fz pl-2"></i></a>
-                                </p>
+                </div>
+                <div class="col-12 col-lg-3 order-1">
+                    <div class="mb-3">
+                        <h5 class="blog-heading mb-3 position-relative">
+                            <span style="z-index: 10;background: #f8fafc" class="position-relative pr-1"><i class="fas fa-bahai" style="font-size: 14px"></i> Search Form</span>
+                        </h5>
+                        <form id="blog-page-search">
+                            <div class="w-100 position-relative">
+                                <input id="search-title-field" class="form-control w-100 pr-4" aria-label="title" name="title" placeholder="Search by title..."/>
+                                <div class="position-absolute" style="top: 10px; right: 10px"><i class="fas fa-search"></i></div>
                             </div>
-                        </div>
+                        </form>
                     </div>
-                    {{-- post 4 --}}
-                    <div class="about__title mb-5">
-                        <div class="blog__post--content py-4 px-3">
-                            <ul class="post__list list-unstyled">
-                                <li class="d-inline-block pr-2">december 28, 2018</li>
-                                <li class="d-inline-block px-2">By: Alex Ali</li>
-                                <li class="d-inline-block px-2">Freebies, News</li>
-                                <li class="d-inline-block px-2">3 comments</li>
-                            </ul>
-                            <div class="post__content--heading">
-                                <h2 class="font-weight-bold">Quickly deploy strategic networks with compelling</h2>
-                                <p class="post__content--text">Our smart media phone that provides an enriched HD audio
-                                    video calling experience for business professionals. Change the way your office
-                                    communicates with video communication that increases productivity and enhances
-                                    communication with the ease of a standard phone. Communicate face-to-face with your
-                                    colleagues, even across different locations. Minime vero, inquit ille, consentit.
-                                    Naturales divitias dixit parabiles esse, quod parvo esset natura contenta. Et…</p>
-                                <p class="blog__link--detail">
-                                    <a href="#" class="text-capitalize font-weight-bold text-muted">read more
-                                        <i class="fa-solid fa-angle-right blog__icon--fz pl-2"></i></a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    {{-- post 5 --}}
-                    <div class="about__title mb-5">
-                        <div class="blog__post--content py-4 px-3">
-                            <ul class="post__list list-unstyled">
-                                <li class="d-inline-block pr-2">december 28, 2018</li>
-                                <li class="d-inline-block px-2">By: Alex Ali</li>
-                                <li class="d-inline-block px-2">Freebies, News</li>
-                                <li class="d-inline-block px-2">3 comments</li>
-                            </ul>
-                            <div class="post__content--heading">
-                                <h2 class="font-weight-bold">Fully researched data and enterprise process
-                                    improvements</h2>
-                                <p class="post__content--text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Quod idem cum vestri faciant, non satis magnam tribuunt inventoribus gratiam. Bonum
-                                    negas esse divitias, praeposìtum esse dicis? Duo Reges: constructio interrete. Quae
-                                    cum praeponunt, ut sit aliqua rerum selectio, naturam videntur sequi; Luxuriam non
-                                    reprehendit, modo sit vacua infinita cupiditate et timore. Beatus sibi videtur esse
-                                    moriens. Non potes, nisi retexueris… </p>
-                                <p class="blog__link--detail">
-                                    <a href="#" class="text-capitalize font-weight-bold text-muted">read more
-                                        <i class="fa-solid fa-angle-right blog__icon--fz pl-2"></i></a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    {{-- post 6 --}}
-                    <div class="about__title mb-5">
-                        <div class="blog__post--content py-4 px-3">
-                            <ul class="post__list list-unstyled">
-                                <li class="d-inline-block pr-2">december 28, 2018</li>
-                                <li class="d-inline-block px-2">By: Alex Ali</li>
-                                <li class="d-inline-block px-2">Freebies, News</li>
-                                <li class="d-inline-block px-2">3 comments</li>
-                            </ul>
-                            <div class="post__content--heading">
-                                <h2 class="font-weight-bold">Professionally cultivate one-to-one customer service</h2>
-                                <p class="post__content--text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Amicitiam autem adhibendam esse censent, quia sit ex eo genere, quae prosunt. Quo
-                                    modo autem optimum, si bonum praeterea nullum est? Vitae autem degendae ratio maxime
-                                    quidem illis placuit quieta. Duo Reges: constructio interrete. Ita multo sanguine
-                                    profuso in laetitia et in victoria est mortuus. Quare conare, quaeso. Itaque contra
-                                    est, ac… </p>
-                                <p class="blog__link--detail">
-                                    <a href="#" class="text-capitalize font-weight-bold text-muted">read more
-                                        <i class="fa-solid fa-angle-right blog__icon--fz pl-2"></i></a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    {{--Pagination--}}
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination pagination__hover justify-content-center">
-{{--                            <li class="page-item disabled">--}}
-{{--                                <a class="page-link">Previous</a>--}}
-{{--                            </li>--}}
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link link__hover" href="{{asset('blog_page2')}}">2</a></li>
-                            <li class="page-item next__hover">
-                                <a class="page-link link__hover" href="{{asset('blog_page2')}}">Next
-                                    <i class="fa-solid fa-angles-right blog__icon--fz"></i></a>
-                            </li>
+                    <div class="d-none d-lg-block">
+                        <h5 class="blog-heading position-relative mb-3">
+                            <span class="position-relative pr-1" style="z-index: 10;background: #f8fafc"><i class="fas fa-bahai" style="font-size: 14px"></i>  Related Blogs</span>
+                        </h5>
+                        <ul class="list-unstyled">
+                            @foreach($relatedBlog as $relaBlog)
+                                <li class="mb-2"><a href="/blogs/{{$relaBlog->id}}">{{$relaBlog->title}}</a></li>
+                            @endforeach
                         </ul>
-                    </nav>
-                    {{-- End Pagination --}}
+                    </div>
+                    <div class="d-none d-lg-block">
+                        <h5 class="blog-heading position-relative">
+                            <span class="position-relative pr-1" style="z-index: 10;background: #f8fafc"><i class="fas fa-bahai" style="font-size: 14px"></i>  Tags</span>
+                        </h5>
+                        @php
+                            $listTags = array(
+                                "Contemporary","Graphic","Painting","Painting","Metalwork Art","Illustration","Sculpture","Visual Art","Crafts","Art Glossary",
+                                "Fine Art","Animation Art","Ceramics","Conceptual Art","Folk Art","Jewellery Art","Land Art",)
+                        @endphp
+                        <ul class="list-unstyled d-flex flex-wrap mt-3">
+                            @foreach($listTags as $tag)
+                                <li class="btn btn-dark p-1 mr-1 mb-1">{{$tag}}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -201,4 +80,91 @@
 {{--    ========= End Blog ========--}}
 @endsection
 @section('script-tag')
+    <script>
+        $(document).ready(function(){
+            getBlogs(blogFilter);
+        });
+        let blogFilter = {
+            page:1,
+            title:undefined,
+            sort_Type:undefined,
+        }
+        function getBlogs(search){
+            $.ajax({
+                url:`/blogs/list`,
+                method:'GET',
+                data:{
+                    page:search.page,
+                    sortType:search.sort_Type,
+                    title:search.title,
+                },
+                success:(result)=>{
+                    console.log(result);
+                    $('#blog-main-list').html('');
+                    if(result.data.length > 0){
+                        result.data.forEach(blog =>{
+                            let blogItem = `
+                                <div class="about__title mb-5">
+                                    <div class="blog__post--image">
+                                        <img class="w-100" alt="" style="max-height: 400px" src="/images_store/blogs/${blog.image}"></div>
+                                    <div class="blog__post--content p-3">
+                                        <a href="/blogs/${blog.id}"><h4 class="font-weight-bold blog__content-title">${blog.title}</h4></a>
+                                        <ul class="post__list list-unstyled">
+                                            <li class="d-inline-block pr-2">${new Date(blog.created_at).toLocaleDateString("en-US",{ year: 'numeric', month: 'long', day: 'numeric' })}</li>
+                                            <li class="d-inline-block px-2"><i class="fas fa-user-tag mr-1"></i><span>${blog.author}</span></li>
+                                            <li class="d-inline-block px-2"><i class="fas fa-tags mr-1"></i><span>${blog.tag}</span></li>
+                                            <li class="d-inline-block px-2"><i class="fas fa-comment-alt"></i> 3</li>
+                                        </ul>
+                                        <div class="post__content--heading">
+                                            <p class="post__content--text">${blog.content_post}</p>
+                                            <p class="blog__link--detail">
+                                                <a href="/blogs/${blog.id}" class="text-capitalize font-weight-bold">Read more
+                                                    <i class="fa-solid fa-angle-right blog__icon--fz pl-2"></i></a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                            $('#blog-main-list').append(blogItem);
+                        });
+                        $('#pagination-custom ul').html('');
+                        const totalPage = result.total;
+                        const numberPerPage = result.per_page;
+                        for(let i =1; i<=Math.ceil(totalPage/numberPerPage);i++){
+                            let pageItem = `<li class="mr-1 ${i === search.page ? "active" : ""}" onclick="getBlogs({sortType:${search.sortType},title:${search.title},page: ${i}})" class="page-item-custom">${i}</li>`;
+                            $('#pagination-custom ul').append(pageItem);
+                        }
+                    }else{
+                        $('#pagination-custom ul').html('');
+                        $('#blog-main-list').html('').append(
+                            `<div class="text-center mt-5">
+                                <i class="fas fa-box-open fa-2x"></i>
+                                <h5>No Blogs Found</h5>
+                            </div>`
+                        );
+                    }
+                }
+            })
+        }
+        $('#select-sort-type').change((e)=>{
+            let sortValue = e.currentTarget.value;
+            let titleValue = $('#search-title-field').val();
+            getBlogs({
+                page:1,
+                sort_Type: sortValue ? sortValue : undefined,
+                title: titleValue ? titleValue : undefined,
+            })
+        });
+
+        $('#blog-page-search').submit((e)=>{
+            let sortValue = $('#select-sort-type').val();
+            let titleValue = $('#search-title-field').val();
+           e.preventDefault();
+            getBlogs({
+                page:1,
+                sort_Type: sortValue ? sortValue : undefined,
+                title: titleValue ? titleValue : undefined,
+            })
+        });
+    </script>
 @endsection

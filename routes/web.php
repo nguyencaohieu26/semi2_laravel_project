@@ -30,21 +30,20 @@ Route::get('/aboutus',function (){
 
 Route::get('/products',[ProductController::class,'products_field_filter'])->name('products-page');
 
+Route::get('/products/{id}',[ProductController::class,'showDetailProductPage'])->name('product-detail-page');
+
 Route::get('/error-page', function () {
     return view('main_public.error');
 })->name('error-page');
 
-Route::get('/blog', function () {
-    return view('main_public.blog.index');
+Route::get('/blogs', function () {
+    $relatedBlog = \App\Models\Blog::where('deleted_at','=',null)->where('status','=',1)->skip(10)->limit(5)->get();
+    return view('main_public.blog.index',compact('relatedBlog'));
 })->name('blog-page');
 
-Route::get('/blog_page2', function () {
-    return view('main_public.blog.page2_index');
-});
+Route::get('/blogs/list',[\App\Http\Controllers\BlogController::class,'getBlogsList']);
 
-Route::get('/blog_detail', function () {
-    return view('main_public.blog.blog_detail1');
-});
+Route::get('/blogs/{id}',[\App\Http\Controllers\BlogController::class,'getDetailBlogPage'])->name('blog-detail-page');
 //|--------------------------------------------------------------------------
 //Manage Dashboard Route Admin
 
