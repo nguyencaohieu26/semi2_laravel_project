@@ -138,7 +138,7 @@
             "page":1,
         }
         getProducts(productFieldSearch);
-        //s
+        //
         function getProducts(search){
             $.ajax({
                 url:'/products_resource',

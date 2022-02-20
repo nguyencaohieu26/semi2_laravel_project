@@ -36,6 +36,8 @@ Route::get('/error-page', function () {
     return view('main_public.error');
 })->name('error-page');
 
+Route::get('/search/products',[ProductController::class,'search_product_main_nav']);
+
 Route::get('/blogs', function () {
     $relatedBlog = \App\Models\Blog::where('deleted_at','=',null)->where('status','=',1)->skip(10)->limit(5)->get();
     return view('main_public.blog.index',compact('relatedBlog'));

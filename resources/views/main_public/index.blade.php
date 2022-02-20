@@ -37,7 +37,7 @@
         <section class="px-5 home-trending-auctions">
             <div>
                 <h3 class="main-section-heading position-relative">Trending auctions</h3>
-                <div class="pt-2 d-flex align-items-center justify-content-between">
+                <div class="pt-2 d-flex align-items-center justify-content-between flex-wrap">
                     <p class="mt-0">See what's popular across thousands of items</p>
                     <a href="{{route('products-page')}}">
                         <span class="mr-1">Views All</span>
@@ -101,7 +101,7 @@
                                     </div>
                                 </div>
 
-                                <div class="small-trending-lots-item position-relative overflow-hidden rounded">
+                                <div class="small-trending-lots-item position-relative overflow-hidden rounded trending-lot-load-more">
                                     <div class="image overflow-hidden">
                                             <img width="100%" height="100%" src="images_store/products/{{$trending_products['2']->image}}" alt="{{$trending_products['2']->name}}">
                                         <div class="btn-view-more position-absolute">
@@ -127,7 +127,7 @@
                                     </div>
                                 </div>
 
-                                <div class="small-trending-lots-item position-relative overflow-hidden rounded">
+                                <div class="small-trending-lots-item position-relative overflow-hidden rounded trending-lot-load-more">
                                     <div class="image overflow-hidden">
                                             <img width="100%" height="100%" src="images_store/products/{{$trending_products['3']->image}}" alt="{{$trending_products['3']->name}}">
                                         <div class="btn-view-more position-absolute">
@@ -137,7 +137,7 @@
                                     <div class="count-down-container count-down-container--2 position-absolute" data-countdown="{{$trending_products['3']->date_end}}"></div>
                                     <div class="upcoming-lot-content">
                                         <h4>
-                                            <a href="{{route('product-detail-page',$trending_products['4']->id)}}" class="text-white p-1">{{$trending_products['3']->name}}</a>
+                                            <a href="{{route('product-detail-page',$trending_products['3']->id)}}" class="text-white p-1">{{$trending_products['3']->name}}</a>
                                         </h4>
                                         <p class="mb-0">
                                             <i class="fas fa-user-tag"></i>
@@ -153,7 +153,7 @@
                                     </div>
                                 </div>
 
-                                <div class="small-trending-lots-item position-relative overflow-hidden rounded">
+                                <div class="small-trending-lots-item position-relative overflow-hidden rounded trending-lot-load-more">
                                     <div class="image overflow-hidden">
                                         <img width="100%" height="100%" src="images_store/products/{{$trending_products['4']->image}}" alt="{{$trending_products['4']->name}}">
                                         <div class="btn-view-more position-absolute">
@@ -183,6 +183,9 @@
                     </div>
                 </div>
             </div>
+            <div class="mt-3 text-center" id="home-trending-auctions-btn">
+                <button class="btn btn-primary p-1" id="btn-load-more-trending-lot">Load more</button>
+            </div>
         </section>
 
         {{--  UPCOMMING AUCTIONS  --}}
@@ -190,8 +193,8 @@
             <div>
                 <h3 class="main-section-heading position-relative">Upcoming lot auctions</h3>
                 <div class="row mt-4">
-                    @foreach($upcoming_products as $upcoming_product)
-                        <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+                    @foreach($upcoming_products as $key => $upcoming_product)
+                        <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4 {{$key >= 3 ? "load-more-upcoming-lots" : ""}}">
                             <a href="{{route('product-detail-page',$upcoming_product->id)}}">
                                 <div class="upcoming-lot-item overflow-hidden">
                                     <div class="upcoming-lot-thumbnail position-relative">
@@ -210,6 +213,9 @@
                         </div>
                     @endforeach
                 </div>
+                <div class="text-center d-block d-md-none">
+                    <button class="p-1 btn btn-primary" id="btn-load-more-upcoming-lot">Load more</button>
+                </div>
             </div>
         </section>
 
@@ -227,7 +233,7 @@
                     <div class="col-sm-12 col-md-5 p-0 position-relative">
                         <a href="#" class="glightbox">
                             <div class="position-absolute play-btn"><i class="fas fa-play fa-2x"></i></div>
-                            <img width="100%" src="{{asset('./images/banner7.jpg')}}" alt="banner-img7">
+                            <img height="100%" width="100%" src="{{asset('./images/banner7.jpg')}}" alt="banner-img7">
                         </a>
                     </div>
                 </div>
@@ -237,7 +243,7 @@
         {{--  FEATURE STORIES & BLOG  --}}
         <section class="p-5">
             <div>
-                <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex justify-content-between align-items-center flex-wrap">
                     <h3 class="main-section-heading position-relative">Feature stories & blog</h3>
                     <a href="{{route('blog-page')}}">
                         <span>View All</span>
@@ -245,72 +251,76 @@
                     </a>
                 </div>
                     <div class="mt-4">
-                        <div class="row blog-background">
-                            <div class="col-md-6">
-                                <div class="rounded overflow-hidden">
-                                    <img width="100%" src="/images_store/blogs/{{$blogs['0']->image}}" alt="{{$blogs['0']->title}}">
+                        <div class="main-blog-container">
+
+                            <div class="left-side left-main-blog">
+                                <div class="image rounded overflow-hidden">
+                                    <img height="100%" width="100%" src="/images_store/blogs/{{$blogs['0']->image}}" alt="{{$blogs['0']->title}}">
                                 </div>
-                                <div class="mt-2">
+                                <div class="blog-content mt-2">
                                     <a href="{{route('blog-detail-page',$blogs[0]->id)}}"><h5>{{$blogs['0']->title}}</h5></a>
-                                    <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex justify-content-between align-items-center add-shadow">
                                         <p class="mb-0">
-                                            <i class="fa-solid fa-tags" ></i>
+                                            <i class="fa-solid fa-tags text-danger" ></i>
                                             <span class="ml-1">{{$blogs['0']->tag}}</span>
                                         </p>
-                                        <p class="mb-0" style="font-size: 11px">{{date("F d, Y", strtotime($blogs['0']->created_at))}}</p>
+                                        <p class="mb-0 font-italic" style="font-size: 11px">{{date("F d, Y", strtotime($blogs['0']->created_at))}}</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-12 col-lg-6">
-                                        <div class="rounded overflow-hidden">
-                                            <img width="100%" src="/images_store/blogs/{{$blogs['1']->image}}" alt="{{$blogs['1']->title}}">
+
+                            <div class="right-side">
+                                    <div class="middle-main-blog">
+                                        <div class="image rounded overflow-hidden">
+                                            <img height="100%" width="100%" src="/images_store/blogs/{{$blogs['1']->image}}" alt="{{$blogs['1']->title}}">
                                         </div>
-                                        <div class="my-3">
+                                        <div class="content my-2">
                                             <a href="{{route('blog-detail-page',$blogs[1]->id)}}"><h5>{{$blogs['1']->title}}</h5></a>
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <p class="mb-0">
-                                                    <i class="fa-solid fa-tags"></i><span class="ml-1">{{$blogs['1']->tag}}</span>
+                                                    <i class="fa-solid fa-tags text-danger"></i><span class="ml-1">{{$blogs['1']->tag}}</span>
                                                 </p>
-                                                <p class="mb-0" style="font-size: 11px">{{date("F d, Y", strtotime($blogs['1']->created_at))}}</p>
+                                                <p class="mb-0 font-italic" style="font-size: 11px">{{date("F d, Y", strtotime($blogs['1']->created_at))}}</p>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-lg-6">
-                                        <div>
-                                            <div class="rounded overflow-hidden">
-                                                <img width="100%" src="/images_store/blogs/{{$blogs['2']->image}}" alt="{{$blogs['2']->title}}">
+
+                                    <div class="right-main-blog">
+                                        <div class="right-main-blog-1">
+                                            <div class="image rounded overflow-hidden">
+                                                <img height="100%" width="100%" src="/images_store/blogs/{{$blogs['2']->image}}" alt="{{$blogs['2']->title}}">
                                             </div>
-                                            <div class="my-3">
+                                            <div class="content pt-2">
                                                 <a href="{{route('blog-detail-page',$blogs[2]->id)}}"><h5>{{$blogs['2']->title}}</h5></a>
-                                                <div class="d-flex justify-content-between align-items-center">
+                                                <div class="d-flex justify-content-between align-items-center flex-wrap">
                                                     <p class="mb-0">
-                                                        <i class="fa-solid fa-tags" ></i>
+                                                        <i class="fa-solid fa-tags text-danger" ></i>
                                                         <span class="ml-1">{{$blogs['2']->tag}}</span>
                                                     </p>
-                                                    <p class="mb-0" style="font-size: 11px">{{date("F d, Y", strtotime($blogs['2']->created_at))}}</p>
+                                                    <p class="mb-0 font-italic" style="font-size: 11px">{{date("F d, Y", strtotime($blogs['2']->created_at))}}</p>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div>
-                                            <div class="rounded overflow-hidden">
-                                                <img width="100%" src="/images_store/blogs/{{$blogs['3']->image}}" alt="{{$blogs['3']->title}}">
+
+                                        <div class="right-main-blog-1">
+                                            <div class="image rounded overflow-hidden">
+                                                <img height="100%" width="100%" src="/images_store/blogs/{{$blogs['3']->image}}" alt="{{$blogs['3']->title}}">
                                             </div>
-                                            <div class="my-3">
+                                            <div class="content pt-2">
                                                 <a href="{{route('blog-detail-page',$blogs[3]->id)}}"><h5>{{$blogs['3']->title}}</h5></a>
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <p class="mb-0">
-                                                        <i class="fa-solid fa-tags" ></i>
+                                                <div class="d-flex justify-content-between align-items-center flex-wrap">
+                                                    <p class="mb-0 mr-3">
+                                                        <i class="fa-solid fa-tags text-danger" ></i>
                                                         <span class="ml-1">{{$blogs['3']->tag}}</span>
                                                     </p>
-                                                    <p class="mb-0" style="font-size: 11px">{{date("F d, Y", strtotime($blogs['3']->created_at))}}</p>
+                                                    <p class="mb-0 font-italic" style="font-size: 11px">{{date("F d, Y", strtotime($blogs['3']->created_at))}}</p>
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
-                                </div>
                             </div>
+
                         </div>
                     </div>
             </div>
@@ -456,7 +466,6 @@
         $('[data-countdown]').each(function() {
             let $this = $(this), finalDate = $(this).data('countdown');
             $this.countdown(finalDate, function(event) {
-                console.log(event);
                 let dayFormat = `<div class="days"><span class="font-weight-bolder">${event.offset.totalDays < 10 ? "0"+event.offset.totalDays : event.offset.totalDays}</span><p class="mb-0" style="font-size: 10px">days</p></div>`
                 let countDownTimeEle = `
                     ${dayFormat}
@@ -466,6 +475,18 @@
                 `
                 $this.html(countDownTimeEle);
             });
+        });
+        $('#btn-load-more-upcoming-lot').click(function (){
+            $('.load-more-upcoming-lots').each(function (){
+                $(this).addClass('active');
+            });
+            $(this).hide();
+        });
+        $('#btn-load-more-trending-lot').click(function (){
+            $('.trending-lot-load-more').each(function (){
+                $(this).addClass('active');
+            });
+            $(this).hide();
         });
     </script>
 @endsection

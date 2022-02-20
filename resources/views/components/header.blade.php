@@ -45,6 +45,8 @@
                 <div class="my-2 my-lg-0 position-relative search-container">
                     <input class="form-control mr-sm-2 pr-5" id="home_search" type="search" placeholder="Search for art" aria-label="Search">
                     <div class="search-icon position-absolute"><i class="fa-solid fa-magnifying-glass"></i></div>
+                    <div id="main-search-container" class="position-absolute">
+                    </div>
                 </div>
             </div>
         </nav>

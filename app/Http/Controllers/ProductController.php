@@ -25,18 +25,46 @@ class ProductController extends Controller
             $query = $query->getbyid($request->id);
         }
         if (isset($request->category)) {
-            $query = $query->getbycategory($request->category);
+            if(is_array($request->category)){
+                $query = $query->getbylistcategory($request->category);
+            }else{
+                $query = $query->getbycategory($request->category);
+            }
         }
         if (isset($request->status)) {
-            $query = $query->getbystatus($request->status);
+            if(is_array($request->status)){
+                $query = $query->getliststatus($request->status);
+            }else{
+                $query = $query->getbystatus($request->status);
+            }
+        }
+        if(isset($request->sortType)){
+            switch ($request->sortType){
+                case 0:
+                    $query = $query->orderBy('start_price','DESC');
+                    break;
+                case 1:
+                    $query = $query->orderBy('start_price','ASC');
+                    break;
+                case 2:
+                    $query = $query->orderBy('name','ASC');
+                    break;
+                case 3:
+                    $query = $query->orderBy('name','DESC');
+                    break;
+                default: echo 'error';
+            }
         }
         if (isset($request->artist)) {
-            $query = $query->getbyartist($request->artist);
+            if(is_array($request->artist)){
+                $query = $query->getbylistartist($request->artist);
+            }else{
+                $query = $query->getbyartist($request->artist);
+            }
         }
-//        if(isset($request->price)){
-//            echo 'in';
-//        }
-
+        if(isset($request->priceMin) && isset($request->priceMax)){
+            $query = $query->where('start_price','>=',$request->priceMin)->where('start_price','<=',$request->priceMax);
+        }
         return $query->paginate(10);
     }
 
@@ -45,10 +73,18 @@ class ProductController extends Controller
         $categories = Category::all();
         $artists = Artist::all();
         $categoryID = $request->categoryID;
-
-        return view('main_public.products', compact('categories', 'artists', 'categoryID'));
+        $productStatus = ProductStatus::all();
+        return view('main_public.products', compact('categories', 'artists', 'categoryID','productStatus'));
     }
 
+    public function search_product_main_nav(Request $request){
+        $query = Product::with(['artists', 'product_status'])->where('deleted_at','=',null);
+        if(isset($request->title)){
+            return $query->getbyname($request->title)->get();
+        }else{
+            return [];
+        }
+    }
     /**
      * Show the form for creating a new resource.
      */

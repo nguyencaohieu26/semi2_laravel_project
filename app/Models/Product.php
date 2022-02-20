@@ -54,4 +54,15 @@ class Product extends Model
     public function scopegetbyartist($query,$artist){
         $query->where('artist_id','=',$artist);
     }
+    public function scopegetliststatus($query,$liststatus){
+        $query->whereIn('status_id',$liststatus);
+    }
+    public function scopegetbylistartist($query,$listaritsts){
+        $query->whereIn('artist_id',$listaritsts);
+    }
+    public function scopegetbylistcategory($query,$listcategory){
+        $query->whereHas('categories', function ($q) use ($listcategory){
+            $q->whereIn('category_id', $listcategory);
+        });
+    }
 }

@@ -13,11 +13,16 @@
     {{--    --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
     {{--    --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"/>
+    {{--    --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css" />
     <title>@yield('page-title')</title>
 </head>
 <body>
+<div class="overlay" id="overlay">
+    <div class="lds-hourglass"></div>
+</div>
 {{-- HEADER --}}
     @include('components.header')
 {{-- MAIN CONTENT --}}
@@ -216,6 +221,59 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.countdown/2.2.0/jquery.countdown.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>
+    $(document).ready(function (){
+        let homeSearch = $('#home_search');
+        let searchContainer = $('#main-search-container');
+
+        searchContainer.hide();
+        homeSearch.on('input',function (){
+        $.ajax({
+            url:'/search/products',
+            data:{title:$(this).val()},
+            method:"GET",
+            success:(result)=>{
+                console.log(result);
+                searchContainer.html('');
+                if(result.length > 0){
+                    result.forEach(item =>{
+                       let artItem = `
+                       <a href="/products/${item.id}">
+                            <div class="d-flex search-item">
+                                <div><img class="rounded" height="80px" width="80px" src="images_store/products/${item.image}" alt="${item.name}"/></div>
+                                <div>
+                                     <p class="name mb-1 font-weight-bold">${item.name}</p>
+                                     <div class="">
+                                        <p class="artist mb-0">Artist: <span class="font-weight-bold">${item.artists.name}</span></p>
+                                        <p class="status mb-0">Status: <span class="font-weight-bold">${item.product_status.name}</span></p>
+                                        <p class="bid mb-0">Current Bid: <span class="${item.current_price > 0 ? "text-success" : "text-danger"} font-weight-bold">${item.current_price > 0 ? item.current_price : "No bid"}</span></p>
+                                     </div>
+                                </div>
+                            </div>
+                        </a>
+                       `
+                        searchContainer.show().append(artItem);
+                    });
+                }else{
+                    searchContainer.show().append(`
+                        <div class="px-1 py-3 text-center text-secondary">
+                            <i class="fas fa-box-open fa-2x"></i>
+                            <p>No art found!</p>
+                        </div>
+                    `);
+                }
+            }
+        })
+    });
+        searchContainer.on('mouseleave',function (){
+            searchContainer.hide();
+        })
+        setTimeout(()=>{
+            $('#overlay').hide();
+        },1200)
+    });
+</script>
 @yield('script-tag')
 </body>
 </html>
