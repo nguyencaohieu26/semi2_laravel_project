@@ -1078,3 +1078,80 @@ footer .accordion .accordion-item a i{
 
 }
 /*=========== End Blog =========*/
+
+/*PRODUCT DETAIL*/
+.product-thumbnail{
+    height: 35rem;
+}
+.product-category span:hover{
+    color: white;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.55);
+}
+.product-info{
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+.product-description{
+    max-height: 9rem;
+    color: #6e6e6e;
+}
+.product-start-price{
+    color: white;
+    transition: .3s all ease;
+    background-color: #FF3CAC;
+    background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+}
+.product-start-price:hover{
+    cursor: pointer;
+    background-color: #0093E9;
+    background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+
+}
+.btn-view-more-description{
+    position: relative;
+    top: -3px;
+    font-size: 12px;
+}
+.btn-view-more-description:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.product-description.active{
+    max-height:fit-content;
+}
+.product-status{
+    top: -4rem;
+    font-size: 13px;
+    right: -.5rem;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background: #FC4F4F;
+}
+.count-down-container--3{
+    left: 0;
+    width: 100%;
+    padding: 5px;
+    transform: translateX(0);
+}
+.form-bid-product input{
+    max-width: 10rem;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border-radius: 3px;
+    border: 1px solid #b4b4b4;
+    transition: .3s all ease-in-out;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.form-bid-product button{
+    height: 100%;
+    padding: 5px 8px;
+    border-radius: 3px;
+    background: darkblue;
+    color: white;
+    border: 0;
+    display: inline-block;
+}
+.form-bid-product input:focus{
+    background: rgba(197, 204, 252, 0.26);
+}
