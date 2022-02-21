@@ -2,6 +2,9 @@
 @section('page-title',$product->name)
 @section('content')
     <section>
+        <div class="btn-open-product-info d-block d-md-none">
+            <i class="fas fa-info"></i>
+        </div>
         <div class="container-lg mt-5">
             <div class="row">
                 <div class="col-md-7">
@@ -40,14 +43,56 @@
                         </div>
                         <div class="border border-primary rounded py-3 mb-3">
                             <h5 style="border-left: 6px solid darkblue;background: rgba(11,44,79,0.62)" class="text-white px-3 py-2 font-weight-bold">Reviews</h5>
-                            <div class="product-review-container">
-                                <p>There are no reviews yet</p>
+                            <p class="mb-0 px-3" id="no-review">There are no reviews yet</p>
+                            <div id="product-review-container" class="product-review-container px-3 mb-2">
                             </div>
-                            <h5>Be the first to review <span>{{$product->name}}</span></h5>
+                            <h5 class="px-3">Be the first to review <span>{{$product->name}}</span></h5>
+                            <p class="mb-1 text-secondary font-italic px-3">Your email address will not be published. Required fields are marked *</p>
+                            <div class="px-3">
+                                <form class="needs-validation" novalidate>
+                                    <div class="form-row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="validationCustom01">Name*</label>
+                                            <input type="text" class="form-control" id="validationCustom01" placeholder="Mark" required>
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
+                                            <div class="invalid-feedback">Name is required</div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="validationCustom02">Email*</label>
+                                            <input type="text" class="form-control" id="validationCustom02" placeholder="example@gmail.com" required>
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
+                                            <div class="invalid-feedback">Email is required</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlTextarea1">Review</label>
+                                        <textarea required class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                                            <label class="form-check-label" for="invalidCheck">
+                                                Agree to terms and conditions
+                                            </label>
+                                            <div class="invalid-feedback">
+                                                You must agree before submitting.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary" type="submit">Submit form</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-5 product-info-small">
+                    <div class="d-block d-md-none mb-2" id="btn-close-product-info" style="cursor: pointer">
+                        <i class="fas fa-times-circle"></i>
+                    </div>
                     <div class="product-info rounded p-3">
                         <h4 class="pr-4">{{$product->name}}</h4>
                         <div class="d-flex position-relative">
@@ -133,6 +178,53 @@
             </div>
         </div>
 
+        <div class="container-lg mt-4">
+            <h3>Related Products</h3>
+            <div class="mt-3">
+                <div class="row">
+                    @foreach($relatedProduct as $relaProduct)
+                        <a href="products/{{$relaProduct->id}}"></a>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <div class="auction-lot-item mb-3 border border-primary rounded">
+                                <a href="/products/{{$relaProduct->id}}">
+                                    <div class="lot-thumbnail position-relative overflow-hidden">
+                                        <img class="border" style="height: 250px" width="100%" src="/images_store/products/{{$relaProduct->image}}" alt="{{$relaProduct->name}}"/>
+                                        <div class="lot-id-container d-flex mb-2 position-absolute" style="top: 1rem;left: 10px">
+                                            <p class="m-0 border p-1 font-weight-bold text-white rounded" style="background: rgba(0,0,0,0.3)">LOT <span class="lot-id">{{$relaProduct->id}}</span></p>
+                                        </div>
+                                        <div class="count-down-container count-down-container--lot position-absolute p-0"  data-countdown="{{$relaProduct->date_end}}"></div>
+                                        <div class="auction-lot-item-btn position-absolute"><button class="border-0 rounded">View bid</button></div>
+                                    </div>
+                                    <div class="lot-content mt-2 p-1">
+                                        <h5 class="lot-content-name font-weight-bold">{{$relaProduct->name}}</h5>
+                                        <div class="d-flex justify-content-between">
+                                            <p class="lot-content-artist font-italic text-secondary">
+                                                <i class="fas fa-user-tag text-primary"></i>
+                                                <span style="font-size: 13px">{{$relaProduct->artists->name}}</span>
+                                            </p>
+                                            <p class="font-italic text-secondary mr-1">
+                                                <i class="fas fa-tags text-danger"></i>
+                                                <span style="font-size: 13px">{{$relaProduct->product_status->name}}</span>
+                                            </p>
+                                        </div>
+                                        <div class="">
+                                            <p class="lot-content-start-price mb-3">
+                                                <span class="font-weight-bold mr-1 d-inline-block" style="width: 80px;color: black;font-size: 13px">Starting bid: </span>
+                                                <span class="text-success font-italic border border-success p-1 rounded font-weight-bold" style="font-size: 12px">$<span class="price">{{$relaProduct->start_price}}</span></span>
+                                            </p>
+                                            <p class="lot-content-current-bid">
+                                                <span class="font-weight-bold mr-1 d-inline-block" style="width: 80px;color: black;font-size: 13px">Current bid:</span>
+                                                <span class="text-danger font-italic font-weight-bold border rounded border-danger p-1" style="font-size: 12px"><span class="price">{{$relaProduct->current_price > 0 ? "$".$relaProduct->current_price : "No bid"}}</span></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
         <!-- Modal -->
         <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable">
@@ -189,6 +281,18 @@
             }
             productDescriptionEle.toggleClass('active');
         })
+        //
+        let openProductInfoEle = document.querySelector('.btn-open-product-info');
+        let closeProductInfoEle = document.querySelector('#btn-close-product-info');
+        let productInfoEle = document.querySelector('.product-info-small');
+
+        openProductInfoEle.addEventListener('click',()=>{
+           productInfoEle.classList.add('active');
+        });
+        closeProductInfoEle.addEventListener('click',()=>{
+           productInfoEle.classList.remove('active');
+        });
+        //
         $('[data-countdown]').each(function() {
             let $this = $(this), finalDate = $(this).data('countdown');
             $this.countdown(finalDate, function(event) {
@@ -202,5 +306,49 @@
                 $this.html(countDownTimeEle);
             });
         });
+        //
+        (function() {
+            'use strict';
+            // window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                let forms = document.getElementsByClassName('needs-validation');
+                let reviewContainerEle = document.querySelector('#product-review-container');
+                // Loop over them and prevent submission
+                let validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            form.classList.add('was-validated');
+                        }else{
+                            event.preventDefault();
+                            document.querySelector('#no-review').style.display= 'none';
+                            let inputName = $('#validationCustom01');
+                            let inputEmail = $('#validationCustom02');
+                            let inputText = $('#exampleFormControlTextarea1');
+                            form.classList.add('was-validated');
+                            let item = document.createElement('div');
+                            item.innerHTML = `
+                                <div class="pb-2 border-bottom">
+                                <div class="d-flex justify-content-between align-items-center mt-1">
+                                    <p class="mb-0">
+                                        <i class="fas fa-user-alt"></i>
+                                        <span class="font-weight-bold">${inputName.val()}</span></p>
+                                    <p class="mb-0 text-secondary font-italic" style="font-size: 12px">${new Date()}<p>
+                                </div>
+                                <p class="mb-0">${inputText.val()}</p>
+                                </div>
+                            `
+                            reviewContainerEle.appendChild(item);
+                            inputName.val('');
+                            inputEmail.val('');
+                            inputText.val('');
+                            document.querySelector('#invalidCheck').checked = false;
+                            form.classList.remove('was-validated');
+                        }
+                    }, false);
+                });
+            // }, false);
+        })();
     </script>
 @endsection

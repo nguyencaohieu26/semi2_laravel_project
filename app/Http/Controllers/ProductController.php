@@ -157,7 +157,11 @@ class ProductController extends Controller
     public function showDetailProductPage($id)
     {
         $product = Product::with(['categories', 'artists', 'product_status'])->where('id', $id)->first();
-        return view('main_public.product-detail',compact('product'));
+        $relatedProduct = Product::where('artist_id','=',$product->artists->id)
+            ->where('deleted_at','=',null)
+            ->where('status_id','=',1)
+            ->limit(4)->get();
+        return view('main_public.product-detail',compact('product','relatedProduct'));
     }
 
     /**
