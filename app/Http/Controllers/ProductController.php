@@ -109,7 +109,7 @@ class ProductController extends Controller
             "categories" => "required",
             "description" => "required",
             "name" => "required|unique:products,name",
-            "size" => "required",
+            "size" => "required|numeric",
             "product_artist" => "required",
             "product_status" => "required",
             "price" => "bail|gt:1|numeric",
@@ -129,7 +129,7 @@ class ProductController extends Controller
         $product = new Product();
         $product->name = $request->name;
         $product->description = $request->description;
-        $product->size = $request->size;
+        $product->size_id = $request->size;
         $product->image = $newImageName;
         $product->status_id = $request->product_status;
         $product->artist_id = $request->product_artist;

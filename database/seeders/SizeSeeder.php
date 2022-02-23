@@ -18,7 +18,7 @@ class SizeSeeder extends Seeder
             [
                 "id" =>1,
                 "name" => "300x300",
-                "status" => 0,
+                "status" => 1,
                 "deleted_at" => NULL,
                 "created_at" =>"2022-02-13 21:39:12",
                 "updated_at" =>"2022-02-13 21:39:12"
@@ -26,7 +26,7 @@ class SizeSeeder extends Seeder
             [
                 "id" =>2,
                 "name" => "400x400",
-                "status" => 0,
+                "status" => 1,
                 "deleted_at" => NULL,
                 "created_at" =>"2022-02-13 21:39:12",
                 "updated_at" =>"2022-02-13 21:39:12"
@@ -34,7 +34,7 @@ class SizeSeeder extends Seeder
             [
                 "id" =>3,
                 "name" => "500x500",
-                "status" => 0,
+                "status" => 1,
                 "deleted_at" => NULL,
                 "created_at" =>"2022-02-13 21:39:12",
                 "updated_at" =>"2022-02-13 21:39:12"
@@ -42,7 +42,7 @@ class SizeSeeder extends Seeder
             [
                 "id" =>4,
                 "name" => "600x500",
-                "status" => 0,
+                "status" => 1,
                 "deleted_at" => NULL,
                 "created_at" =>"2022-02-13 21:39:12",
                 "updated_at" =>"2022-02-13 21:39:12"
@@ -50,7 +50,7 @@ class SizeSeeder extends Seeder
             [
                 "id" =>5,
                 "name" => "600x600",
-                "status" => 0,
+                "status" => 1,
                 "deleted_at" => NULL,
                 "created_at" =>"2022-02-13 21:39:12",
                 "updated_at" =>"2022-02-13 21:39:12"
@@ -58,7 +58,7 @@ class SizeSeeder extends Seeder
             [
                 "id" =>6,
                 "name" => "700x800",
-                "status" => 0,
+                "status" => 1,
                 "deleted_at" => NULL,
                 "created_at" =>"2022-02-13 21:39:12",
                 "updated_at" =>"2022-02-13 21:39:12"
@@ -66,7 +66,7 @@ class SizeSeeder extends Seeder
             [
                 "id" =>7,
                 "name" => "800x800",
-                "status" => 0,
+                "status" => 1,
                 "deleted_at" => NULL,
                 "created_at" =>"2022-02-13 21:39:12",
                 "updated_at" =>"2022-02-13 21:39:12"
@@ -74,7 +74,7 @@ class SizeSeeder extends Seeder
             [
                 "id" =>8,
                 "name" => "1000x1000",
-                "status" => 0,
+                "status" => 1,
                 "deleted_at" => NULL,
                 "created_at" =>"2022-02-13 21:39:12",
                 "updated_at" =>"2022-02-13 21:39:12"
@@ -82,7 +82,7 @@ class SizeSeeder extends Seeder
             [
                 "id" =>9,
                 "name" => "900x900",
-                "status" => 0,
+                "status" => 1,
                 "deleted_at" => NULL,
                 "created_at" =>"2022-02-13 21:39:12",
                 "updated_at" =>"2022-02-13 21:39:12"
@@ -90,7 +90,7 @@ class SizeSeeder extends Seeder
             [
                 "id" =>10,
                 "name" => "1100x900",
-                "status" => 0,
+                "status" => 1,
                 "deleted_at" => NULL,
                 "created_at" =>"2022-02-13 21:39:12",
                 "updated_at" =>"2022-02-13 21:39:12"
