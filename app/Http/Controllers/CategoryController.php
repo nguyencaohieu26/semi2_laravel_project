@@ -64,7 +64,12 @@ class CategoryController extends Controller
         return redirect()->route('admin-categories')->with('create-category','Create category successfully');
         //
     }
-
+    public function changeStatus(Request $request){
+        $category = Category::findOrFail($request->id);
+        $category->status = $request->status;
+        $category->save();
+        return "Change status to ".($request->status == 1 ? "active" : "inactive")." successfully";
+    }
     /**
      * Display the specified resource.
      */

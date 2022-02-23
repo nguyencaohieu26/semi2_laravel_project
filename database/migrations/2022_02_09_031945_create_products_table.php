@@ -16,7 +16,7 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name',255);
-            $table->string('size',50);
+            $table->unsignedBigInteger('size_id')->default(0);
             $table->string('image',255);
             $table->longText('description');
             $table->unsignedBigInteger('artist_id');
@@ -27,7 +27,8 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('status_id')->default(1);
             $table->foreign('status_id')->references('id')->on('product_statuses');
             $table->foreign('artist_id')->references('id')->on('artists');
-            $table->softDeletes();
+            $table->foreign('size_id')->references('id')->on('sizes');
+            $table->softDeletes()->default(NULL);
             $table->timestamps();
         });
     }

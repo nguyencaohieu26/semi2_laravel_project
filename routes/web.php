@@ -75,6 +75,8 @@ Route::get('/admin/categories',function (){
     return view('admin.categories.index');
 })->name('admin-categories');
 
+Route::get('/changeStatus',[\App\Http\Controllers\CategoryController::class,'changeStatus']);
+
 Route::get('/admin/users',function (){
     return view('admin.accounts.index');
 })->name('admin-users');

@@ -109,21 +109,36 @@
                         result.data.forEach((category)=>{
                             let item = `
                                 <tr class="">
-                                   <th scope="row" style="line-height: 70px">${category.id}</th>
+                                   <th scope="row">${category.id}</th>
                                    <td class="category-image">
-                                    <img width="70px" style="height: 50px" class="rounded mt-2" src="/images_store/categories/${category.image}" alt=""/>
+                                    <img width="70px" style="height: 50px" class="rounded" src="/images_store/categories/${category.image}" alt=""/>
                                    </td>
-                                   <td class="category-name" style="line-height: 70px">${category.name}</td>
-                                   <td class="category-code" style="line-height: 70px">${category.category_code}</td>
-                                   <td class="category-code ${category.status === 1 ? "text-success" : "text-danger"}" style="line-height: 70px;font-size: 13px">${category.status === 1 ? "Active":"Inactive"}</td>
-                                   <td class="" style="line-height: 70px">change</td>
-                                    <td class="d-flex" style="line-height: 70px">
+                                   <td class="category-name">${category.name}</td>
+                                   <td class="category-code">${category.category_code}</td>
+                                   <td class="category-code ${category.status === 1 ? "text-success" : "text-danger"}" style="font-size: 13px">${category.status === 1 ? "Active":"Inactive"}</td>
+                                   <td class="">
+                                        <label class="switch">
+                                          <input type="checkbox" ${category.status === 1 ? "checked" :""} id="btn-category-on-off" data-category-id="${category.id}">
+                                          <span class="slider round"></span>
+                                        </label>
+                                    </td>
+                                    <td class="d-flex">
                                         <div><a class="text-success" href="/categories_resource/${category.id}/edit "><i class="ti-pencil-alt2"></i></a></div>
                                         <div class="text-danger" onclick="deleteCategory(${category.id})"><i class="ti-trash"></i></div>
                                    </td>
                                 <tr>
                             `
                             $('.category-list').append(item);
+                        });
+                        let btnCategoryOnOff = document.querySelectorAll('#btn-category-on-off');
+                        btnCategoryOnOff.forEach(item =>{
+                            item.addEventListener('click',()=>{
+                                if(item.checked){
+                                    changeStatus(item.getAttribute('data-category-id'),1)
+                                }else{
+                                    changeStatus(item.getAttribute('data-category-id'),0)
+                                }
+                            })
                         });
                         $('.pagination-custom ul').html('');
                         const totalPage = result.total;
@@ -192,6 +207,20 @@
             $('.response-message').addClass('active')
             setTimeout(()=>{$('.response-message').removeClass('active')},2000);
         }
-
+        //
+        function changeStatus(id,status){
+            $.ajax({
+                url:`/changeStatus`,
+                method:'GET',
+                data:{id,status},
+                success:result =>{
+                    getCategories(categoryFieldSearch);
+                    $('.response-message').html('').addClass('active').append(`
+                                    <div class="alert alert-success">${result}</div>
+                                `);
+                    setTimeout(()=>{$('.response-message').removeClass('active')},2000);
+                }
+            })
+        }
     </script>
 @endsection

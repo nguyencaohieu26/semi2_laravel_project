@@ -233,6 +233,7 @@
                 url:`/products_resource/${id}`,
                 method:'GET',
                 success:(product)=>{
+                    console.log(product);
                     let categoryList = ``;
                     product.categories.forEach(cate =>{
                        let categoryItem = `<p class="mb-0 product-category-item">${cate.name}</p>`
@@ -256,7 +257,7 @@
                                         <p><span>Date End:</span><span class="font-italic font-weight-bold ml-2 text-secondary" style="font-size: 12px">${new Date(product.date_end).toLocaleDateString("en-US",{ year: 'numeric', month: 'long', day: 'numeric' })}</span></p>
                                     </div>
                                     <div class="d-flex justify-content-between">
-                                        <p class="mb-0"><span>Size: </span> <span style="font-size: 13px">${product.size}</span></p>
+                                        <p class="mb-0"><span>Size: </span> <span style="font-size: 13px">${product.sizes.name}</span></p>
                                         <p class="mb-0"><span>Start Price:</span> <span class="ml-2 text-success font-italic" style="font-size: 13px">${formatter.format(product.start_price)}</span></p>
                                         <p class="mb-0"><span>Current Bid:</span><span class="ml-2 text-danger font-italic" style="font-size: 13px">${(product.current_price > product.start_price) ? formatter.format(product.current_price) : "No Bid"}</span></p></div>
                                     </div>

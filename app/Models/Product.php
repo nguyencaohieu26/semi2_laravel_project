@@ -13,7 +13,7 @@ class Product extends Model
     use SoftDeletes;
     protected $fillable=[
         'name',
-        'size',
+        'size_id',
         'image',
         'artist_id',
         'start_price',
@@ -33,6 +33,9 @@ class Product extends Model
         return $this->hasOne(Artist::class,'id','artist_id');
     }
 
+    public function sizes(){
+        return $this->hasOne(Size::class,'id','size_id');
+    }
     public function product_status(){
         return $this->hasOne(ProductStatus::class,'id','status_id');
     }

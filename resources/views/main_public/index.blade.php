@@ -48,7 +48,7 @@
                     <div class="home-trending-lots">
                         <div class="large-trending-lots h-100% position-relative overflow-hidden rounded">
                             <div class="image overflow-hidden">
-                                <img src="images_store/products/{{$trending_products['0']->image}}" alt="{{$trending_products['0']->name}}">
+                                <img height="100%" src="images_store/products/{{$trending_products['0']->image}}" alt="{{$trending_products['0']->name}}">
                                 <div class="btn-view-more position-absolute">
                                     <a class="btn btn-primary p-1" href="{{route('product-detail-page',$trending_products['0']->id)}}">View more</a>
                                 </div>

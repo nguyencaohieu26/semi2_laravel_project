@@ -111,7 +111,7 @@
                             </p>
                         </div>
                         <div class="mt-1">
-                            <p class="mb-0" style="font-size: 13px">Size: <span class="font-italic" >{{$product->size}}</span></p>
+                            <p class="mb-0" style="font-size: 13px">Size: <span class="font-italic" >{{$product->sizes->name}}</span></p>
                             <p class="mb-0 font-weight-bold">Description</p>
                             <div class="position-relative">
                                 <div class="font-italic overflow-hidden product-description mb-0">

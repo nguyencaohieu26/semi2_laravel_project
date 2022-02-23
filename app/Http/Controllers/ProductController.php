@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductStatus;
+use App\Models\Size;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -92,8 +93,9 @@ class ProductController extends Controller
     {
         $artists = Artist::all();
         $product_status = ProductStatus::all();
+        $sizes = Size::where('status','=',1)->get();
         $categories = Category::all();
-        return view('admin.products.create', compact('artists', 'product_status', 'categories'));
+        return view('admin.products.create', compact('artists', 'product_status', 'categories','sizes'));
     }
 
 
@@ -151,13 +153,13 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        return Product::with(['categories', 'artists', 'product_status'])->where('id', $id)->first();
+        return Product::with(['categories', 'artists', 'product_status','sizes'])->where('id', $id)->first();
         //
     }
 
     public function showDetailProductPage($id)
     {
-        $product = Product::with(['categories', 'artists', 'product_status'])->where('id', $id)->first();
+        $product = Product::with(['categories', 'artists', 'product_status','sizes'])->where('id', $id)->first();
         $relatedProduct = Product::where('artist_id','=',$product->artists->id)
             ->where('deleted_at','=',null)
             ->where('status_id','=',1)
