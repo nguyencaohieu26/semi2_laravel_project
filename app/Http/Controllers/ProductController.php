@@ -164,6 +164,16 @@ class ProductController extends Controller
         return view('main_public.product-detail',compact('product','relatedProduct'));
     }
 
+    public function getCurrentPrice(Request $request){
+        return Product::where('id','=',$request->id)->get();
+    }
+
+    public function bidProduct(Request $request){
+        $product = Product::find($request->id);
+        $product->current_price = $request->bid;
+        $product->save();
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

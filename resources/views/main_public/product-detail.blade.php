@@ -139,11 +139,11 @@
                                     <div class="mt-3">
                                         <p class="mb-2">
                                             <span>Current Price: $</span>
-                                            <span class="text-danger" style="font-size: 17px"> {{$product->current_price}}</span>
+                                            <span class="text-danger" style="font-size: 17px" id="product-current-price"></span>
                                         </p>
                                         <form id="form-bid-product" class="form-bid-product d-flex align-items-center">
                                             <div class="position-relative">
-                                                <input aria-label="input-bid" class="pl-4" type="text" value="{{$product->current_price}}"/>
+                                                <input aria-label="input-bid" id="bid-input" class="pl-4" type="text" value="{{$product->current_price}}"/>
                                                 <div class="position-absolute" style="top: 8px;left: 10px"><i class="fa-solid fa-dollar-sign"></i></div>
                                             </div>
                                             <button class="ml-2" type="submit">Bid</button>
@@ -272,7 +272,17 @@
 @endsection
 @section('script-tag')
     <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        let idProduct = {!! json_encode($product->id) !!};
         let productDescriptionEle = $('.product-description');
+        let openProductInfoEle = document.querySelector('.btn-open-product-info');
+        let closeProductInfoEle = document.querySelector('#btn-close-product-info');
+        let productInfoEle = document.querySelector('.product-info-small');
+
         $('.btn-view-more-description').click(function (){
             if(productDescriptionEle.hasClass('active')){
                 $(this).text('view more')
@@ -282,9 +292,6 @@
             productDescriptionEle.toggleClass('active');
         })
         //
-        let openProductInfoEle = document.querySelector('.btn-open-product-info');
-        let closeProductInfoEle = document.querySelector('#btn-close-product-info');
-        let productInfoEle = document.querySelector('.product-info-small');
 
         openProductInfoEle.addEventListener('click',()=>{
            productInfoEle.classList.add('active');
@@ -306,7 +313,44 @@
                 $this.html(countDownTimeEle);
             });
         });
+
         //
+        $('#form-bid-product').submit(e=>{
+            e.preventDefault();
+            let bidValue = $('#bid-input').val();
+            $.ajax({
+                url:`/bidProduct`,
+                method:'GET',
+                data:{id:idProduct,bid:bidValue.replaceAll(',','')},
+                success:result =>{
+                    console.log(result);
+                }
+            });
+        })
+
+        getCurrentPrice();
+        setInterval(getCurrentPrice,1000);
+        function getCurrentPrice(){
+            console.log(idProduct);
+            $.ajax({
+                url:`/getcurrentprice`,
+                data:{id:idProduct},
+                method:'GET',
+                success:result =>{
+                    $('#product-current-price').html(result[0].current_price);
+                }
+            })
+        }
+        let bidInputEle = document.querySelector('#bid-input');
+        bidInputEle.addEventListener('input',()=>{
+                let format1 = formatPriceInput(bidInputEle.value);
+                let format2 = format1.replaceAll(',','')
+                bidInputEle.value = formatPriceInput(format2);
+        });
+
+        function formatPriceInput(num){
+            return num.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+        }
         (function() {
             'use strict';
             // window.addEventListener('load', function() {

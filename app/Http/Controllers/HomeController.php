@@ -18,4 +18,5 @@ class HomeController extends Controller
 
         return view('main_public.index',compact('categories','trending_products','upcoming_products','blogs'));
     }
+
 }
