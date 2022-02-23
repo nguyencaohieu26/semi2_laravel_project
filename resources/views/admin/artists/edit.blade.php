@@ -48,5 +48,7 @@
     </section>
 @endsection
 @section('script_tag')
-    <script></script>
+    <script>
+        CKEDITOR.replace( 'artist-description' );
+    </script>
 @endsection

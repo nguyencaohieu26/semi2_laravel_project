@@ -342,11 +342,13 @@
             })
         }
         let bidInputEle = document.querySelector('#bid-input');
-        bidInputEle.addEventListener('input',()=>{
-                let format1 = formatPriceInput(bidInputEle.value);
-                let format2 = format1.replaceAll(',','')
-                bidInputEle.value = formatPriceInput(format2);
-        });
+        if(bidInputEle != null){
+            bidInputEle.addEventListener('input',()=>{
+                    let format1 = formatPriceInput(bidInputEle.value);
+                    let format2 = format1.replaceAll(',','')
+                    bidInputEle.value = formatPriceInput(format2);
+            });
+        }
 
         function formatPriceInput(num){
             return num.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
@@ -394,5 +396,7 @@
                 });
             // }, false);
         })();
+
+        CKEDITOR.replace( 'exampleFormControlTextarea1' );
     </script>
 @endsection

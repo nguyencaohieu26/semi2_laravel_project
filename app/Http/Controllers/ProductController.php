@@ -102,6 +102,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+//        $request->price = str_replace(',','',$request->price);
         $validate = $request->validate([
             "categories" => "required",
             "description" => "required",
@@ -109,7 +110,7 @@ class ProductController extends Controller
             "size" => "required",
             "product_artist" => "required",
             "product_status" => "required",
-            "price" => "gt:1",
+            "price" => "bail|gt:1|numeric",
             "image" => "bail|required",
             "product_date_start" => [
                 "after:now"

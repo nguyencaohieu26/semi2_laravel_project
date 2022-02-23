@@ -51,6 +51,8 @@ Route::get('/blogs/list',[\App\Http\Controllers\BlogController::class,'getBlogsL
 
 Route::get('/blogs/{id}',[\App\Http\Controllers\BlogController::class,'getDetailBlogPage'])->name('blog-detail-page');
 
+
+
 //|--------------------------------------------------------------------------
 //Manage Dashboard Route Admin
 

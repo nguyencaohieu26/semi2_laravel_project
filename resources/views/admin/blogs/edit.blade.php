@@ -86,5 +86,7 @@
             let fileName = $(this).val().split("\\").pop();
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });
+        CKEDITOR.replace( 'content_post' );
+
     </script>
 @endsection
