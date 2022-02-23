@@ -1,3 +1,4 @@
+
 <!-- header area start -->
 <div class="header-area">
     <div class="row align-items-center">
@@ -177,6 +178,23 @@
                 </ul>
             </div>
         </div>
+        {{--        ======== Phong Them Icon User ===================--}}
+        <div class="col-sm-6 text-right">
+            <div class="dropdown">
+                <a data-toggle="dropdown" aria-haspopup="true" class="border-0">
+                    <i class="fa fa-user" style="font-size: 20px" aria-hidden="true"></i>
+{{--                    <span>{{Auth::admins()->email}}</span>--}}
+                    <i class="fa fa-angle-down pl-1" aria-hidden="true"></i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a href="{{route('auth.logout')}}" class="dropdown-item">
+                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                        Log out
+                    </a>
+                </div>
+            </div>
+        </div>
+        {{--        ================== End Icon User =================--}}
         <div class="col-sm-6 clearfix"></div>
     </div>
 </div>

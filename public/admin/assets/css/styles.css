@@ -8,10 +8,10 @@
     Version: 1.0
 
 ----------------------------------------------
-    
+
     CSS INDEX
     ===================
-  
+
     1. Core Css
     2. Dashboard One
         2.1 Sidebar Menu
@@ -2472,7 +2472,7 @@ table.dataTable thead td {
     margin-left: 5px;
 }
 
-/* login-s2 */
+/* auth-s2 */
 
 .login-s2 {
     background: #fff;
@@ -2505,7 +2505,7 @@ table.dataTable thead td {
     color: #444;
 }
 
-/* login-s3 */
+/* auth-s3 */
 
 .login-bg {
     background: url(../images/bg/singin-bg.jpg) center/cover no-repeat;

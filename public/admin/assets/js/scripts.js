@@ -121,7 +121,7 @@
     });
 
     /*================================
-    login form
+    auth form
     ==================================*/
     $('.form-gp input').on('focus', function() {
         $(this).parent('.form-gp').addClass('focused');

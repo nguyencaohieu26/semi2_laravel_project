@@ -1078,7 +1078,13 @@ footer .accordion .accordion-item a i{
 
 }
 /*=========== End Blog =========*/
+/*==========Login============*/
+.dashboard__logout:hover li{
+    display: block;
+}
 
+
+/*========= End Login ============*/
 /*PRODUCT DETAIL*/
 .product-thumbnail{
     height: 35rem;
