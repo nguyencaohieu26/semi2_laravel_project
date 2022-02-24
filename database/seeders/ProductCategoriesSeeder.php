@@ -1150,6 +1150,331 @@ class ProductCategoriesSeeder extends Seeder
                 "created_at"=>"2022-02-15 16:38:44",
                 "updated_at"=>"2022-02-15 16:38:44"
             ],
+            [
+                "id"=>163,
+                "product_id"=>52,
+                "category_id"=>7,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>164,
+                "product_id"=>52,
+                "category_id"=>8,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>165,
+                "product_id"=>52,
+                "category_id"=>13,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>166,
+                "product_id"=>52,
+                "category_id"=>14,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>167,
+                "product_id"=>53,
+                "category_id"=>7,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>168,
+                "product_id"=>53,
+                "category_id"=>8,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>169,
+                "product_id"=>53,
+                "category_id"=>14,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>170,
+                "product_id"=>54,
+                "category_id"=>6,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>171,
+                "product_id"=>54,
+                "category_id"=>7,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>172,
+                "product_id"=>54,
+                "category_id"=>8,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>173,
+                "product_id"=>54,
+                "category_id"=>14,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>174,
+                "product_id"=>55,
+                "category_id"=>7,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>175,
+                "product_id"=>55,
+                "category_id"=>8,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>176,
+                "product_id"=>55,
+                "category_id"=>12,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>177,
+                "product_id"=>55,
+                "category_id"=>14,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>178,
+                "product_id"=>56,
+                "category_id"=>7,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>179,
+                "product_id"=>56,
+                "category_id"=>8,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>180,
+                "product_id"=>56,
+                "category_id"=>14,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>181,
+                "product_id"=>57,
+                "category_id"=>8,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>182,
+                "product_id"=>57,
+                "category_id"=>14,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>183,
+                "product_id"=>58,
+                "category_id"=>7,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>184,
+                "product_id"=>58,
+                "category_id"=>8,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>185,
+                "product_id"=>58,
+                "category_id"=>14,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>186,
+                "product_id"=>59,
+                "category_id"=>7,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>187,
+                "product_id"=>59,
+                "category_id"=>8,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>188,
+                "product_id"=>59,
+                "category_id"=>14,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>189,
+                "product_id"=>60,
+                "category_id"=>14,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>190,
+                "product_id"=>60,
+                "category_id"=>6,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>191,
+                "product_id"=>60,
+                "category_id"=>7,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>192,
+                "product_id"=>60,
+                "category_id"=>8,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>193,
+                "product_id"=>61,
+                "category_id"=>8,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>194,
+                "product_id"=>61,
+                "category_id"=>7,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>195,
+                "product_id"=>61,
+                "category_id"=>6,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>196,
+                "product_id"=>61,
+                "category_id"=>12,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>197,
+                "product_id"=>61,
+                "category_id"=>13,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>198,
+                "product_id"=>61,
+                "category_id"=>14,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>199,
+                "product_id"=>61,
+                "category_id"=>14,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>200,
+                "product_id"=>62,
+                "category_id"=>5,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>201,
+                "product_id"=>62,
+                "category_id"=>6,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>202,
+                "product_id"=>62,
+                "category_id"=>14,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>203,
+                "product_id"=>63,
+                "category_id"=>6,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>204,
+                "product_id"=>63,
+                "category_id"=>7,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>205,
+                "product_id"=>63,
+                "category_id"=>8,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>206,
+                "product_id"=>63,
+                "category_id"=>14,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>207,
+                "product_id"=>64,
+                "category_id"=>6,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>208,
+                "product_id"=>64,
+                "category_id"=>8,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>209,
+                "product_id"=>64,
+                "category_id"=>10,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>210,
+                "product_id"=>64,
+                "category_id"=>11,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>211,
+                "product_id"=>64,
+                "category_id"=>14,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>212,
+                "product_id"=>65,
+                "category_id"=>6,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>213,
+                "product_id"=>65,
+                "category_id"=>7,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>214,
+                "product_id"=>65,
+                "category_id"=>8,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>215,
+                "product_id"=>65,
+                "category_id"=>10,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],[
+                "id"=>216,
+                "product_id"=>65,
+                "category_id"=>14,
+                "created_at"=>"2022-02-15 16:38:44",
+                "updated_at"=>"2022-02-15 16:38:44"
+            ],
         ]);
     }
 }

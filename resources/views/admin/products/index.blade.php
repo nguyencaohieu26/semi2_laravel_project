@@ -236,7 +236,7 @@
                     console.log(product);
                     let categoryList = ``;
                     product.categories.forEach(cate =>{
-                       let categoryItem = `<p class="mb-0 product-category-item">${cate.name}</p>`
+                       let categoryItem = `<p class="mb-1 product-category-item">${cate.name}</p>`
                         categoryList +=categoryItem;
                     });
                     let productDetail = `

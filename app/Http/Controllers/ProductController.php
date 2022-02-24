@@ -10,6 +10,7 @@ use App\Models\ProductStatus;
 use App\Models\Size;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class ProductController extends Controller
 {
@@ -104,7 +105,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-//        $request->price = str_replace(',','',$request->price);
         $validate = $request->validate([
             "categories" => "required",
             "description" => "required",
@@ -183,9 +183,13 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::with(['categories', 'artists', 'product_status'])->where('id', $id)->first();
+        $listArtists = Artist::where('status','=',1)->get();
+        $sizes = Size::where('status','=',1)->get();
+        $product_status = ProductStatus::all();
+        $categories = Category::where('status','=',1)->get();
 //        $product = Product::query()->where('id', $id)->first();
 
-        return view('admin.products.edit', compact('product'));
+        return view('admin.products.edit', compact('product','listArtists','sizes','product_status','categories'));
         //
     }
 
@@ -194,7 +198,82 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if(isset($request->image)){
+            $validate = $request->validate([
+                'name'  => ['bail','required', Rule::unique('products')->ignore($id)],
+                'product_artist' => 'bail|required',
+                'size'  => 'bail|required',
+                'price' => 'bail|gt:1|numeric',
+                'product_status' =>'bail|required',
+                "product_date_start" => 'bail|required',
+                "product_date_end" => [
+                    "after:product_date-start"
+                ],
+                'categories' => 'bail|required',
+                'description' => 'bail|required',
+                'image' => 'bail|required|mimes:jpg,png,jpeg',
+            ]);
+
+            $newImageName = time().'-'.$request->name.'.'.$request->image->extension();
+
+            $request->image->move(public_path('images_store/products'),$newImageName);
+
+            $productFound =  Product::findOrFail($id);
+            $productFound->name         = $request->name;
+            $productFound->description  = $request->description;
+            $productFound->size_id      = $request->size;
+            $productFound->image        = $newImageName;
+            $productFound->status_id    = $request->product_status;
+            $productFound->artist_id    = $request->product_artist;
+            $productFound->start_price  = $request->price;
+            $productFound->date_start   = $request->product_date_start;
+            $productFound->date_end     = $request->product_date_end;
+            $productFound->save();
+            ProductCategory::where('product_id',$id)->delete();
+
+            foreach ($request->categories as $cate) {
+                $product_category = new ProductCategory;
+                $product_category->product_id = $id;
+                $product_category->category_id = $cate;
+                $product_category->save();
+            }
+
+            return redirect()->route('admin-products')->with('edit-product','Edit product successfully');
+        }else{
+            $validate = $request->validate([
+                'name'  => ['bail','required', Rule::unique('products')->ignore($id)],
+                'product_artist' => 'bail|required',
+                'size'  => 'bail|required',
+                'price' => 'bail|gt:1|numeric',
+                'product_status' =>'bail|required',
+                "product_date_start" => 'bail|required',
+                "product_date_end" => [
+                    "after:product_date-start"
+                ],
+                'categories' => 'bail|required',
+                'description' => 'bail|required',
+            ]);
+            $productFound =  Product::findOrFail($id);
+            $productFound->name         = $request->name;
+            $productFound->description  = $request->description;
+            $productFound->size_id      = $request->size;
+            $productFound->status_id    = $request->product_status;
+            $productFound->artist_id    = $request->product_artist;
+            $productFound->start_price  = $request->price;
+            $productFound->date_start   = $request->product_date_start;
+            $productFound->date_end     = $request->product_date_end;
+
+            $productFound->save();
+            ProductCategory::where('product_id',$id)->delete();
+            foreach ($request->categories as $cate) {
+                $product_category = new ProductCategory;
+                $product_category->product_id = $id;
+                $product_category->category_id = $cate;
+                $product_category->save();
+            }
+            return redirect()->route('admin-products')->with('edit-product','Edit product successfully');
+        }
+
     }
 
     /**

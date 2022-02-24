@@ -99,4 +99,11 @@ class ArtistController extends Controller
         return "Remove Artist Successfully";
         //
     }
+
+    public function changeStatus(Request  $request){
+        $artist = Artist::findOrFail($request->id);
+        $artist->status = $request->status;
+        $artist->save();
+        return "Change status to ".($request->status == 1 ? "active" : "inactive")." successfully";
+    }
 }

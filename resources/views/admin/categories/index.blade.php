@@ -210,7 +210,7 @@
         //
         function changeStatus(id,status){
             $.ajax({
-                url:`/changeStatus`,
+                url:`/changeCategoryStatus`,
                 method:'GET',
                 data:{id,status},
                 success:result =>{

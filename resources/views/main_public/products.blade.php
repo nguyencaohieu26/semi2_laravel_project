@@ -4,7 +4,7 @@
     <section>
     {{--  BANNER  --}}
         <section class="products_banner px-5">
-            <img width="100%" height="600px" src="https://images.unsplash.com/photo-1579695114441-573c26d8de54?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" alt="">
+            <img width="100%" height="100%" src="https://images.unsplash.com/photo-1579695114441-573c26d8de54?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" alt="">
             <div></div>
         </section>
     {{--  FILTER  --}}
@@ -119,7 +119,7 @@
                 $( "#slider-range" ).slider({
                     range: true,
                     min: 0,
-                    max: 12000,
+                    max: 20000,
                     values: [1000, 6000 ],
                     slide: function( event, ui ) {
                         $('#amount').html('').append(
@@ -201,7 +201,7 @@
                                     dayCount = item.date_end;
                                 }
                                 let productItem = `
-                                   <div class="col-12 col-sm-6 col-md-3 col-xl-4">
+                                   <div class="col-12 col-sm-6 col-md-4 col-xl-3">
                                         <div class="auction-lot-item mb-3">
                                             <a href="/products/${item.id}">
                                                 <div class="lot-thumbnail position-relative overflow-hidden">
@@ -212,26 +212,26 @@
                                                     <div class="count-down-container count-down-container--lot position-absolute p-0"  data-countdown="${dayCount}"></div>
                                                     <div class="auction-lot-item-btn position-absolute"><button class="border-0 rounded">View bid</button></div>
                                                 </div>
-                                                <div class="lot-content mt-2 p-1">
+                                                <div class="lot-content mt-2 p-2">
                                                     <h5 class="lot-content-name font-weight-bold">${item.name}</h5>
-                                                    <div class="d-flex justify-content-between">
-                                                        <p class="lot-content-artist font-italic text-secondary">
-                                                            <i class="fas fa-user-tag text-primary"></i>
-                                                            <span>${item.artists.name}</span>
-                                                        </p>
-                                                        <p class="font-italic text-secondary mr-1">
+                                                    <div class="my-2 d-flex flex-wrap justify-content-between border-bottom pb-1">
+                                                        <p style="font-size: 11px" class="font-italic text-dark font-weight-bold mb-0 mr-1">
                                                             <i class="fas fa-tags text-danger"></i>
                                                             <span>${item.product_status.name}</span>
                                                         </p>
-                                                    </div>
-                                                    <div class="d-flex justify-content-between">
-                                                        <p class="lot-content-start-price mb-3">
-                                                            <span class="font-weight-bold mr-1 d-inline-block" style="width: 80px;color: black;font-size: 13px">Starting bid: </span>
-                                                            <span class="text-success font-italic border border-success p-1 rounded font-weight-bold" style="font-size: 12px">$<span class="price">${item.start_price}</span></span>
+                                                        <p style="font-size: 11px" class="lot-content-artist text-dark font-italic font-weight-bold mb-0">
+                                                            <i class="fas fa-user-tag text-primary"></i>
+                                                            <span>${item.artists.name}</span>
                                                         </p>
-                                                        <p class="lot-content-current-bid">
+                                                    </div>
+                                                    <div class="">
+                                                        <p class="lot-content-start-price mb-1">
+                                                            <span class="font-weight-bold mr-1 d-inline-block" style="width: 80px;color: black;font-size: 13px">Starting bid: </span>
+                                                            <span class="text-success font-italic font-weight-bold" style="font-size: 12px">$<span class="price">${item.start_price}</span></span>
+                                                        </p>
+                                                        <p class="lot-content-current-bid mb-1">
                                                             <span class="font-weight-bold mr-1 d-inline-block" style="width: 80px;color: black;font-size: 13px">Current bid:</span>
-                                                            <span class="text-danger font-italic font-weight-bold border rounded border-danger p-1" style="font-size: 12px"><span class="price">${item.current_price > 0 ? "$"+item.current_price : "No bid"}</span></span>
+                                                            <span class="text-danger font-italic font-weight-bold p-1" style="font-size: 12px"><span class="price">${item.current_price > 0 ? "$"+item.current_price : "No bid"}</span></span>
                                                         </p>
                                                     </div>
                                                 </div>

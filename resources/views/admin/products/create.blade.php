@@ -21,7 +21,7 @@
                         <label for="product_name">Product Name</label>
                         <input type="text" class="form-control" id="product_name" placeholder="Enter product name" value="{{old('name')}}" name="name" required>
                         <div class="valid-feedback">Looks good!</div>
-                        <div class="invalid-feedback">Product code is required!</div>
+                        <div class="invalid-feedback">Product name is required!</div>
                         @error('name')<div class="error-message">{{$message}}</div>@enderror
                     </div>
                     <div class="col-md-6 mb-3">
@@ -156,7 +156,7 @@
         }
 
         functionRenderCategories();
-
+        let priceInputValue;
         //###############################
         (function() {
             'use strict';
@@ -167,13 +167,13 @@
                 let validation = Array.prototype.filter.call(forms, function(form) {
                 //
                 let checkbox = document.getElementsByName("categories[]");
-                let price = document.querySelector('#product_price').value;
                 let checked;
                     form.addEventListener('submit', function(event) {
                         if (form.checkValidity() === false) {
                             event.preventDefault();
                             event.stopPropagation();
                             form.classList.add('was-validated');
+                            console.log('run');
                         }else{
                             for (let i = 0; i < checkbox.length; i += 1) {
                                 checked = (checkbox[i].checked || checked === true);
@@ -185,11 +185,13 @@
                                 }
                                 document.querySelector('#category-message-warning').style.display = 'block';
                                 document.querySelector('#category-message-warning').innerHTML = 'Category is required';
-
-                            } else{
-                                document.querySelector('#product_price').value = price.replaceAll(',','');
-                                form.classList.add('was-validated');
                             }
+                                // console.log(price);
+                                // let a = price.replaceAll(/,/g,'');
+                                // console.log(a);
+                                // console.log(price);
+                                $('#product_price').val(priceInputValue);
+                                form.classList.add('was-validated');
                         }
                     }, false);
                 });
@@ -201,6 +203,8 @@
             let format1 = formatPriceInput($(this).val());
             let format2 = format1.replaceAll(',','')
             $(this).val(formatPriceInput(format2));
+            priceInputValue = format2;
+            console.log($(this).val());
         });
         //
         function formatPriceInput(num){

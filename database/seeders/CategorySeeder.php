@@ -115,6 +115,16 @@ class CategorySeeder extends Seeder
                 "created_at" =>"2022-02-13 21:39:12",
                 "updated_at" =>"2022-02-13 21:39:12"
             ],
+            [
+                "id" =>14,
+                "category_code" => "A801",
+                "name" => "Japanese Art",
+                "image" => "1645692254-A05261.png",
+                "status" => 0,
+                "deleted_at" => NULL,
+                "created_at" =>"2022-02-13 21:39:12",
+                "updated_at" =>"2022-02-13 21:39:12"
+            ],
         ]);
     }
 }

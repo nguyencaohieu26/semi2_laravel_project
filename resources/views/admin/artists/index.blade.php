@@ -59,6 +59,7 @@
                                 <th scope="col">Date of Birth</th>
                                 <th scope="col">Description</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">On/Off</th>
                                 <th scope="col">Action</th>
                             </tr>
                             </thead>
@@ -112,6 +113,12 @@
                                     <td class="font-italic" style="font-size: 12px">${new Date(artist.date_of_birth).toLocaleDateString("en-US",{ year: 'numeric', month: 'long', day: 'numeric' })}</td>
                                     <td class="artist-description">${artist.description}</td>
                                     <td style="font-size: 13px" class="font-weight-bold ${artist.status === 1 ? "text-success" : "text-danger"}">${artist.status === 1 ? "Active" : "Inactive"}</td>
+                                    <td class="">
+                                          <label class="switch">
+                                            <input type="checkbox" ${artist.status === 1 ? "checked" :""} id="btn-artist-on-off" data-category-id="${artist.id}">
+                                            <span class="slider round"></span>
+                                          </label>
+                                    </td>
                                     <td class="d-flex">
                                         <div><a class="text-success" href="/artists_resource/${artist.id}/edit "><i class="ti-pencil-alt2"></i></a></div>
                                         <div class="text-danger" onclick="deleteArtist(${artist.id})"><i class="ti-trash"></i></div>
@@ -119,6 +126,16 @@
                                 <tr>
                             `
                             $('.artists-list').append(item);
+                        });
+                        let btnArtistOnOff = document.querySelectorAll('#btn-artist-on-off');
+                        btnArtistOnOff.forEach(item =>{
+                            item.addEventListener('click',()=>{
+                                if(item.checked){
+                                    changeStatus(item.getAttribute('data-category-id'),1)
+                                }else{
+                                    changeStatus(item.getAttribute('data-category-id'),0)
+                                }
+                            })
                         });
                         $('.pagination-custom ul').html('');
                         const totalPage = result.total;
@@ -185,6 +202,21 @@
         function clearMessage(){
             $('.response-message').addClass('active')
             setTimeout(()=>{$('.response-message').removeClass('active')},2000);
+        }
+        //
+        function changeStatus(id,status){
+            $.ajax({
+                url:`/changeArtistStatus`,
+                method:'GET',
+                data:{id,status},
+                success:result =>{
+                    getArtists(artistFieldSearch);
+                    $('.response-message').html('').addClass('active').append(`
+                                    <div class="alert alert-success">${result}</div>
+                                `);
+                    setTimeout(()=>{$('.response-message').removeClass('active')},2000);
+                }
+            })
         }
     </script>
 @endsection

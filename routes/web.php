@@ -71,11 +71,13 @@ Route::get('/admin/artists',function (){
     return view('admin.artists.index');
 })->name('admin-artists');
 
+Route::get('/changeArtistStatus',[\App\Http\Controllers\ArtistController::class,'changeStatus']);
+
 Route::get('/admin/categories',function (){
     return view('admin.categories.index');
 })->name('admin-categories');
 
-Route::get('/changeStatus',[\App\Http\Controllers\CategoryController::class,'changeStatus']);
+Route::get('/changeCategoryStatus',[\App\Http\Controllers\CategoryController::class,'changeStatus']);
 
 Route::get('/admin/users',function (){
     return view('admin.accounts.index');

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
 .lds-hourglass {
     display: inline-block;
@@ -753,8 +754,21 @@ footer .accordion .accordion-item a i{
 
 /*----------------------------*/
 /*#######  PRODUCTS PAGE  #######*/
+.products_banner{
+    height: 580px;
+}
+@media  only screen and (max-width: 900px) {
+    .products_banner{
+        height: auto;
+        max-height: 550px;
+    }
+}
 .auction-lot-item{
     overflow: hidden;
+    border-radius: 3px;
+    background: white;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    /*font-family: 'Poppins', sans-serif;*/
 }
 .auction-lot-item a{
     color: black;
@@ -1151,11 +1165,41 @@ line-clamp: 2;
     height: 100%;
     padding: 5px 8px;
     border-radius: 3px;
-    background: darkblue;
+    background: #3535a9;
+    text-align: center;
     color: white;
     border: 0;
     display: inline-block;
+    transition: all 0.5s;
 }
+.form-bid-product button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+.form-bid-product button:hover{
+    background: #c53333;
+}
+.form-bid-product button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+.form-bid-product button:hover span {
+    padding-right: 20px;
+}
+
+.form-bid-product button:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+/**/
 .form-bid-product input:focus{
     background: rgba(197, 204, 252, 0.26);
 }

@@ -146,7 +146,7 @@
                                                 <input aria-label="input-bid" id="bid-input" class="pl-4" type="text" value="{{$product->current_price}}"/>
                                                 <div class="position-absolute" style="top: 8px;left: 10px"><i class="fa-solid fa-dollar-sign"></i></div>
                                             </div>
-                                            <button class="ml-2" type="submit">Bid</button>
+                                            <button class="ml-2" type="submit"><span>Bid</span></button>
                                         </form>
                                     </div>
                                 @else
@@ -195,26 +195,26 @@
                                         <div class="count-down-container count-down-container--lot position-absolute p-0"  data-countdown="{{$relaProduct->date_end}}"></div>
                                         <div class="auction-lot-item-btn position-absolute"><button class="border-0 rounded">View bid</button></div>
                                     </div>
-                                    <div class="lot-content mt-2 p-1">
+                                    <div class="lot-content mt-2 p-2">
                                         <h5 class="lot-content-name font-weight-bold">{{$relaProduct->name}}</h5>
-                                        <div class="d-flex justify-content-between">
-                                            <p class="lot-content-artist font-italic text-secondary">
+                                        <div class="d-flex justify-content-between flex-wrap border-bottom pb-1">
+                                            <p class="lot-content-artist font-italic text-dark mb-0">
                                                 <i class="fas fa-user-tag text-primary"></i>
-                                                <span style="font-size: 13px">{{$relaProduct->artists->name}}</span>
+                                                <span style="font-size: 12px" class="font-weight-bold">{{$relaProduct->artists->name}}</span>
                                             </p>
-                                            <p class="font-italic text-secondary mr-1">
+                                            <p class="font-italic text-dark mr-1 mb-0">
                                                 <i class="fas fa-tags text-danger"></i>
-                                                <span style="font-size: 13px">{{$relaProduct->product_status->name}}</span>
+                                                <span style="font-size: 12px" class="font-weight-bold">{{$relaProduct->product_status->name}}</span>
                                             </p>
                                         </div>
-                                        <div class="">
-                                            <p class="lot-content-start-price mb-3">
+                                        <div class="mt-2">
+                                            <p class="lot-content-start-price mb-1">
                                                 <span class="font-weight-bold mr-1 d-inline-block" style="width: 80px;color: black;font-size: 13px">Starting bid: </span>
-                                                <span class="text-success font-italic border border-success p-1 rounded font-weight-bold" style="font-size: 12px">$<span class="price">{{$relaProduct->start_price}}</span></span>
+                                                <span class="text-success font-italic p-1 font-weight-bold" style="font-size: 12px">$<span class="price">{{$relaProduct->start_price}}</span></span>
                                             </p>
-                                            <p class="lot-content-current-bid">
+                                            <p class="lot-content-current-bid mb-1">
                                                 <span class="font-weight-bold mr-1 d-inline-block" style="width: 80px;color: black;font-size: 13px">Current bid:</span>
-                                                <span class="text-danger font-italic font-weight-bold border rounded border-danger p-1" style="font-size: 12px"><span class="price">{{$relaProduct->current_price > 0 ? "$".$relaProduct->current_price : "No bid"}}</span></span>
+                                                <span class="text-danger font-italic font-weight-bold p-1" style="font-size: 12px"><span class="price">{{$relaProduct->current_price > 0 ? "$".$relaProduct->current_price : "No bid"}}</span></span>
                                             </p>
                                         </div>
                                     </div>
