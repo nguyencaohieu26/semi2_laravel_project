@@ -91,7 +91,7 @@
         }
         function getBlogs(search){
             $.ajax({
-                url:`/blogs/list`,
+                url:`blogs-list`,
                 method:'GET',
                 data:{
                     page:search.page,

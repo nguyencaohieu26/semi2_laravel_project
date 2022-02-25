@@ -228,10 +228,13 @@
         let homeSearch = $('#home_search');
         let searchContainer = $('#main-search-container');
 
+        $('.button-54').click(function (){
+            $('.btn-login-public').toggleClass('active');
+        });
         searchContainer.hide();
         homeSearch.on('input',function (){
         $.ajax({
-            url:'/search/products',
+            url:'search/products',
             data:{title:$(this).val()},
             method:"GET",
             success:(result)=>{

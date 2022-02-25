@@ -14,8 +14,7 @@ class Accounts extends Authenticatable
     use SoftDeletes;
     use Notifiable;
 
-    protected $table = 'accounts';
-//    protected $guarded = ['id'];
+    protected $guarded = ['id'];
 //    protected $hidden = [
 //        'password', 'remember_token',
 //    ];
@@ -25,9 +24,10 @@ class Accounts extends Authenticatable
         'password',
         'role'
     ];
-    public function getAuthPassword()
-    {
-        return $this->password;
+
+    public function user(){
+        return $this->hasOne(Users::class);
     }
+
 
 }

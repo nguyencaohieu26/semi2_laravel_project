@@ -86,7 +86,7 @@
                         <div class="nofity-list">
                             <a href="#" class="notify-item">
                                 <div class="notify-thumb">
-                                    <img src="assets/images/author/author-img1.jpg" alt="image">
+{{--                                    <img src="assets/images/author/author-img1.jpg" alt="image">--}}
                                 </div>
                                 <div class="notify-text">
                                     <p>Aglae Mayer</p>
@@ -96,7 +96,7 @@
                             </a>
                             <a href="#" class="notify-item">
                                 <div class="notify-thumb">
-                                    <img src="assets/images/author/author-img2.jpg" alt="image">
+{{--                                    <img src="assets/images/author/author-img2.jpg" alt="image">--}}
                                 </div>
                                 <div class="notify-text">
                                     <p>Aglae Mayer</p>
@@ -106,7 +106,7 @@
                             </a>
                             <a href="#" class="notify-item">
                                 <div class="notify-thumb">
-                                    <img src="assets/images/author/author-img3.jpg" alt="image">
+{{--                                    <img src="assets/images/author/author-img3.jpg" alt="image">--}}
                                 </div>
                                 <div class="notify-text">
                                     <p>Aglae Mayer</p>
@@ -116,7 +116,7 @@
                             </a>
                             <a href="#" class="notify-item">
                                 <div class="notify-thumb">
-                                    <img src="assets/images/author/author-img4.jpg" alt="image">
+{{--                                    <img src="assets/images/author/author-img4.jpg" alt="image">--}}
                                 </div>
                                 <div class="notify-text">
                                     <p>Aglae Mayer</p>
@@ -126,7 +126,7 @@
                             </a>
                             <a href="#" class="notify-item">
                                 <div class="notify-thumb">
-                                    <img src="assets/images/author/author-img2.jpg" alt="image">
+{{--                                    <img src="assets/images/author/author-img2.jpg" alt="image">--}}
                                 </div>
                                 <div class="notify-text">
                                     <p>Aglae Mayer</p>
@@ -136,7 +136,7 @@
                             </a>
                             <a href="#" class="notify-item">
                                 <div class="notify-thumb">
-                                    <img src="assets/images/author/author-img1.jpg" alt="image">
+{{--                                    <img src="assets/images/author/author-img1.jpg" alt="image">--}}
                                 </div>
                                 <div class="notify-text">
                                     <p>Aglae Mayer</p>
@@ -146,7 +146,7 @@
                             </a>
                             <a href="#" class="notify-item">
                                 <div class="notify-thumb">
-                                    <img src="assets/images/author/author-img3.jpg" alt="image">
+{{--                                    <img src="assets/images/author/author-img3.jpg" alt="image">--}}
                                 </div>
                                 <div class="notify-text">
                                     <p>Aglae Mayer</p>
@@ -159,6 +159,23 @@
                 </li>
                 <li class="settings-btn">
                     <i class="ti-settings"></i>
+                </li>
+                <li class="account-admin-container">
+                    <i class="ti-user"></i>
+                    <div class="account-admin-menu position-absolute">
+                        <ul>
+                            <li class="ml-0 w-100 py-2 px-3">
+                                <span class="mr-1 text-secondary"><i class="fa fa-key" aria-hidden="true"></i></span>
+                                <span>Change password</span>
+                            </li>
+                            <li class="ml-0 w-100">
+                                <a class=" py-2 px-3" href="{{route('logout-account')}}">
+                                    <span class="mr-1 text-secondary"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+                                    <span>Logout</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
             </ul>
         </div>

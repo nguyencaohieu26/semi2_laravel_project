@@ -2,9 +2,11 @@
 @section('page-title',$product->name)
 @section('content')
     <section>
+        @php $isLogin = Auth::check() @endphp
         <div class="btn-open-product-info d-block d-md-none">
             <i class="fas fa-info"></i>
         </div>
+        <div class="product-bid-message"></div>
         <div class="container-lg mt-5">
             <div class="row">
                 <div class="col-md-7">
@@ -278,11 +280,13 @@
             }
         });
         let idProduct = {!! json_encode($product->id) !!};
+        let isUserLogin = {!! json_encode($isLogin) !!};
+        let currentPrice = 0;
         let productDescriptionEle = $('.product-description');
         let openProductInfoEle = document.querySelector('.btn-open-product-info');
         let closeProductInfoEle = document.querySelector('#btn-close-product-info');
         let productInfoEle = document.querySelector('.product-info-small');
-
+        //
         $('.btn-view-more-description').click(function (){
             if(productDescriptionEle.hasClass('active')){
                 $(this).text('view more')
@@ -292,7 +296,6 @@
             productDescriptionEle.toggleClass('active');
         })
         //
-
         openProductInfoEle.addEventListener('click',()=>{
            productInfoEle.classList.add('active');
         });
@@ -317,26 +320,50 @@
         //
         $('#form-bid-product').submit(e=>{
             e.preventDefault();
-            let bidValue = $('#bid-input').val();
-            $.ajax({
-                url:`/bidProduct`,
-                method:'GET',
-                data:{id:idProduct,bid:bidValue.replaceAll(',','')},
-                success:result =>{
-                    console.log(result);
+            let max = 10000;
+            let min = 500;
+            let bidValue = $('#bid-input').val().replaceAll(',','');
+            if(!isUserLogin){
+                chooseNotification(false,"Please login before bidding");
+            }else{
+                if(isNaN(parseInt(bidValue)) || parseInt(bidValue) <= 0){
+                    chooseNotification(false,"Please enter number format greater than 0");
+                }else if(parseInt(bidValue) <= currentPrice){
+                    chooseNotification(false,"Please enter bid greater than current price");
+                }else if( parseInt(bidValue) > max || parseInt(bidValue) - currentPrice < min){
+                    chooseNotification(false,"Please enter bid at least $500 and not exceed $10000 each time");
                 }
-            });
+                else{
+                    $.ajax({
+                        url:`/bidProduct`,
+                        method:'GET',
+                        data:{id:idProduct,bid:bidValue.replaceAll(',','')},
+                        success:result =>{
+                            console.log(result);
+                            chooseNotification(true,"Bidding successfully");
+                        }
+                    });
+                }
+            }
         })
-
+        function chooseNotification(flag = true,mess){
+            let mes = `<div class="alert ${flag ? "alert-success" : "alert-danger"}">
+                                <p class="mb-0" style="font-size: 13px">${mess}</p>
+                            </div>`
+            $('.product-bid-message').html('').append(mes).addClass('active');
+            setTimeout(()=>{
+                $('.product-bid-message').removeClass('active');
+            },1800);
+        }
         getCurrentPrice();
         setInterval(getCurrentPrice,1000);
         function getCurrentPrice(){
-            console.log(idProduct);
             $.ajax({
-                url:`/getcurrentprice`,
+                url:`/getCurrentPrice`,
                 data:{id:idProduct},
                 method:'GET',
                 success:result =>{
+                    currentPrice = result[0].current_price;
                     $('#product-current-price').html(result[0].current_price);
                 }
             })

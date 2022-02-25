@@ -269,8 +269,8 @@
 </script>
 <!-- all line chart activation -->
 <script src="{!! asset('admin/assets/js/line-chart.js') !!}"></script>
-<!-- all bar chart activation -->
 <script src="{!! asset('admin/assets/js/bar-chart.js') !!}"></script>
+<!-- all bar chart activation -->
 <!-- all pie chart -->
 <script src="{!! asset('admin/assets/js/pie-chart.js') !!}"></script>
 <!-- others plugins -->

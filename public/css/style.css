@@ -97,6 +97,72 @@ a:hover{
     background: rgba(0,0,0,0.5);
 }
 
+/**/
+.login-container{
+    background-position: center center;
+    background-size: 100% 100% ;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    display: flex;
+    padding-top: 5rem;
+    height: 100vh;
+    justify-content: center;
+    background-image: url('../images/5563515.jpg');
+}
+.login-container-content{
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 800px;
+    max-height: 75vh;
+    border-radius: 1rem;
+    background: rgba(250, 250, 250, 0.97);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.login-loader{
+    position: absolute;
+    background: #FDC800;
+    z-index: 50;
+    opacity: 0;
+    visibility: hidden;
+    transform-origin: center;
+    transition: .3s all ease;
+}
+.login-loader.active{
+    opacity: 1;
+    visibility: visible;
+}
+#animationWindow {
+    width: 100%;
+    height: 100%;
+}
+.btn-login-google{
+    color: #6c757d;
+    border: 1px solid #c0c0c0;
+    transition: .3s all ease-in-out;
+}
+.btn-login-google:hover{
+    color: #292929;
+    background: #e8e8e8;
+}
+.login-error-message{
+    top: -20px;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: .2s all ease-in-out;
+}
+.login-error-message.active{
+    opacity: 1;
+    visibility: visible;
+}
+.login-slider-content{
+    background: rgba(0,37,62,.8);
+}
+.login-slider-content a{
+    color: white;
+}
 /*----------------------------*/
 /*#######  HEADER NAV  #######*/
 .header__top-link{
@@ -141,6 +207,63 @@ a:hover{
     border-width: 0.6rem 0.7rem;
     border-color: transparent transparent rgb(232, 232, 232) transparent;
 }
+.btn-login-public{
+    z-index: 30;
+    right: -6px;
+    min-width: 12rem;
+    border-radius: 4px;
+    top: calc(100% + .6rem);
+    border: 1px solid black;
+    opacity: 0;
+    visibility: hidden;
+    transform-origin:center top;
+    transition: .3s all ease-in-out;
+    background: rgba(0,0,0,0.8);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.btn-login-public a{
+    padding:6px 10px;
+    color: white;
+}
+.btn-login-public.active{
+    opacity: 1;
+    visibility: visible;
+}
+/**/
+.button-54 .email-user{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 7rem;
+}
+.button-54 {
+    font-family: "Open Sans", sans-serif;
+    letter-spacing: 2px;
+    text-decoration: none;
+    /*text-transform: uppercase;*/
+    color: rgba(0, 0, 0, 0.75);
+    cursor: pointer;
+    border: 3px solid;
+    padding: 0.25em 0.5em;
+    box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.button-54:active {
+    box-shadow: 0px 0px 0px 0px;
+    top: 5px;
+    left: 5px;
+}
+
+@media (min-width: 768px) {
+    .button-54 {
+        padding: 0.25em 0.75em;
+    }
+}
+/**/
 .nav__main-link{
     font-size: 18px;
     font-weight: 700;
@@ -1218,6 +1341,21 @@ line-clamp: 2;
 .btn-open-product-info:hover{
     background: #0c5460;
 }
+.product-bid-message{
+    position: fixed;
+    top: 7rem;
+    right: 1rem;
+    z-index: 200;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(120%);
+    transition: .6s all ease-out;
+}
+.product-bid-message.active{
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
 @media only screen and (max-width: 767px){
     .product-info-small{
         top: 0;
@@ -1234,5 +1372,8 @@ line-clamp: 2;
     }
     .product-info-small.active{
         transform: translateX(0);
+    }
+    .product-bid-message{
+        top: .8rem;
     }
 }

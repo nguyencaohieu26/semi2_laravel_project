@@ -2,7 +2,7 @@
 <div class="sidebar-menu">
     <div class="sidebar-header">
         <div class="logo">
-            <a href="{{route('admin-home-index')}}" class="text-white">Welcome Admin</a>
+            <a href="{{route('admin-home-index')}}" class="text-white">Welcome <span>{{\Illuminate\Support\Facades\Auth::user()->email}}</span></a>
         </div>
     </div>
     <div class="main-menu">

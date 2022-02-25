@@ -8,7 +8,7 @@
 @endsection
 
 @section('header')
-    @include('components.headerAdmin')
+    @include('components.headerUser')
 @endsection
 
 @section('content')
@@ -21,7 +21,7 @@
                 {{--  first name  --}}
                 <div class="col-md-6">
                     <label for="firstname" class="text-capitalize font-weight-bold text-dark">first name</label>
-                    <input type="text" name="f_name" class="form-control" id="firstname" placeholder="First Name"
+                    <input type="text" name="f_name" class="form-control" id="firstname"  placeholder="First Name"
                            value="{{old('f_name')}}" required>
                     <div class="valid-feedback">look good!</div>
                     @error('f_name')<div class="error-message">{{$message}}</div>@enderror
@@ -50,44 +50,11 @@
                     <label for="birthday" class="text-capitalize font-weight-bold text-dark">birthday</label>
                     <input type="date" name="birthday" class="form-control" id="birthday"
                            value="{{old('birthday')}}" required>
-                    @error('birthday')
-                    <div class="error-message">{{$message}}</div>
-                    @enderror
+                    @error('birthday')<div class="error-message">{{$message}}</div> @enderror
                 </div>
             </div>
-            {{-- gender + avatar  --}}
             <div class="form-row mb-2">
-                {{--  avatar  --}}
-                <div class="col-md-6">
-                    <label for="" class="text-dark text-capitalize font-weight-bold">Upload Image</label>
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" value="{{old('upload_img')}}" name="upload_img"
-                               id="upload_img">
-                        <label class="custom-file-label" for="upload_img">Choose file</label>
-                        <div class="invalid-feedback">Image is required</div>
-                    </div>
-                    @error('upload_img')
-                    <div class="error-message">{{$message}}</div>
-                    @enderror
-                </div>
-                {{-- gender  --}}
-                <div class="col-md-6">
-                    <label for="gender" class="text-capitalize font-weight-bold text-dark">gender</label><br>
-                    <div class="d-flex mt-2">
-                        <div class="form-check">
-                            <input type="radio" name="gender" class="form-check-input" id="male" value="{{old('gender')}}">
-                            <label for="male" class="form-check-label">Male</label>
-                        </div>
-                        <div class="form-check ml-3">
-                            <input type="radio" name="gender" class="form-check-input" id="female" value="{{old('gender')}}">
-                            <label for="female" class="form-check-label">Female</label>
-                        </div>
-                        <div class="form-check ml-3">
-                            <input type="radio" name="gender" class="form-check-input" id="other" value="{{old('gender')}}">
-                            <label for="other" class="form-check-label">Other</label>
-                        </div>
-                    </div>
-                </div>
+
             </div>
             <button type="submit" class="btn btn-submit mt-3">submit</button>
         </form>

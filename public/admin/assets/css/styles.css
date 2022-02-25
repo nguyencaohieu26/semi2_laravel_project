@@ -8,10 +8,10 @@
     Version: 1.0
 
 ----------------------------------------------
-    
+
     CSS INDEX
     ===================
-  
+
     1. Core Css
     2. Dashboard One
         2.1 Sidebar Menu
@@ -499,7 +499,7 @@
 }
 
 .notification-area li>i {
-    font-size: 26px;
+    font-size: 18px;
     color: #bdbcbc;
     vertical-align: middle;
     text-shadow: 0 0 8px rgba(0, 0, 0, 0.12);

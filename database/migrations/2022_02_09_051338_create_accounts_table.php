@@ -18,7 +18,7 @@ class CreateAccountsTable extends Migration
             $table->id();
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('role',12);
+            $table->string('role',12)->default('USER');
             $table->unsignedBigInteger('user_id');
             $table->double('balance')->default(1000000);
             $table->rememberToken();

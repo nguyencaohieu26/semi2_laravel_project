@@ -84,6 +84,7 @@ class BlogController extends Controller
     }
 
     public function getBlogsList(Request $request){
+
         $query =Blog::where('deleted_at','=',null)->where('status','=',1);
         if(isset($request->sortType)){
             switch ($request->sortType){

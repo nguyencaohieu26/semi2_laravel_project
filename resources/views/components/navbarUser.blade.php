@@ -2,7 +2,7 @@
 <div class="sidebar-menu">
     <div class="sidebar-header">
         <div class="logo">
-            <a href="{{route('user-home-index')}}" class="text-white">Welcome User</a>
+            <a href="{{route('user-home-index')}}" class="text-white">Welcome <span>{{Auth::user()->email}}</span></a>
         </div>
     </div>
     <div class="main-menu">

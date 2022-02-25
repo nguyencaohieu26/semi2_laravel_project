@@ -20,4 +20,8 @@ class Users extends Model
         'avatar',
         'address'
     ];
+
+    public function accounts(){
+        return $this->belongsTo(Accounts::class);
+    }
 }

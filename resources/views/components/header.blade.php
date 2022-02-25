@@ -2,8 +2,29 @@
     <div class="header__top py-2">
         <nav>
             <ul class="d-flex list-unstyled justify-content-center justify-content-md-end px-5 mb-0">
-                <li><a href="#" class="header__top-link font-weight-bold px-3">LOG IN</a></li>
-                <li class="position-relative px-3">
+                @if(Auth::check())
+                    <li class="position-relative">
+                        <div class="button-54 d-flex align-items-center border p-1 px-3 rounded">
+                            <img width="20px" height="20px" style="border-radius: 50%" alt="user-avatar" src="{{asset('images_store/accounts/avatar-no-img.png')}}"/>
+                            <p class="mb-0 ml-2 email-user" style="font-size: 12px">{{Auth::user()->email}}</p>
+                            <i class="fas fa-angle-down ml-1" style="font-size: 10px"></i>
+                        </div>
+                        @php $role = Auth::user()->role;@endphp
+                        <div class="btn-login-public position-absolute d-flex flex-column">
+                            <a class="d-inline-block" href="{{route('logout-account')}}">
+                                <span class="mr-2"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+                                <span>Logout</span>
+                            </a>
+                            <a class="d-inline-block" href="{{strcmp($role,"ADMIN") == 0 ? route('admin-home-index') : route('user-home-index')}}">
+                                <span class="mr-2"><i class="fas fa-tachometer-alt"></i></span>
+                                <span>Go Dashboard</span>
+                            </a>
+                        </div>
+                    </li>
+                @else
+                    <li><a href="{{route('login-account')}}" class="header__top-link font-weight-bold px-3">LOG IN</a></li>
+                @endif
+                <li class="position-relative px-3 d-flex align-items-center">
                     <a class="header__top-link" href="#">ABOUT</a>
                     <div class="header__top-submenu position-absolute">
                         <ul class="list-unstyled">
@@ -12,9 +33,9 @@
                         </ul>
                     </div>
                 </li>
-                <li><a href="{{route('blog-page')}}" class="header__top-link">BLOG</a></li>
-                <li><a href="{{route('error-page')}}" class="header__top-link px-3">FAQ</a></li>
-                <li><a href="{{route('contact-page')}}" class="header__top-link">CONTACT US</a></li>
+                <li class="d-flex align-items-center"><a href="{{route('blog-page')}}" class="header__top-link">BLOG</a></li>
+                <li class="d-flex align-items-center"><a href="{{route('error-page')}}" class="header__top-link px-3">FAQ</a></li>
+                <li class="d-flex align-items-center"><a href="{{route('contact-page')}}" class="header__top-link">CONTACT US</a></li>
             </ul>
         </nav>
     </div>
