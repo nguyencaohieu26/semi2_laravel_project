@@ -232,7 +232,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
+@yield('script-tag')
+
 <script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     $(document).ready(function (){
             let homeSearch = $('#home_search');
             let searchContainer = $('#main-search-container');
@@ -294,21 +301,48 @@
     let accountID = {!! Auth::check() ? $accountID : "undefined" !!};
 
     if(accountID){
-        console.log('hello');
-        // getCartUser();
+        getCartUser();
     }
 
     function getCartUser(){
         $.ajax({
-            url:``,
+            url:`/userCart`,
+            data:{account:accountID ? accountID : undefined},
             method:'GET',
-            data:{account:accountID,},
             success: result=>{
-                console.log(result);
+                if(result.length > 0){
+                    cartUserContainer.html("");
+                    numberBidUser.children('p').text(result.length);
+                    result.forEach(item =>{
+                    let bid_status = `${item.bid_status_id === 1 ? "bidding" : (item.bid_status_id === 2 ? "giveup" : (item.bid_status_id === 3 ? "payment" : "success"))}`;
+                        let itemBid = `
+                            <div class="mb-3 p-1 cartuser-item rounded">
+                                 <a href="/products/${item.product_id}">
+                                    <div class="d-flex">
+                                        <div class="mr-2">
+                                            <img height="100%" width="70px" class="rounded" src="/images_store/products/${item.image}" alt="${item.name}"/>
+                                        </div>
+                                        <div class="w-100">
+                                            <h6 class="mb-1" style="color: #0c5460">${item.name}</h6>
+                                            <div class="d-flex justify-content-between">
+                                                <p style="font-size: 13px" class="mb-0 text-secondary">Current price: <span class="font-italic text-success">${item.current_price}</span></p>
+                                                <p style="font-size: 12px" class="mb-0 border p-1 rounded">${bid_status}</p>
+                                            </div>
+                                            <p style="font-size: 13px" class="mb-0 text-secondary">Your Bid: <span class="font-italic text-danger">${item.max_bid}</span></p>
+                                        </div>
+                                    </div>
+                                 </a>
+                            <div>
+                        `
+                        cartUserContainer.append(itemBid);
+                    });
+                }else{
+                    numberBidUser.hide();
+                    cartUserContainer.hide();
+                }
             }
         });
     }
 </script>
-@yield('script-tag')
 </body>
 </html>

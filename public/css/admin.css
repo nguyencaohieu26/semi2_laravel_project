@@ -34,7 +34,7 @@
     color: rgba(222, 28, 28, 0.99);
 }
 /**/
-.artist-name,.artist-description,.category-list,.products-admin-list,.product-category-item,.blogs-admin-list{
+.artist-name,.artist-description,.category-list,.products-admin-list,.product-category-item,.blogs-admin-list,.users-list{
     font-family: 'Poppins', sans-serif;
 }
 .artist-description{

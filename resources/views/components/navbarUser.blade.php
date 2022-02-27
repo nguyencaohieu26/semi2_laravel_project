@@ -4,8 +4,8 @@
         <div class="logo">
             <a href="{{route('user-home-index')}}" class="text-white">
                 <h4 class="mb-2 text-uppercase">Welcome</h4>
-                <div class="d-flex align-items-center flex-wrap">
-                    <img width="35px" class="rounded-circle mr-2" src="images_store/accounts/{{$user->avatar}}" alt="{{$user->lastname ."-".$user->firstname.'avatar'}}">
+                <div class="d-flex align-items-center flex-wrap justify-content-center">
+                    <img width="35px" class="rounded-circle mr-2" src="/images_store/accounts/{{$user->avatar}}" alt="{{$user->lastname ."-".$user->firstname.'avatar'}}">
                     <p class="mb-0 text-white">{{$user->lastname ." ".$user->firstname}}</p>
                 </div>
             </a>

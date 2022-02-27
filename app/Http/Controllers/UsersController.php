@@ -2,41 +2,52 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Accounts;
 use App\Models\Users;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class UsersController extends Controller
 {
     /** */
-    public function index()
-    {
-        //
+    public function index(Request $request){
+//        $query = Users::with('accounts')->where('deleted_at','=',null);
+//        if(isset($request->id)){
+//            $query = $query->getbyid($request->id);
+//        }
+//        if(isset($request->name)){
+//            $query = $query->getbyname($request->name);
+//        }
+//        if(isset($request->email)){
+//            $query = $query->getbyemail($request->email);
+//        }
+        $query = DB::table('users')
+            ->select('users.id','users.avatar','users.firstname','users.lastname','users.gender','users.email','users.date_of_birth','accounts.role')
+            ->join('accounts','users.id','=','accounts.user_id');
+        if(isset($request->id)){
+            $query = $query->where('users.id','=',$request->id);
+        }
+        if(isset($request->name)){
+            $query = $query->where('users.lastname','like','%'.$request->name.'%');
+        }
+        if(isset($request->email)){
+            $query = $query->where('users.email','like','%'.$request->email.'%');
+        }
+        return $query->paginate(10);
     }
 
     /** */
-    public function create()
-    {
-        //
-    }
+    public function create(){}
 
     /** */
-    public function store(Request $request)
-    {
-        //
-    }
+    public function store(Request $request){}
 
     /** */
-    public function show(Users $users)
-    {
-        //
-    }
+    public function show(Users $users){}
 
     /** */
-    public function edit(Users $users)
-    {
-        //
-    }
+    public function edit(Users $users){}
 
     /** */
     public function update(Request $request,$id)

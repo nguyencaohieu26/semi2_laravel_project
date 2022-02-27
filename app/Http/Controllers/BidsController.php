@@ -4,82 +4,37 @@ namespace App\Http\Controllers;
 
 use App\Models\Bids;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BidsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+    /** */
+    public function index(){}
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function showBidUser(Request $request){
+            $userCart = DB::table('bids')
+                ->join('products','bids.product_id','=','products.id')
+                ->select(DB::raw('max(amount_of_bid) as max_bid,product_id,bid_status_id,bids.created_at,products.name,products.image,products.current_price'))
+                ->where('account_id','=',$request->account)
+                ->groupBy('product_id')
+                ->get();
+        return $userCart;
     }
+    /** */
+    public function create(){}
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    /***/
+    public function store(Request $request){}
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Bids  $bids
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Bids $bids)
-    {
-        //
-    }
+    /** */
+    public function show(Bids $bids){}
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Bids  $bids
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Bids $bids)
-    {
-        //
-    }
+    /** */
+    public function edit(Bids $bids){}
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Bids  $bids
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Bids $bids)
-    {
-        //
-    }
+    /** */
+    public function update(Request $request, Bids $bids){}
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Bids  $bids
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Bids $bids)
-    {
-        //
-    }
+    /** */
+    public function destroy(Bids $bids){}
 }

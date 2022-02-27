@@ -19,7 +19,7 @@ class CreateBidsTable extends Migration
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('bid_status_id')->default(1);
             $table->double('amount_of_bid');
-            $table->double('current-bid');
+            $table->double('current-bid')->nullable()->default(0);
             $table->foreign('product_id')->references('id')->on('products');
             $table->foreign('account_id')->references('id')->on('accounts');
             $table->foreign('bid_status_id')->references('id')->on('bid_statuses');

@@ -283,7 +283,7 @@
         let isUserLogin = {!! json_encode($isLogin) !!};
         let currentPrice = 0;
         let startPrice = {!! json_encode($product->start_price) !!};
-        let account_id = {!! json_encode(Auth::user()->id) !!};
+        let account_id = {!! json_encode(Auth::check() ? Auth::user()->id : 'undefined') !!};
 
         //
         let productDescriptionEle = $('.product-description');
@@ -361,11 +361,20 @@
                                         data:{product_id:idProduct,bid:bidValue.replaceAll(',',''),account_id:account_id},
                                         success:result =>{
                                             console.log(result);
-                                            $('#product-current-price').addClass('animate__animated animate__bounceIn animate__infinite');
-                                            chooseNotification(true,"Bidding successfully");
-                                            setTimeout(()=>{
-                                                $('#product-current-price').removeClass('animate__animated animate__bounceIn animate__infinite');
-                                            },1000)
+                                            if(result.status === 1){
+                                                $('#product-current-price').addClass('animate__animated animate__bounceIn animate__infinite');
+                                                chooseNotification(true,`${result.message}`);
+                                                getCartUser();
+                                                $('#button-bid').attr('disabled','disable');
+                                                setTimeout(()=>{
+                                                    $('#product-current-price').removeClass('animate__animated animate__bounceIn animate__infinite');
+                                                },1000)
+                                                setTimeout(()=>{
+                                                    $('#button-bid').removeAttr('disable','disable');
+                                                },900000)
+                                            }else{
+                                                chooseNotification(false,`${result.message}`);
+                                            }
                                         }
                                     });
                                 }
@@ -457,7 +466,8 @@
                 });
             // }, false);
         })();
-
+        //
+        //
         CKEDITOR.replace( 'exampleFormControlTextarea1' );
     </script>
 @endsection

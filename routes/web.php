@@ -71,7 +71,7 @@ Route::group(['prefix'=>'/'],function(){
 
     Route::get('bidProduct',[ProductController::class,'bidProduct']);
 
-
+    Route::get('userCart',[BidsController::class,'showBidUser']);
     //Route Api Admin
     Route::get('changeArtistStatus',[ArtistController::class,'changeStatus']);
 
@@ -82,38 +82,46 @@ Route::group(['prefix'=>'/'],function(){
 //Manage Dashboard Route Admin
 Route::group(['prefix' => 'admin','middleware' => ['CheckLogedOut','CheckRoleAdmin']],function(){
     Route::get('dashboard',function (){
-       return view('admin.index');
+        $user = \App\Models\Users::with(['accounts'])->where('id', Auth::user()->user_id)->first();
+        return view('admin.index',compact('user'));
     })->name('admin-home-index');
 
     Route::get('products',function (){
         $artists       = Artist::all();
         $productStatus = ProductStatus::all();
         $categories    = Category::all();
-        return view('admin.products.index',compact('artists','productStatus','categories'));
+        $user = \App\Models\Users::with(['accounts'])->where('id', Auth::user()->user_id)->first();
+        return view('admin.products.index',compact('artists','productStatus','categories','user'));
     })->name('admin-products');
 
     Route::get('artists',function (){
-        return view('admin.artists.index');
+        $user = \App\Models\Users::with(['accounts'])->where('id', Auth::user()->user_id)->first();
+        return view('admin.artists.index',compact('user'));
     })->name('admin-artists');
 
     Route::get('categories',function (){
-        return view('admin.categories.index');
+        $user = \App\Models\Users::with(['accounts'])->where('id', Auth::user()->user_id)->first();
+        return view('admin.categories.index',compact('user'));
     })->name('admin-categories');
 
     Route::get('users',function (){
-        return view('admin.accounts.index');
+        $user = \App\Models\Users::with(['accounts'])->where('id', Auth::user()->user_id)->first();
+        return view('admin.accounts.index',compact('user'));
     })->name('admin-users');
 
     Route::get('blogs',function (){
-        return view('admin.blogs.index');
+        $user = \App\Models\Users::with(['accounts'])->where('id', Auth::user()->user_id)->first();
+        return view('admin.blogs.index',compact('user'));
     })->name('admin-blogs');
 
     Route::get('bids',function (){
-        return view('admin.bids.index');
+        $user = \App\Models\Users::with(['accounts'])->where('id', Auth::user()->user_id)->first();
+        return view('admin.bids.index',compact('user'));
     })->name('admin-bids');
 
     Route::get('auctions-result',function (){
-        return view('admin.auction_results.index');
+        $user = \App\Models\Users::with(['accounts'])->where('id', Auth::user()->user_id)->first();
+        return view('admin.auction_results.index',compact('user'));
     })->name('admin-auction-result');
 });
 
@@ -144,7 +152,8 @@ Route::group(['prefix' => 'user','middleware' => ['CheckLogedOut','CheckRoleUser
     })->name('user-home-index');
 
     Route::get('cart',function (){
-        return view('user.cart');
+        $user = \App\Models\Users::with(['accounts'])->where('id', Auth::user()->user_id)->first();
+        return view('user.cart',compact('user'));
     })->name('user-cart');
 
     Route::post('changePassword',[AccountsController::class,''])->name('user-change-password');

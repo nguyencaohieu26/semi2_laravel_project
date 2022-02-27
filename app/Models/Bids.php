@@ -13,7 +13,10 @@ class Bids extends Model
     protected $fillable=[
       'account_id',
       'product_id',
-        'date_of_bid',
-        'amount_of_bid'
+        'amount_of_bid',
+        'current-bid'
     ];
+    public function product(){
+        return $this->hasOne(Product::class);
+    }
 }

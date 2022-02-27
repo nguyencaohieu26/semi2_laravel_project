@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AccountDeposit;
 use App\Models\Artist;
+use App\Models\Bids;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductCategory;
@@ -172,14 +174,63 @@ class ProductController extends Controller
     }
 
     public function bidProduct(Request $request){
-        $product = Product::find($request->product_id);
-        $product->current_price = $request->bid;
-        $product->save();
+        $bidItem = array(
+           "account_id"=> $request->account_id,
+            "product_id"=>$request->product_id,
+            "bid" =>$request->bid,
+        );
+
+        $this->createDeposit($bidItem);
+        $isValidTimeBid = $this->checkCurrentBid($bidItem);
+        if($isValidTimeBid){
+            $bid = new Bids();
+            $bid->account_id    = $request->account_id;
+            $bid->product_id    = $request->product_id;
+            $bid->amount_of_bid = $request->bid;
+            $bid->save();
+
+            //
+            $product = Product::find($request->product_id);
+            $product->current_price = $request->bid;
+            $product->save();
+            return $result = array(
+                "status" => 1,
+                "message"=>"Bidding successfully! You can bidding after 15 minutes",
+            );
+        }else{
+            return $result = array(
+              "status" => 0,
+              "message" => "Please continues bidding in 15 minutes",
+            );
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    public function createDeposit($bidItem){
+        $depositExist = AccountDeposit::where('account_id','=',$bidItem['account_id'])->where('product_id','=',$bidItem['product_id'])->get();
+        $depositCount = $depositExist->count();
+        if($depositCount == 0){
+            $bidAccountDeposit = new AccountDeposit();
+            $bidAccountDeposit->account_id     = $bidItem['account_id'];
+            $bidAccountDeposit->product_id     = $bidItem['product_id'];
+            $bidAccountDeposit->deposit_amount = floatval($bidItem['bid']) * 0.2;
+            $bidAccountDeposit->save();
+        }
+    }
+    public function checkCurrentBid($bidItem){
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $bid = Bids::where('account_id','=',$bidItem['account_id'])->where('product_id','=',$bidItem['product_id'])->get()->last();
+        if(isset($bid)){
+            $timeValidBid = $bid->created_at;
+            $timeNow =  date('d-m-y h:i:s');
+            if(strtotime("+15 minutes",strtotime(date_format($timeValidBid,"d-m-y H:i:s"))) <= strtotime($timeNow)){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        return  true;
+    }
+    /** Show the form for editing the specified resource. */
     public function edit($id)
     {
         $product = Product::with(['categories', 'artists', 'product_status'])->where('id', $id)->first();

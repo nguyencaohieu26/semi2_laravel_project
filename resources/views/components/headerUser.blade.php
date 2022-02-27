@@ -170,7 +170,7 @@
                             </li>
                             <li class="ml-0 w-100">
                                 <a class="py-2 px-3" href="{{route('home-index')}}">
-                                    <span class="mr-1 text-secondary"><i class="fas fa-angle-double-right"></i></span>
+                                    <span class="mr-1 text-secondary"><i class="ti-location-arrow"></i></span>
                                     <span>Visit Website</span>
                                 </a>
                             </li>

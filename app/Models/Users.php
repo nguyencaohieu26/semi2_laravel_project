@@ -25,4 +25,13 @@ class Users extends Model
     public function accounts(){
         return $this->belongsTo(Accounts::class);
     }
+    public function scopegetbyid($query,$id){
+        return $query->where('id','=',$id);
+    }
+    public function scopegetbyname($query,$name){
+        return $query->where('lastname','like','%'.$name.'%');
+    }
+    public function scopegetbyemail($query,$email){
+        return $query->where('email','like','%'.$email.'%');
+    }
 }

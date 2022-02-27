@@ -45,7 +45,7 @@ class UserSeeder extends Seeder
             ],
             [
                 "id" =>3,
-                "avatar"=>"Avatar",
+                "avatar"=>"avatar-no-img.png",
                 "firstname" => "nguyen",
                 "lastname" => "hieu",
                 "address" => "Ha Noi",
