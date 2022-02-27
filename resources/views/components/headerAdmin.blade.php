@@ -169,6 +169,12 @@
                                 <span>Change password</span>
                             </li>
                             <li class="ml-0 w-100">
+                                <a class="py-2 px-3" href="{{route('home-index')}}">
+                                    <span class="mr-1 text-secondary"><i class="fas fa-angle-double-right"></i></span>
+                                    <span>Visit Website</span>
+                                </a>
+                            </li>
+                            <li class="ml-0 w-100">
                                 <a class=" py-2 px-3" href="{{route('logout-account')}}">
                                     <span class="mr-1 text-secondary"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
                                     <span>Logout</span>

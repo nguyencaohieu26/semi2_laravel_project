@@ -62,6 +62,7 @@ Route::group(['prefix'=>'/'],function(){
 
     Route::get('logout',[AccountsController::class,'getLogout'])->name('logout-account');
 
+    Route::get('signup',[AccountsController::class,'getSignup'])->name('signup-account');
 
     //Route Api Public
     Route::get('search/products',[ProductController::class,'search_product_main_nav']);
@@ -132,17 +133,20 @@ Route::resource('/blogs_resource',BlogController::class);
 
 Route::resource('/auction-result_resource',AuctionResultController::class);
 
-
+Route::resource('/users_resource',\App\Http\Controllers\UsersController::class);
 //|--------------------------------------------------------------------------
 //Manage Dashboard Route User
 
 Route::group(['prefix' => 'user','middleware' => ['CheckLogedOut','CheckRoleUser']],function(){
     Route::get('/',function (){
-        return view('user.index');
+        $user = \App\Models\Users::with(['accounts'])->where('id', Auth::user()->user_id)->first();
+        return view('user.index',compact('user'));
     })->name('user-home-index');
 
     Route::get('cart',function (){
         return view('user.cart');
     })->name('user-cart');
+
+    Route::post('changePassword',[AccountsController::class,''])->name('user-change-password');
 });
 

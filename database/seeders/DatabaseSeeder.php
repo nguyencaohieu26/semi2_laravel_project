@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
            BlogSeeder::class,
             UserSeeder::class,
             AccountSeeder::class,
+            BidStatusSeeder::class,
         ]);
     }
 }

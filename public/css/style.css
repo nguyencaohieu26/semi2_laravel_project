@@ -1,5 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
+:root{
+    --poppin:'Poppins', sans-serif;
+    --bg-login-signup:url('../images/5563515.jpg');
+    --bg-login-loader:#FDC800;
+    --bg-login-slider-content:rgba(0,37,62,.8);
+    --color-purple:#5552ff;
+    --color-purple-1:#6173e1;
+
+    --box-shadow-1:rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    --box-shadow-2:rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    --box-shadow-3:rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    --box-shadow-4:1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+    --box-shadow-5:rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
 .lds-hourglass {
     display: inline-block;
     position: relative;
@@ -97,8 +111,8 @@ a:hover{
     background: rgba(0,0,0,0.5);
 }
 
-/**/
-.login-container{
+/*login*/
+.login-container,.sign-up-container{
     background-position: center center;
     background-size: 100% 100% ;
     background-repeat: no-repeat;
@@ -107,7 +121,7 @@ a:hover{
     padding-top: 5rem;
     height: 100vh;
     justify-content: center;
-    background-image: url('../images/5563515.jpg');
+    background-image: var(--bg-login-signup);
 }
 .login-container-content{
     position: relative;
@@ -117,11 +131,11 @@ a:hover{
     max-height: 75vh;
     border-radius: 1rem;
     background: rgba(250, 250, 250, 0.97);
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    box-shadow: var(--box-shadow-2);
 }
 .login-loader{
     position: absolute;
-    background: #FDC800;
+    background: var(--bg-login-loader);
     z-index: 50;
     opacity: 0;
     visibility: hidden;
@@ -158,11 +172,98 @@ a:hover{
     visibility: visible;
 }
 .login-slider-content{
-    background: rgba(0,37,62,.8);
+    background: var(--bg-login-slider-content);
 }
 .login-slider-content a{
     color: white;
 }
+/*signup*/
+.sign-up-container{
+    padding-top: 8rem;
+    font-family: var(--poppin);
+}
+.sign-up-container-content{
+    width: 100%;
+    height: fit-content;
+    padding:1.3rem 2rem;
+    max-width: 33rem;
+    background: white;
+    border-radius: 3px;
+    box-shadow: var(--box-shadow-1);
+}
+.sign-up-form input{
+    height: 3rem;
+    font-size: 14px;
+    padding-top: 1.5rem;
+}
+.sign-up-form input::placeholder{
+    font-family: var(--poppin);
+    font-size: 12px;
+    font-style: italic;
+}
+.label-custom{
+    position: absolute;
+    top: 5px;
+    font-size: 11px;
+    font-weight: 500;
+    color: #a2a2a2;
+    padding-left:.7rem;
+}
+.sign-up-form button{
+   background: var(--color-purple);
+    color: white;
+}
+.sign-up-form button:hover{
+    background: var(--color-purple-1);
+    color: white;
+}
+.form-row .error input,.form-check.error input {
+    border: 1px solid crimson;
+    background: rgba(234, 161, 161, 0.27);
+}
+.form-row .success input{
+    border: 1px solid rgba(31, 134, 28, 0.27);
+}
+.form-row .success p{
+    color: #17791f;
+    font-size: 11px;
+    top: calc(100% + 4px);
+    position: absolute;
+}
+.form-row .error,.form-row .success{
+    position: relative;
+}
+.form-row .error p,.form-check.error p{
+    color: #d51818;
+    font-size: 11px;
+    top: calc(100% + 4px);
+    position: absolute;
+}
+/*Cart*/
+.user-auction-number{
+    top: 9px;
+    right: -1px;
+}
+.user-auction-number p{
+    font-size: 10px;
+    font-weight: bold;
+    background: #e83232;
+    padding: 1px 5px;
+    border-radius: 50%;
+    color: white;
+    display: inline-block;
+}
+.user-auction-cart{
+    position: absolute;
+    top: calc(100% + 5px);
+    right: 0;
+    background: white;
+    z-index: 50;
+    min-width: 20rem;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;}
+/**/
 /*----------------------------*/
 /*#######  HEADER NAV  #######*/
 .header__top-link{
@@ -219,16 +320,75 @@ a:hover{
     transform-origin:center top;
     transition: .3s all ease-in-out;
     background: rgba(0,0,0,0.8);
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    box-shadow: var(--box-shadow-3);
 }
 .btn-login-public a{
-    padding:6px 10px;
     color: white;
+    overflow: hidden;
 }
+/**/
 .btn-login-public.active{
     opacity: 1;
     visibility: visible;
 }
+.button-48 {
+    appearance: none;
+    background-color:rgba(0,0,0,0.7);
+    border-width: 0;
+    box-sizing: border-box;
+    color: #000000;
+    cursor: pointer;
+    width: 100%;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1em;
+    margin: 0;
+    opacity: 1;
+    outline: 0;
+    padding:8px 12px;
+    position: relative;
+    text-decoration: none;
+    text-rendering: geometricprecision;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    white-space: nowrap;
+    transition: opacity 300ms cubic-bezier(.694, 0, 0.335, 1),background-color 100ms cubic-bezier(.694, 0, 0.335, 1),color 100ms cubic-bezier(.694, 0, 0.335, 1);
+}
+
+.button-48:before {
+    animation: opacityFallbackOut .5s step-end forwards;
+    backface-visibility: hidden;
+    background-color: #788ae8;
+    clip-path: polygon(-1% 0, 0 0, -25% 100%, -1% 100%);
+    content: "";
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transform: translateZ(0);
+    transition: clip-path .5s cubic-bezier(.165, 0.84, 0.44, 1), -webkit-clip-path .5s cubic-bezier(.165, 0.84, 0.44, 1);
+    width: 100%;
+}
+
+.button-48:hover:before {
+    animation: opacityFallbackIn 0s step-start forwards;
+    clip-path: polygon(0 0, 101% 0, 101% 101%, 0 101%);
+}
+
+.button-48:after {
+    background-color: #FFFFFF;
+}
+
+.button-48 span {
+    z-index: 1;
+    position: relative;
+    color: white;
+}
+
 /**/
 .button-54 .email-user{
     white-space: nowrap;
@@ -237,15 +397,13 @@ a:hover{
     max-width: 7rem;
 }
 .button-54 {
-    font-family: "Open Sans", sans-serif;
     letter-spacing: 2px;
     text-decoration: none;
-    /*text-transform: uppercase;*/
     color: rgba(0, 0, 0, 0.75);
     cursor: pointer;
     border: 3px solid;
     padding: 0.25em 0.5em;
-    box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+    box-shadow: var(--box-shadow-4);
     position: relative;
     user-select: none;
     -webkit-user-select: none;
@@ -288,7 +446,7 @@ a:hover{
     top: calc(100% + 6px);
     flex-direction: column;
     width: calc(100% + 6.5rem);
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    box-shadow: var(--box-shadow-5);
 }
 .search-item:hover{
     cursor: pointer;
@@ -891,7 +1049,6 @@ footer .accordion .accordion-item a i{
     border-radius: 3px;
     background: white;
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-    /*font-family: 'Poppins', sans-serif;*/
 }
 .auction-lot-item a{
     color: black;
@@ -1355,6 +1512,40 @@ line-clamp: 2;
     opacity: 1;
     visibility: visible;
     transform: translateX(0);
+}
+.bid-note{
+    padding: 8px 12px;
+    color: #777;
+    gap: 5px;
+    border-radius: 3px;
+    background: #f8f8f8;
+    align-items: stretch;
+}
+.bid-note i{
+    position: relative;
+    top: 4px;
+}
+.jconfirm-buttons button{
+    font-size: 13px;
+    text-transform: lowercase !important;
+}
+.btn-cancel{
+    border: 1px solid #777;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.btn-enter-bid{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    min-width: 4rem;
+    background: #757575;
+    color: white;
+    transition: .2s all ease-out;
+}
+.btn-enter-bid:hover{
+    color: darkslategrey;
+    background: #bdcee7;
+}
+.bid-note p{
+    font-size: 14px;
 }
 @media only screen and (max-width: 767px){
     .product-info-small{

@@ -22,7 +22,7 @@ class Accounts extends Authenticatable
     protected $fillable =[
         'email',
         'password',
-        'role'
+        'user_id',
     ];
 
     public function user(){

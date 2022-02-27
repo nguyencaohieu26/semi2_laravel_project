@@ -12,12 +12,20 @@
                         @php $role = Auth::user()->role;@endphp
                         <div class="btn-login-public position-absolute d-flex flex-column">
                             <a class="d-inline-block" href="{{route('logout-account')}}">
-                                <span class="mr-2"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
-                                <span>Logout</span>
+                                <button class="button-48" role="button">
+                                    <span class="text d-flex">
+                                        <span class="mr-2"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+                                        <span>Logout</span>
+                                    </span>
+                                </button>
                             </a>
                             <a class="d-inline-block" href="{{strcmp($role,"ADMIN") == 0 ? route('admin-home-index') : route('user-home-index')}}">
-                                <span class="mr-2"><i class="fas fa-tachometer-alt"></i></span>
-                                <span>Go Dashboard</span>
+                                <button class="button-48" role="button">
+                                    <span class="text d-flex">
+                                        <span class="mr-2"><i class="fas fa-tachometer-alt"></i></span>
+                                        <span>Go Dashboard</span>
+                                    </span>
+                                </button>
                             </a>
                         </div>
                     </li>
@@ -71,10 +79,20 @@
                 </div>
             </div>
         </nav>
-        <div>
+        <div class="position-relative" onclick="getCartUser()">
             <div class="ml-2 border rounded-circle position-relative" style="padding: 6px 8px; cursor: pointer;top: 16px">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 6h-2c0-2.76-2.24-5-5-5S7 3.24 7 6H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3H9c0-1.66 1.34-3 3-3zm7 17H5V8h14v12zm-7-8c-1.66 0-3-1.34-3-3H7c0 2.76 2.24 5 5 5s5-2.24 5-5h-2c0 1.66-1.34 3-3 3z"/></svg>
             </div>
+            @if(Auth::check())
+            <div class="user-auction-number position-absolute" id="user-auction-number"><p class="mb-0">1</p></div>
+            <div class="user-auction-cart" id="user-auction-cart">
+                <div>
+                    <p>image</p>
+                    <h5>product name</h5>
+                    <p>current price</p>
+                </div>
+            </div>
+            @endif
         </div>
     </div>
 </div>

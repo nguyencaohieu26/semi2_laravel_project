@@ -13,21 +13,40 @@ class AccountsController extends Controller
     public function index(){}
 
     /** Show the form for creating a new resource.*/
-    public function create()
-    {
+    public function create(){}
+
+    /** Store a newly created resource in storage. */
+    public function store(Request $request){
+
+        $validate = $request->validate([
+            'firstname' => 'bail|required',
+            'lastname'  => 'bail|required',
+            'email'     => 'bail|email|required|unique:accounts,email',
+            'password'  => 'regex:"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"',
+        ],['password.regex' =>'The :attribute minimum eight characters, at least one uppercase letter, one lowercase letter and one number']
+        );
+
+        //Create user info
+        $user = new Users();
+        $user->firstname = $request->firstname;
+        $user->lastname  = $request->lastname;
+        $user->email     = $request->email;
+
+        $user->save();
+        //Create account
+        $account = new Accounts();
+        $account->user_id = $user->id;
+        $account->email   = $request->email;
+        $account->password = bcrypt($request->password);
+
+        $account->save();
+
+        return redirect()->route('login-account')->with('create-account','Create Account Success');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    public function getLogin(){return view('main_public.login');}
 
-    public function getLogin(){
-        return view('main_public.login');
-    }
+    public function getSignup(){return view('main_public.signup');}
 
     public function checkLogin(Request $request){
         $arr = [
@@ -49,35 +68,20 @@ class AccountsController extends Controller
         Auth::logout();
         return redirect()->route('home-index');
     }
-    /**
-     * Display the specified resource.
-     */
-    public function show(Accounts $accounts)
-    {
-        //
+
+    public function userChangePassword(Request $request){
+        dd($request->all());
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Accounts $accounts)
-    {
-        //
-    }
+    /** Display the specified resource. */
+    public function show(Accounts $accounts){}
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Accounts $accounts)
-    {
-        //
-    }
+    /** Show the form for editing the specified resource. */
+    public function edit(Accounts $accounts){}
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Accounts $accounts)
-    {
-        //
-    }
+    /** Update the specified resource in storage. */
+    public function update(Request $request, Accounts $accounts){}
+
+    /** Remove the specified resource from storage. */
+    public function destroy(Accounts $accounts){}
 }

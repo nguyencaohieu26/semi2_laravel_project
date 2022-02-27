@@ -141,14 +141,14 @@
                                     <div class="mt-3">
                                         <p class="mb-2">
                                             <span>Current Price: $</span>
-                                            <span class="text-danger" style="font-size: 17px" id="product-current-price"></span>
+                                            <span class="text-danger d-inline-block ml-1" style="font-size: 17px" id="product-current-price"></span>
                                         </p>
                                         <form id="form-bid-product" class="form-bid-product d-flex align-items-center">
                                             <div class="position-relative">
                                                 <input aria-label="input-bid" id="bid-input" class="pl-4" type="text" value="{{$product->current_price}}"/>
                                                 <div class="position-absolute" style="top: 8px;left: 10px"><i class="fa-solid fa-dollar-sign"></i></div>
                                             </div>
-                                            <button class="ml-2" type="submit"><span>Bid</span></button>
+                                            <button class="ml-2" type="submit" id="button-bid"><span>Bid</span></button>
                                         </form>
                                     </div>
                                 @else
@@ -179,7 +179,6 @@
                 </div>
             </div>
         </div>
-
         <div class="container-lg mt-4">
             <h3>Related Products</h3>
             <div class="mt-3">
@@ -279,9 +278,14 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+        //Php variables
         let idProduct = {!! json_encode($product->id) !!};
         let isUserLogin = {!! json_encode($isLogin) !!};
         let currentPrice = 0;
+        let startPrice = {!! json_encode($product->start_price) !!};
+        let account_id = {!! json_encode(Auth::user()->id) !!};
+
+        //
         let productDescriptionEle = $('.product-description');
         let openProductInfoEle = document.querySelector('.btn-open-product-info');
         let closeProductInfoEle = document.querySelector('#btn-close-product-info');
@@ -328,19 +332,49 @@
             }else{
                 if(isNaN(parseInt(bidValue)) || parseInt(bidValue) <= 0){
                     chooseNotification(false,"Please enter number format greater than 0");
+                }else if(parseInt(bidValue) <= startPrice){
+                    chooseNotification(false,"Please enter bid greater than start price");
                 }else if(parseInt(bidValue) <= currentPrice){
                     chooseNotification(false,"Please enter bid greater than current price");
-                }else if( parseInt(bidValue) > max || parseInt(bidValue) - currentPrice < min){
+                }else if( parseInt(bidValue) - currentPrice > max || parseInt(bidValue) - currentPrice < min){
                     chooseNotification(false,"Please enter bid at least $500 and not exceed $10000 each time");
                 }
                 else{
-                    $.ajax({
-                        url:`/bidProduct`,
-                        method:'GET',
-                        data:{id:idProduct,bid:bidValue.replaceAll(',','')},
-                        success:result =>{
-                            console.log(result);
-                            chooseNotification(true,"Bidding successfully");
+                    $.confirm({
+                        title: '<h5 class="mb-0">Confirm bidding</h5>',
+                        content: `<div>
+                            <div class="bid-note d-flex">
+                                <i class="fas fa-info-circle"></i>
+                                <p class="mb-0">Note: You have to deposit 20% value of The Item at the start price of it</p>
+                            </div>
+                            <p class="text-danger mb-0 mt-1" style="font-size: 12px">* You only need to deposit at the first time bid on this item!</p>
+                        </div>`,
+                        autoClose: 'cancelAction|10000',
+                        buttons: {
+                            Bidding: {
+                                text: 'Confirm bid',
+                                btnClass:'btn-enter-bid',
+                                action: function () {
+                                    $.ajax({
+                                        url:`/bidProduct`,
+                                        method:'GET',
+                                        data:{product_id:idProduct,bid:bidValue.replaceAll(',',''),account_id:account_id},
+                                        success:result =>{
+                                            console.log(result);
+                                            $('#product-current-price').addClass('animate__animated animate__bounceIn animate__infinite');
+                                            chooseNotification(true,"Bidding successfully");
+                                            setTimeout(()=>{
+                                                $('#product-current-price').removeClass('animate__animated animate__bounceIn animate__infinite');
+                                            },1000)
+                                        }
+                                    });
+                                }
+                            },
+                            cancelAction:{
+                                text:'cancel',
+                                btnClass:'btn-cancel',
+                               action: function () {}
+                            },
                         }
                     });
                 }
@@ -353,7 +387,7 @@
             $('.product-bid-message').html('').append(mes).addClass('active');
             setTimeout(()=>{
                 $('.product-bid-message').removeClass('active');
-            },1800);
+            },2200);
         }
         getCurrentPrice();
         setInterval(getCurrentPrice,1000);

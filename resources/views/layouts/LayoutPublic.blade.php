@@ -17,6 +17,11 @@
     {{--    --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css" />
+    {{--    --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    {{--    --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
     <title>@yield('page-title')</title>
 </head>
 <body>
@@ -31,6 +36,9 @@
     </main>
 {{-- FOOTER --}}
 <footer>
+    @if(Auth::check())
+        @php $accountID = Auth::user()->id @endphp
+    @endif
     <div>
         <!-- footer larger -->
         <div class="footer__static-1 py-5 d-none d-md-block">
@@ -222,54 +230,56 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.countdown/2.2.0/jquery.countdown.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
 <script>
     $(document).ready(function (){
-        let homeSearch = $('#home_search');
-        let searchContainer = $('#main-search-container');
+            let homeSearch = $('#home_search');
+            let searchContainer = $('#main-search-container');
 
-        $('.button-54').click(function (){
-            $('.btn-login-public').toggleClass('active');
-        });
-        searchContainer.hide();
-        homeSearch.on('input',function (){
-        $.ajax({
-            url:'search/products',
-            data:{title:$(this).val()},
-            method:"GET",
-            success:(result)=>{
-                console.log(result);
-                searchContainer.html('');
-                if(result.length > 0){
-                    result.forEach(item =>{
-                       let artItem = `
-                       <a href="/products/${item.id}">
-                            <div class="d-flex search-item">
-                                <div><img class="rounded" height="80px" width="80px" src="images_store/products/${item.image}" alt="${item.name}"/></div>
-                                <div>
-                                     <p class="name mb-1 font-weight-bold">${item.name}</p>
-                                     <div class="">
-                                        <p class="artist mb-0">Artist: <span class="font-weight-bold">${item.artists.name}</span></p>
-                                        <p class="status mb-0">Status: <span class="font-weight-bold">${item.product_status.name}</span></p>
-                                        <p class="bid mb-0">Current Bid: <span class="${item.current_price > 0 ? "text-success" : "text-danger"} font-weight-bold">${item.current_price > 0 ? item.current_price : "No bid"}</span></p>
-                                     </div>
+            $('.button-54').click(function (){
+                $('.btn-login-public').toggleClass('active');
+            });
+            searchContainer.hide();
+            homeSearch.on('input',function (){
+            $.ajax({
+                url:'search/products',
+                data:{title:$(this).val()},
+                method:"GET",
+                success:(result)=>{
+                    console.log(result);
+                    searchContainer.html('');
+                    if(result.length > 0){
+                        result.forEach(item =>{
+                           let artItem = `
+                           <a href="/products/${item.id}">
+                                <div class="d-flex search-item">
+                                    <div><img class="rounded" height="80px" width="80px" src="images_store/products/${item.image}" alt="${item.name}"/></div>
+                                    <div>
+                                         <p class="name mb-1 font-weight-bold">${item.name}</p>
+                                         <div class="">
+                                            <p class="artist mb-0">Artist: <span class="font-weight-bold">${item.artists.name}</span></p>
+                                            <p class="status mb-0">Status: <span class="font-weight-bold">${item.product_status.name}</span></p>
+                                            <p class="bid mb-0">Current Bid: <span class="${item.current_price > 0 ? "text-success" : "text-danger"} font-weight-bold">${item.current_price > 0 ? item.current_price : "No bid"}</span></p>
+                                         </div>
+                                    </div>
                                 </div>
+                            </a>
+                           `
+                            searchContainer.show().append(artItem);
+                        });
+                    }else{
+                        searchContainer.show().append(`
+                            <div class="px-1 py-3 text-center text-secondary">
+                                <i class="fas fa-box-open fa-2x"></i>
+                                <p>No art found!</p>
                             </div>
-                        </a>
-                       `
-                        searchContainer.show().append(artItem);
-                    });
-                }else{
-                    searchContainer.show().append(`
-                        <div class="px-1 py-3 text-center text-secondary">
-                            <i class="fas fa-box-open fa-2x"></i>
-                            <p>No art found!</p>
-                        </div>
-                    `);
+                        `);
+                    }
                 }
-            }
-        })
-    });
+            })
+        });
+        //####################
         searchContainer.on('mouseleave',function (){
             searchContainer.hide();
         })
@@ -277,6 +287,27 @@
             $('#overlay').hide();
         },1200)
     });
+    //####################
+
+    let numberBidUser = $('#user-auction-number');
+    let cartUserContainer = $('#user-auction-cart');
+    let accountID = {!! Auth::check() ? $accountID : "undefined" !!};
+
+    if(accountID){
+        console.log('hello');
+        // getCartUser();
+    }
+
+    function getCartUser(){
+        $.ajax({
+            url:``,
+            method:'GET',
+            data:{account:accountID,},
+            success: result=>{
+                console.log(result);
+            }
+        });
+    }
 </script>
 @yield('script-tag')
 </body>

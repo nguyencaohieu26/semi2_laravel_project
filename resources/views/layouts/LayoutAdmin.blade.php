@@ -21,7 +21,9 @@
     <link rel="stylesheet" href="{!! asset('admin/assets/css/default-css.css') !!}">
     <link rel="stylesheet" href="{!! asset('admin/assets/css/styles.css') !!}">
     <link rel="stylesheet" href="{!! asset('admin/assets/css/responsive.css') !!}">
+    {{--    --}}
     <link rel="stylesheet" href="{!! asset('css/admin.css') !!}">
+    {{--    --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
     <!-- modernizr css -->
     <script src="{!! asset('admin/assets/js/vendor/modernizr-2.8.3.min.js') !!}"></script>
@@ -263,10 +265,10 @@
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <!-- start zingchart js -->
 <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
-<script>
-    zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
-    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
-</script>
+{{--<script>--}}
+{{--    zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";--}}
+{{--    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];--}}
+{{--</script>--}}
 <!-- all line chart activation -->
 <script src="{!! asset('admin/assets/js/line-chart.js') !!}"></script>
 <script src="{!! asset('admin/assets/js/bar-chart.js') !!}"></script>

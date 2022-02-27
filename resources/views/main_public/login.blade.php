@@ -2,6 +2,9 @@
 @section('page-title','Login')
 @section('content')
     <section class="login-container px-3">
+        <div>
+
+        </div>
         <div class="row login-container-content">
         <div class="login-loader active" id="animationWindow"></div>
             <div class="d-none d-md-block col-md-7 p-0 h-100">
@@ -86,7 +89,7 @@
                 <div class="mt-auto">
                     <p class="mb-0" style="font-size: 13px;font-weight: 600">
                         <span class="text-secondary mr-1">Don't have an account yet?</span>
-                        <a href="#" class="">Sign Up</a>
+                        <a href="{{route('signup-account')}}" class="">Sign Up</a>
                     </p>
                 </div>
             </div>

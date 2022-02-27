@@ -214,3 +214,39 @@ input:checked + .slider:before {
     background: rgba(137, 150, 227, 0.8);
     color: white;
 }
+/*dashboard user*/
+.change-password-form label{
+    position: absolute;
+    font-size: 12px;
+    font-weight: 600;
+    background: white;
+    top: -13px;
+    left: 1.5rem;
+    padding: 0px 8px;
+}
+.change-password-form input{
+    padding-top: 1rem;
+    font-size: 13px;
+}
+.change-password-form input::placeholder{
+    font-family: 'Poppins', sans-serif;
+}
+.change-password-form .success input{
+    border: 1px solid forestgreen;
+    background: rgba(188, 236, 188, 0.35);
+}
+.change-password-form .error input{
+    border: 1px solid crimson;
+    background: rgba(217, 49, 49, 0.23);
+}
+.change-password-form .error p{
+    color: #e34d6c;
+}
+.change-password-form .success p{
+    color: green;
+}
+.change-password-form p{
+    margin-top: 4px;
+    font-size: 12px;
+    line-height: 1.3;
+}

@@ -172,7 +172,7 @@ class ProductController extends Controller
     }
 
     public function bidProduct(Request $request){
-        $product = Product::find($request->id);
+        $product = Product::find($request->product_id);
         $product->current_price = $request->bid;
         $product->save();
     }

@@ -164,9 +164,15 @@
                     <i class="ti-user"></i>
                     <div class="account-admin-menu position-absolute">
                         <ul>
-                            <li class="ml-0 w-100 py-2 px-3">
+                            <li class="ml-0 w-100 py-2 px-3" data-toggle="modal" data-target="#changePasswordModal">
                                 <span class="mr-1 text-secondary"><i class="fa fa-key" aria-hidden="true"></i></span>
                                 <span>Change password</span>
+                            </li>
+                            <li class="ml-0 w-100">
+                                <a class="py-2 px-3" href="{{route('home-index')}}">
+                                    <span class="mr-1 text-secondary"><i class="fas fa-angle-double-right"></i></span>
+                                    <span>Visit Website</span>
+                                </a>
                             </li>
                             <li class="ml-0 w-100">
                                 <a class=" py-2 px-3" href="{{route('logout-account')}}">
@@ -181,6 +187,46 @@
         </div>
     </div>
 </div>
+{{----}}
+<div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="changePasswordModal">Change password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="change-password-form" id="change-password-form">
+                    @csrf
+                    <input type="hidden" value="{{Auth::user()->id}}">
+                    <div class="flex-row">
+                        <div class="col-12 mb-4">
+                            <label for="old-password">Old Password</label>
+                            <input class="form-control" id="old-password" type="password" placeholder="enter old password..." name="old-password">
+                            <p class="mb-0"></p>
+                        </div>
+                        <div class="col-12 mb-4">
+                            <label for="new-password">New Password</label>
+                            <input class="form-control" id="new-password" type="text" placeholder="enter new password..." name="new-password">
+                            <p class="mb-0"></p>
+                        </div>
+                        <div class="col-12 mb-4">
+                            <label for="confirm-new-password">Confirm New Password</label>
+                            <input class="form-control" id="confirm-new-password" name="confirm-new-password" placeholder="confirm new password" type="text">
+                            <p class="mb-0"></p>
+                        </div>
+                    </div>
+                    <div class="px-3">
+                        <button class="btn btn-primary w-100">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{{----}}
 <!-- header area end -->
 <!-- page title area start -->
 <div class="page-title-area border-bottom">

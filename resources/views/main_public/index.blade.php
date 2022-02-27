@@ -48,7 +48,7 @@
                     <div class="home-trending-lots">
                         <div class="large-trending-lots h-100% position-relative overflow-hidden rounded">
                             <div class="image overflow-hidden">
-                                <img height="100%" src="images_store/products/{{$trending_products['0']->image}}" alt="{{$trending_products['0']->name}}">
+                                <img width="100%" height="100%" src="images_store/products/{{$trending_products['0']->image}}" alt="{{$trending_products['0']->name}}">
                                 <div class="btn-view-more position-absolute">
                                     <a class="btn btn-primary p-1" href="{{route('product-detail-page',$trending_products['0']->id)}}">View more</a>
                                 </div>
@@ -447,7 +447,6 @@
     </div>
 @endsection
 @section('script-tag')
-
     <script>
         const lightbox = GLightbox({
             'href': 'https://youtu.be/7Vnr_9y-rUI',
@@ -455,14 +454,36 @@
             'source': 'youtube', //vimeo, youtube or local
             'width': 900,
         });
-    </script>
-    <script>
+        //#######################
         $('.category-slider').slick({
             infinite: true,
             slidesToShow: 5,
-            slidesToScroll: 5
+            slidesToScroll: 5,
+            responsive:[
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                    }
+                },
+                {
+                    breakpoint: 500,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                    }
+                },
+                {
+                    breakpoint: 700,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
+                    }
+                }
+            ],
         });
-
+        //#######################
         $('[data-countdown]').each(function() {
             let $this = $(this), finalDate = $(this).data('countdown');
             $this.countdown(finalDate, function(event) {
@@ -476,6 +497,7 @@
                 $this.html(countDownTimeEle);
             });
         });
+        //#######################
         $('#btn-load-more-upcoming-lot').click(function (){
             $('.load-more-upcoming-lots').each(function (){
                 $(this).addClass('active');
@@ -488,5 +510,6 @@
             });
             $(this).hide();
         });
+        //#######################
     </script>
 @endsection

@@ -17,10 +17,12 @@ class CreateBidsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('account_id');
             $table->unsignedBigInteger('product_id');
-            $table->dateTime('date_of_bid');
+            $table->unsignedBigInteger('bid_status_id')->default(1);
             $table->double('amount_of_bid');
+            $table->double('current-bid');
             $table->foreign('product_id')->references('id')->on('products');
             $table->foreign('account_id')->references('id')->on('accounts');
+            $table->foreign('bid_status_id')->references('id')->on('bid_statuses');
             $table->softDeletes();
             $table->timestamps();
         });

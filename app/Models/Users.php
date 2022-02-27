@@ -18,7 +18,8 @@ class Users extends Model
         'gender',
         'email',
         'avatar',
-        'address'
+        'address',
+        'phone'
     ];
 
     public function accounts(){
