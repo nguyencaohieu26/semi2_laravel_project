@@ -39,7 +39,9 @@ class Product extends Model
     public function product_status(){
         return $this->hasOne(ProductStatus::class,'id','status_id');
     }
-
+    public function bids(){
+        return $this->hasMany(Bids::class);
+    }
     public function scopegetbyid($query,$id){
         $query->where('id','=',$id);
     }

@@ -16,12 +16,10 @@ use Illuminate\Validation\Rule;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    /** Display a listing of the resource. */
     public function index(Request $request)
     {
-        $query = Product::with(['categories', 'artists', 'product_status'])->where('deleted_at', '=', null);
+        $query = Product::with(['categories','bids', 'artists', 'product_status'])->where('deleted_at', '=', null);
         if (isset($request->name)) {
             $query = $query->getbyname($request->name);
         }

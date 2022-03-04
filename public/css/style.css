@@ -106,6 +106,10 @@
 
 /*----------------------------*/
 /*#######  DEFAULT SETTING  #######*/
+html{
+    scrollbar-width: thin;
+    scrollbar-color:rgba(249,151,119,1) rgb(111, 62, 180);
+}
 a:hover{
     text-decoration: none;
 }

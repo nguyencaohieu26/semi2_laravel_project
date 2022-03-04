@@ -166,7 +166,7 @@
             }
 
             rangeMinPrice = $("#slider-range" ).slider( "values", 0 );
-            rangeMaxPrice = $( "#slider-range" ).slider( "values", 1);
+            rangeMaxPrice = $("#slider-range" ).slider( "values", 1);
 
             let searchProductField      = {
                 name:undefined,
@@ -203,15 +203,28 @@
                         productList.html('');
                         // snippetProduct.show("slow");
                         if(result.data.length > 0){
+                            console.log(result.data);
                             result.data.forEach(item =>{
+                                let userAuctionGet = undefined;
+                                if(item.bids.length > 0){userAuctionGet = getUsersAuctionArt(item.bids);}
+                                let userRender ='';
+                                if(userAuctionGet){
+                                    userAuctionGet.forEach((user,index) =>{
+                                       if(index < 3){
+                                           let ite = `
+                                            <div class="d-flex align-items-center position-relative mr-2">
+                                                <img width="15px" class="rounded-circle" alt="${user.lastname}-${user.firstname}" src="/images_store/accounts/${user.avatar}"/>
+                                                <p class="mb-0 position-absolute d-none">${user.lastname} ${user.firstname}</p>
+                                            </div>`
+                                           userRender +=ite;
+                                       }
+                                    })
+                                }
+                                console.log(userAuctionGet);
                                 let today = new Date().getTime();
                                 let dayStart = new Date(item.date_start);
                                 let dayCount;
-                                if(dayStart.getTime() > today){
-                                    dayCount = item.date_start;
-                                }else{
-                                    dayCount = item.date_end;
-                                }
+                                if(dayStart.getTime() > today){dayCount = item.date_start;}else{dayCount = item.date_end;}
                                 let productItem = `
                                    <div class="col-12 col-sm-6 col-md-4 col-xl-3">
                                         <div class="auction-lot-item mb-3">
@@ -221,6 +234,7 @@
                                                     <div class="lot-id-container d-flex mb-2 position-absolute" style="top: 1rem;left: 10px">
                                                         <p class="m-0 border p-1 font-weight-bold text-white rounded" style="background: rgba(0,0,0,0.3)">LOT <span class="lot-id">${item.id}</span></p>
                                                     </div>
+                                                    <div class="d-flex position-absolute" style="top: 1.2rem;right: 5px">${userAuctionGet ? userRender : ''}</div>
                                                     <div class="count-down-container count-down-container--lot position-absolute p-0"  data-countdown="${dayCount}"></div>
                                                     <div class="auction-lot-item-btn position-absolute"><button class="border-0 rounded">View bid</button></div>
                                                 </div>
@@ -238,11 +252,11 @@
                                                     </div>
                                                     <div class="">
                                                         <p class="lot-content-start-price mb-1">
-                                                            <span class="font-weight-bold mr-1 d-inline-block" style="width: 80px;color: black;font-size: 13px">Starting bid: </span>
+                                                            <span class="font-weight-bold mr-1 d-inline-block text-dark" style="width: 80px;font-size: 13px">Starting bid: </span>
                                                             <span class="text-success font-italic font-weight-bold" style="font-size: 12px">$<span class="price">${(item.start_price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span></span>
                                                         </p>
                                                         <p class="lot-content-current-bid mb-1">
-                                                            <span class="font-weight-bold mr-1 d-inline-block" style="width: 80px;color: black;font-size: 13px">Current bid:</span>
+                                                            <span class="font-weight-bold mr-1 d-inline-block text-dark" style="width: 80px;font-size: 13px">Current bid:</span>
                                                             <span class="font-italic font-weight-bold p-1" style="font-size: 12px"><span class="price" style="color:#EF6D6D">${item.current_price > 0 ? "$ "+(item.current_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")) : "No bid"}</span></span>
                                                         </p>
                                                     </div>
@@ -291,6 +305,22 @@
                     }
 
                 })
+            }
+            //
+            function getUsersAuctionArt(listBid){
+                let userGet =[];
+                let listUser = listBid.map(item =>{return item.account_id;})
+                $.ajax({
+                    url:`getUsersAuction`,
+                    async: false,
+                    method:'GET',
+                    data:{accounts:listUser},
+                    success:result=>{
+                       userGet = result;
+                    }
+                })
+
+                return userGet;
             }
             //
             openFilterButtonEle.addEventListener('click',()=>{

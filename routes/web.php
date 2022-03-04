@@ -72,6 +72,8 @@ Route::group(['prefix'=>'/'],function(){
     Route::get('bidProduct',[ProductController::class,'bidProduct']);
 
     Route::get('userCart',[BidsController::class,'showBidUser']);
+
+    Route::get('getUsersAuction',[AccountsController::class,'getUsers']);
     //Route Api Admin
     Route::get('changeArtistStatus',[ArtistController::class,'changeStatus']);
 

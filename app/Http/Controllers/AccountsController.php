@@ -6,6 +6,7 @@ use App\Models\Accounts;
 use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AccountsController extends Controller
 {
@@ -72,7 +73,14 @@ class AccountsController extends Controller
     public function userChangePassword(Request $request){
         dd($request->all());
     }
-
+    public function getUsers(Request $request){
+        $users = DB::table('users')
+            ->join('accounts','accounts.user_id','=','users.id')
+            ->select('users.firstname','users.lastname','users.avatar')
+            ->whereIn('accounts.id',$request->accounts)
+            ->get();
+        return $users;
+    }
     /** Display the specified resource. */
     public function show(Accounts $accounts){}
 

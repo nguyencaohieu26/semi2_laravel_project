@@ -420,7 +420,7 @@
                 method:'GET',
                 success:result =>{
                     currentPrice = result[0].current_price;
-                    $('#product-current-price').html(result[0].current_price);
+                    $('#product-current-price').html((result[0].current_price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 }
             })
         }
