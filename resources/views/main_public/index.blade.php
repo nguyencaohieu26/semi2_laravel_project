@@ -50,23 +50,23 @@
                             <div class="image overflow-hidden">
                                 <img width="100%" height="100%" src="images_store/products/{{$trending_products['0']->image}}" alt="{{$trending_products['0']->name}}">
                                 <div class="btn-view-more position-absolute">
-                                    <a class="btn btn-primary p-1" href="{{route('product-detail-page',$trending_products['0']->id)}}">View more</a>
+                                    <a class="btn btn-primary p-1" href="/products/{{$trending_products['0']->id}}?Art={{str_replace(' ','-',$trending_products['0']->name)}}?Artist={{str_replace(' ','-',$trending_products['0']->artists->name)}}">View more</a>
                                 </div>
                             </div>
                             <div class="count-down-container count-down-container--1 position-absolute" data-countdown="{{$trending_products['0']->date_end}}"></div>
                             <div class="upcoming-lot-content">
                                 <h4>
-                                    <a href="{{route('product-detail-page',$trending_products['4']->id)}}" class="text-white p-1">{{$trending_products['0']->name}}</a>
+                                    <a href="/products/{{$trending_products['0']->id}}?Art={{str_replace(' ','-',$trending_products['0']->name)}}?Artist={{str_replace(' ','-',$trending_products['0']->artists->name)}}" class="text-white p-1">{{$trending_products['0']->name}}</a>
                                 </h4>
                                 <p class="mb-0">
                                     <i class="fas fa-user-tag"></i>
                                     <span>{{$trending_products['0']->artists->name}}</span>
                                 </p>
                                 <div class="d-flex">
-                                    <p class="mb-0">Starting bid: <span style="font-size: 13px" class="font-italic font-weight-bold text-success"><i class="fad fa-dollar-sign"></i>{{$trending_products['0']->start_price}}</span></p>
+                                    <p class="mb-0">Starting bid: <span style="font-size: 13px;color: #6EBF8B" class="font-italic font-weight-bold"><i class="fad fa-dollar-sign"></i>{{number_format($trending_products['0']->start_price , 0, ',', '.')}}</span></p>
                                     <p class="mb-0 ml-3">Current bid:
-                                        @if($trending_products['0']->current_price > 0)<span style="font-size: 13px" class="font-italic font-weight-bold text-danger"><i class="fad fa-dollar-sign"></i>{{$trending_products['0']->current_price}}</span>
-                                        @else <span style="font-size: 13px" class="font-italic font-weight-bold text-danger">No bid</span>
+                                        @if($trending_products['0']->current_price > 0)<span style="font-size: 13px;color: #FF9F45" class="font-italic font-weight-bold"><i class="fad fa-dollar-sign"></i>{{number_format($trending_products['0']->current_price , 0, ',', '.')}}</span>
+                                        @else <span style="font-size: 13px;color: #EF6D6D" class="font-italic font-weight-bold">No bid</span>
                                         @endif
                                     </p>
                                 </div>
@@ -79,22 +79,22 @@
                                     <div class="image overflow-hidden">
                                             <img width="100%" height="100%" src="images_store/products/{{$trending_products['1']->image}}" alt="{{$trending_products['1']->name}}">
                                         <div class="btn-view-more position-absolute">
-                                            <a class="btn btn-primary text-white p-1" href="{{route('product-detail-page',$trending_products['1']->id)}}">View more</a>
+                                            <a class="btn btn-primary text-white p-1" href="/products/{{$trending_products['1']->id}}?Art={{str_replace(' ','-',$trending_products['1']->name)}}?Artist={{str_replace(' ','-',$trending_products['1']->artists->name)}}">View more</a>
                                         </div>
                                     </div>
                                     <div class="count-down-container count-down-container--2 position-absolute" data-countdown="{{$trending_products['1']->date_end}}"></div>
                                     <div class="upcoming-lot-content">
                                         <h4>
-                                            <a href="{{route('product-detail-page',$trending_products['4']->id)}}" class="text-white p-1">{{$trending_products['1']->name}}</a>
+                                            <a href="/products/{{$trending_products['1']->id}}?Art={{str_replace(' ','-',$trending_products['1']->name)}}?Artist={{str_replace(' ','-',$trending_products['1']->artists->name)}}" class="text-white p-1">{{$trending_products['1']->name}}</a>
                                         </h4>
                                         <p class="mb-0">
                                             <i class="fas fa-user-tag"></i>
                                             <span>{{$trending_products['1']->artists->name}}</span></p>
                                         <div class="d-flex">
-                                            <p class="mb-0">Starting bid: <span style="font-size: 13px" class="font-italic font-weight-bold text-success"><i class="fad fa-dollar-sign"></i>{{$trending_products['1']->start_price}}</span></p>
+                                            <p class="mb-0">Starting bid: <span style="font-size: 13px;color: #6EBF8B" class="font-italic font-weight-bold"><i class="fad fa-dollar-sign"></i>{{number_format($trending_products['1']->start_price , 0, ',', '.')}}</span></p>
                                             <p class="mb-0 ml-3">Current bid:
-                                                @if($trending_products['1']->current_price > 0)<span style="font-size: 13px" class="font-italic font-weight-bold text-danger"><i class="fad fa-dollar-sign"></i>{{$trending_products['1']->current_price}}</span>
-                                                @else <span style="font-size: 13px" class="font-italic font-weight-bold text-danger">No bid</span>
+                                                @if($trending_products['1']->current_price > 0)<span style="font-size: 13px;color: #FF9F45" class="font-italic font-weight-bold"><i class="fad fa-dollar-sign"></i>{{number_format($trending_products['1']->current_price, 0, ',', '.')}}</span>
+                                                @else <span style="font-size: 13px;color: #EF6D6D" class="font-italic font-weight-bold">No bid</span>
                                                 @endif
                                             </p>
                                         </div>
@@ -105,22 +105,22 @@
                                     <div class="image overflow-hidden">
                                             <img width="100%" height="100%" src="images_store/products/{{$trending_products['2']->image}}" alt="{{$trending_products['2']->name}}">
                                         <div class="btn-view-more position-absolute">
-                                            <a class="btn btn-primary text-white p-1" href="{{route('product-detail-page',$trending_products['2']->id)}}">View more</a>
+                                            <a class="btn btn-primary text-white p-1" href="/products/{{$trending_products['2']->id}}?Art={{str_replace(' ','-',$trending_products['2']->name)}}?Artist={{str_replace(' ','-',$trending_products['2']->artists->name)}}">View more</a>
                                         </div>
                                     </div>
                                     <div class="count-down-container count-down-container--2 position-absolute" data-countdown="{{$trending_products['2']->date_end}}"></div>
                                     <div class="upcoming-lot-content">
                                         <h4>
-                                            <a href="{{route('product-detail-page',$trending_products['4']->id)}}" class="text-white p-1">{{$trending_products['2']->name}}</a>
+                                            <a href="/products/{{$trending_products['2']->id}}?Art={{str_replace(' ','-',$trending_products['2']->name)}}?Artist={{str_replace(' ','-',$trending_products['2']->artists->name)}}" class="text-white p-1">{{$trending_products['2']->name}}</a>
                                         </h4>
                                         <p class="mb-0">
                                             <i class="fas fa-user-tag"></i>
                                             <span>{{$trending_products['2']->artists->name}}</span></p>
                                         <div class="d-flex">
-                                            <p class="mb-0">Starting bid: <span style="font-size: 13px" class="font-italic font-weight-bold text-success"><i class="fad fa-dollar-sign"></i>{{$trending_products['2']->start_price}}</span></p>
+                                            <p class="mb-0">Starting bid: <span style="font-size: 13px;color: #6EBF8B" class="font-italic font-weight-bold"><i class="fad fa-dollar-sign"></i>{{number_format($trending_products['2']->start_price, 0, ',', '.')}}</span></p>
                                             <p class="mb-0 ml-3">Current bid:
-                                                @if($trending_products['2']->current_price > 0)<span style="font-size: 13px" class="font-italic font-weight-bold text-danger"><i class="fad fa-dollar-sign"></i>{{$trending_products['2']->current_price}}</span>
-                                                @else <span style="font-size: 13px" class="font-italic font-weight-bold text-danger">No bid</span>
+                                                @if($trending_products['2']->current_price > 0)<span style="font-size: 13px;color: #FF9F45" class="font-italic font-weight-bold"><i class="fad fa-dollar-sign"></i>{{number_format($trending_products['2']->current_price, 0, ',', '.')}}</span>
+                                                @else <span style="font-size: 13px;color: #EF6D6D" class="font-italic font-weight-bold">No bid</span>
                                                 @endif
                                             </p>
                                         </div>
@@ -131,22 +131,22 @@
                                     <div class="image overflow-hidden">
                                             <img width="100%" height="100%" src="images_store/products/{{$trending_products['3']->image}}" alt="{{$trending_products['3']->name}}">
                                         <div class="btn-view-more position-absolute">
-                                            <a class="btn btn-primary text-white p-1" href="{{route('product-detail-page',$trending_products['3']->id)}}">View more</a>
+                                            <a class="btn btn-primary text-white p-1" href="/products/{{$trending_products['3']->id}}?Art={{str_replace(' ','-',$trending_products['3']->name)}}?Artist={{str_replace(' ','-',$trending_products['3']->artists->name)}}">View more</a>
                                         </div>
                                     </div>
                                     <div class="count-down-container count-down-container--2 position-absolute" data-countdown="{{$trending_products['3']->date_end}}"></div>
                                     <div class="upcoming-lot-content">
                                         <h4>
-                                            <a href="{{route('product-detail-page',$trending_products['3']->id)}}" class="text-white p-1">{{$trending_products['3']->name}}</a>
+                                            <a href="/products/{{$trending_products['3']->id}}?Art={{str_replace(' ','-',$trending_products['3']->name)}}?Artist={{str_replace(' ','-',$trending_products['3']->artists->name)}}" class="text-white p-1">{{$trending_products['3']->name}}</a>
                                         </h4>
                                         <p class="mb-0">
                                             <i class="fas fa-user-tag"></i>
                                             <span>{{$trending_products['3']->artists->name}}</span></p>
                                         <div class="d-flex">
-                                            <p class="mb-0">Starting bid: <span style="font-size: 13px" class="font-italic font-weight-bold text-success"><i class="fad fa-dollar-sign"></i>{{$trending_products['3']->start_price}}</span></p>
+                                            <p class="mb-0">Starting bid: <span style="font-size: 13px;color: #6EBF8B" class="font-italic font-weight-bold"><i class="fad fa-dollar-sign"></i>{{number_format($trending_products['3']->start_price, 0, ',', '.')}}</span></p>
                                             <p class="mb-0 ml-3">Current bid:
-                                                @if($trending_products['3']->current_price > 0)<span style="font-size: 13px" class="font-italic font-weight-bold text-danger"><i class="fad fa-dollar-sign"></i>{{$trending_products['3']->current_price}}</span>
-                                                @else <span style="font-size: 13px" class="font-italic font-weight-bold text-danger">No bid</span>
+                                                @if($trending_products['3']->current_price > 0)<span style="font-size: 13px;color: #FF9F45" class="font-italic font-weight-bold"><i class="fad fa-dollar-sign"></i>{{number_format($trending_products['3']->current_price, 0, ',', '.')}}</span>
+                                                @else <span style="font-size: 13px;color: #EF6D6D" class="font-italic font-weight-bold">No bid</span>
                                                 @endif
                                             </p>
                                         </div>
@@ -157,22 +157,22 @@
                                     <div class="image overflow-hidden">
                                         <img width="100%" height="100%" src="images_store/products/{{$trending_products['4']->image}}" alt="{{$trending_products['4']->name}}">
                                         <div class="btn-view-more position-absolute">
-                                            <a href="{{route('product-detail-page',$trending_products['4']->id)}}" class="btn btn-primary text-white p-1">View more</a>
+                                            <a href="/products/{{$trending_products['4']->id}}?Art={{str_replace(' ','-',$trending_products['4']->name)}}?Artist={{str_replace(' ','-',$trending_products['4']->artists->name)}}" class="btn btn-primary text-white p-1">View more</a>
                                         </div>
                                     </div>
                                     <div class="count-down-container count-down-container--2 position-absolute" data-countdown="{{$trending_products['4']->date_end}}"></div>
                                     <div class="upcoming-lot-content">
                                         <h4>
-                                            <a href="{{route('product-detail-page',$trending_products['4']->id)}}" class="text-white p-1">{{$trending_products['4']->name}}</a>
+                                            <a href="/products/{{$trending_products['4']->id}}?Art={{str_replace(' ','-',$trending_products['4']->name)}}?Artist={{str_replace(' ','-',$trending_products['4']->artists->name)}}" class="text-white p-1">{{$trending_products['4']->name}}</a>
                                         </h4>
                                         <p class="mb-0">
                                             <i class="fas fa-user-tag"></i>
                                             <span>{{$trending_products['4']->artists->name}}</span></p>
                                         <div class="d-flex">
-                                            <p class="mb-0">Starting bid: <span style="font-size: 13px" class="font-italic font-weight-bold text-success"><i class="fad fa-dollar-sign"></i>{{$trending_products['4']->start_price}}</span></p>
+                                            <p class="mb-0">Starting bid: <span style="font-size: 13px;color: #6EBF8B" class="font-italic font-weight-bold"><i class="fad fa-dollar-sign"></i>{{number_format($trending_products['4']->start_price, 0, ',', '.')}}</span></p>
                                             <p class="mb-0 ml-3">Current bid:
-                                                @if($trending_products['4']->current_price > 0)<span style="font-size: 13px" class="font-italic font-weight-bold text-danger"><i class="fad fa-dollar-sign"></i>{{$trending_products['4']->current_price}}</span>
-                                                @else <span style="font-size: 13px" class="font-italic font-weight-bold text-danger">No bid</span>
+                                                @if($trending_products['4']->current_price > 0)<span style="font-size: 13px;color: #FF9F45" class="font-italic font-weight-bold"><i class="fad fa-dollar-sign"></i>{{number_format($trending_products['4']->start_price, 0, ',', '.')}}</span>
+                                                @else <span style="font-size: 13px;color: #EF6D6D" class="font-italic font-weight-bold">No bid</span>
                                                 @endif
                                             </p>
                                         </div>
@@ -195,7 +195,7 @@
                 <div class="row mt-4">
                     @foreach($upcoming_products as $key => $upcoming_product)
                         <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4 {{$key >= 3 ? "load-more-upcoming-lots" : ""}}">
-                            <a href="{{route('product-detail-page',$upcoming_product->id)}}">
+                            <a href="/products/{{$upcoming_product->id}}?Art={{str_replace(' ','-',$upcoming_product->name)}}?Artist={{str_replace(' ','-',$upcoming_product->artists->name)}}">
                                 <div class="upcoming-lot-item overflow-hidden">
                                     <div class="upcoming-lot-thumbnail position-relative">
                                         <img src="/images_store/products/{{$upcoming_product->image}}" alt="{{$upcoming_product->name}}">
@@ -205,8 +205,8 @@
                                         <div class="count-down-container position-absolute" data-countdown="{{$upcoming_product->date_start}}"></div>
                                     </div>
                                     <div class="upcoming-lot-content">
-                                        <h5>{{$upcoming_product->name}}</h5>
-                                        <p class="m-0">Starting bid: <span>${{$upcoming_product->start_price}}</span></p>
+                                        <h5 style="color: #F2AA4CFF">{{$upcoming_product->name}}</h5>
+                                        <p class="m-0">Starting bid: <span class="ml-2 font-italic" style="text-decoration: underline">${{number_format($upcoming_product->start_price, 0, ',', '.')}}</span></p>
                                     </div>
                                 </div>
                             </a>

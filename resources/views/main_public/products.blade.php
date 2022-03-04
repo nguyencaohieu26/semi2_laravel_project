@@ -59,11 +59,11 @@
                             <i class="fa-brands fa-galactic-republic"></i>
                             <span class="font-weight-bold">Category</span>
                         </h5>
-                        <div class="form-category">
+                        <div class="form-category" id="form-category">
                             @foreach($categories as $category)
                                 <div>
                                     <input id="{{$category->category_code}}" name="category[]" {{(isset($categoryID) && $categoryID == $category->id) ? "checked" : ""}} value="{{$category->id}}" class="position-relative category-input-checkbox" type="checkbox">
-                                    <label for="{{$category->category_code}}">{{$category->name}}</label>
+                                    <label style="top: -1px" class="position-relative" for="{{$category->category_code}}">{{$category->name}}</label>
                                 </div>
                             @endforeach
                         </div>
@@ -127,12 +127,12 @@
                         <div class="d-flex justify-content-between">
                             <div class="d-flex align-items-center">
                                 <i class="far fa-flag text-success mr-2"  style="font-size: 12px"></i>
-                                <span class="font-italic">${ui.values[0]}</span>
+                                <span class="font-italic">${((ui.values[0]).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))}</span>
                             </div>
                             <div><i class="fas fa-long-arrow-alt-right"></i></div>
                             <div class="d-flex align-items-center">
                                 <i class="fas fa-bullseye text-danger mr-2"  style="font-size: 12px"></i>
-                                <span class="font-italic">${ui.values[1]}</span>
+                                <span class="font-italic">${ui.values[1].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
                             </div>
                         </div>`
                         )
@@ -148,12 +148,12 @@
                     <div class="d-flex justify-content-between">
                         <div class="d-flex align-items-center">
                             <i class="far fa-flag text-success mr-2" style="font-size: 12px"></i>
-                            <span class="font-italic">${$( "#slider-range" ).slider( "values", 0 )}</span>
+                            <span class="font-italic">${$( "#slider-range" ).slider( "values", 0 ).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
                         </div>
                         <div><i class="fas fa-long-arrow-alt-right"></i></div>
                         <div class="d-flex align-items-center">
                             <i class="fas fa-bullseye text-danger mr-2" style="font-size: 12px"></i>
-                            <span class="font-italic">${$( "#slider-range" ).slider( "values", 1 )}</span>
+                            <span class="font-italic">${$( "#slider-range" ).slider( "values", 1 ).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
                         </div>
                     </div>`)
             }
@@ -203,7 +203,7 @@
                                 let productItem = `
                                    <div class="col-12 col-sm-6 col-md-4 col-xl-3">
                                         <div class="auction-lot-item mb-3">
-                                            <a href="/products/${item.id}">
+                                            <a href="/products/${item.id}?Art=${(item.name).replaceAll(' ','-')}?Artist=${(item.artists.name).replaceAll(' ','-')}">
                                                 <div class="lot-thumbnail position-relative overflow-hidden">
                                                     <img class="border" style="height: 300px" width="100%" src="images_store/products/${item.image}" alt="${item.name}"/>
                                                     <div class="lot-id-container d-flex mb-2 position-absolute" style="top: 1rem;left: 10px">
@@ -227,11 +227,11 @@
                                                     <div class="">
                                                         <p class="lot-content-start-price mb-1">
                                                             <span class="font-weight-bold mr-1 d-inline-block" style="width: 80px;color: black;font-size: 13px">Starting bid: </span>
-                                                            <span class="text-success font-italic font-weight-bold" style="font-size: 12px">$<span class="price">${item.start_price}</span></span>
+                                                            <span class="text-success font-italic font-weight-bold" style="font-size: 12px">$<span class="price">${(item.start_price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span></span>
                                                         </p>
                                                         <p class="lot-content-current-bid mb-1">
                                                             <span class="font-weight-bold mr-1 d-inline-block" style="width: 80px;color: black;font-size: 13px">Current bid:</span>
-                                                            <span class="text-danger font-italic font-weight-bold p-1" style="font-size: 12px"><span class="price">${item.current_price > 0 ? "$"+item.current_price : "No bid"}</span></span>
+                                                            <span class="font-italic font-weight-bold p-1" style="font-size: 12px"><span class="price" style="color:#EF6D6D">${item.current_price > 0 ? "$ "+(item.current_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")) : "No bid"}</span></span>
                                                         </p>
                                                     </div>
                                                 </div>

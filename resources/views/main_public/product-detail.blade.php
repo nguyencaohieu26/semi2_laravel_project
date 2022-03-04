@@ -7,7 +7,16 @@
             <i class="fas fa-info"></i>
         </div>
         <div class="product-bid-message"></div>
-        <div class="container-lg mt-5">
+        <div class="container-lg mt-3 d-flex align-items-center">
+            <div class="d-flex align-items-center mr-2">
+                <a style="font-size: 13px" class="mr-2 product-breadcrumb" href="{{route("products-page")}}">Arts</a>
+                <i class="fas fa-chevron-right" style="font-size: 8px"></i>
+            </div>
+            <div>
+                <a class="product-breadcrumb" href="#" style="font-size: 13px">{{$product->name}}</a>
+            </div>
+        </div>
+        <div class="container-lg mt-3">
             <div class="row">
                 <div class="col-md-7">
                     <div class="product-thumbnail border rounded overflow-hidden">
@@ -124,7 +133,7 @@
                             <div class="product-start-price border border-secondary p-1 rounded mt-1">
                                 <p class="mb-0 font-italic">
                                     <span class="font-weight-bold mr-1">Start price: </span>
-                                    <span style="font-size: 18px">${{$product->start_price}}</span>
+                                    <span style="font-size: 18px" >$ {{number_format($product->start_price, 0, ',', '.')}}</span>
                                 </p>
                             </div>
                             <div class="product-auction-container mt-2">
@@ -187,7 +196,7 @@
                         <a href="products/{{$relaProduct->id}}"></a>
                         <div class="col-12 col-sm-6 col-lg-3">
                             <div class="auction-lot-item mb-3 border border-primary rounded">
-                                <a href="/products/{{$relaProduct->id}}">
+                                <a href="/products/{{$relaProduct->id}}?Art={{str_replace(' ','-',$relaProduct->name)}}?Artist={{str_replace(' ','-',$relaProduct->artists->name)}}">
                                     <div class="lot-thumbnail position-relative overflow-hidden">
                                         <img class="border" style="height: 250px" width="100%" src="/images_store/products/{{$relaProduct->image}}" alt="{{$relaProduct->name}}"/>
                                         <div class="lot-id-container d-flex mb-2 position-absolute" style="top: 1rem;left: 10px">
