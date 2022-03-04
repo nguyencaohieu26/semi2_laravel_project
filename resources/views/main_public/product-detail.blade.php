@@ -19,8 +19,10 @@
         <div class="container-lg mt-3">
             <div class="row">
                 <div class="col-md-7">
-                    <div class="product-thumbnail border rounded overflow-hidden">
-                        <img height="100%" width="100%" alt="{{$product->name}}" src="/images_store/products/{{$product->image}}"/>
+                    <div  class="product-thumbnail border rounded">
+                        <div class="overflow-hidden h-100 w-100">
+                            <img id="product-thumbnail-img" height="100%" width="100%" alt="{{$product->name}}" src="/images_store/products/{{$product->image}}"/>
+                        </div>
                     </div>
                     <div class="product-content mt-3">
                         <h3>{{$product->name}}</h3>
@@ -476,6 +478,8 @@
             // }, false);
         })();
         //
+
+        $('#product-thumbnail-img').imageZoom();
         //
         CKEDITOR.replace( 'exampleFormControlTextarea1' );
     </script>
