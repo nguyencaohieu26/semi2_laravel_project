@@ -88,6 +88,9 @@
                 </div>
                 {{--    --}}
                 <div class="col-12 col-xl-10">
+                    <section class="container-loading-section">
+                        <div class="lds-ripple"><div></div><div></div></div>
+                    </section>
                     <div class="row" id="product_list"></div>
                     <div id="pagination-custom" class="pagination-custom mt-auto">
                         <ul class="d-flex list-unstyled"></ul>
@@ -147,16 +150,17 @@
             }
             genderDisplayPrice();
             function genderDisplayPrice(){
+                let ranger = $( "#slider-range" );
                 $('#amount').html('').append(`
                     <div class="d-flex justify-content-between">
                         <div class="d-flex align-items-center">
                             <i class="far fa-flag text-success mr-2" style="font-size: 12px"></i>
-                            <span class="font-italic">${$( "#slider-range" ).slider( "values", 0 ).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
+                            <span class="font-italic">${ranger.slider( "values", 0 ).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
                         </div>
                         <div><i class="fas fa-long-arrow-alt-right"></i></div>
                         <div class="d-flex align-items-center">
                             <i class="fas fa-bullseye text-danger mr-2" style="font-size: 12px"></i>
-                            <span class="font-italic">${$( "#slider-range" ).slider( "values", 1 ).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
+                            <span class="font-italic">${ranger.slider( "values", 1 ).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
                         </div>
                     </div>`)
             }
@@ -174,6 +178,9 @@
                 sortType:undefined,
                 page:1,
             }
+            //
+            let snippetProduct = $('.container-loading-section');
+            snippetProduct.hide();
             //
             getProducts(searchProductField);
             //
@@ -194,6 +201,7 @@
                     },
                     success:(result)=>{
                         productList.html('');
+                        // snippetProduct.show("slow");
                         if(result.data.length > 0){
                             result.data.forEach(item =>{
                                 let today = new Date().getTime();
@@ -244,6 +252,9 @@
                                     </div>
                                 `
                                 productList.append(productItem);
+                                // setTimeout(()=>{
+                                //     snippetProduct.hide("slow");
+                                // },2000)
                                 //show paginate
                                 paginateContainer.html('');
                                 const totalPage = result.total;
@@ -337,6 +348,7 @@
             $('#clearSearch').click(function (){
                submitFilter(1,true)
             });
+            //
             fillAuctionFilterStatus();
             function fillAuctionFilterStatus(){
                 $('#auction-lot-filter-status').hide();
@@ -365,40 +377,40 @@
             }
             //
             function submitFilter(pageNum = 1,clear = false){
-                    if(!clear){
-                        getProducts(
-                            {
-                                name:inputSearchTitle.val() ? inputSearchTitle.val() : undefined,
-                                artist:artistList.length > 0 ? artistList : [],
-                                category:categoryList.length > 0 ? categoryList : [],
-                                priceMin:rangeMinPrice ? rangeMinPrice : undefined,
-                                priceMax:rangeMaxPrice ? rangeMaxPrice : undefined,
-                                status:statusList.length > 0 ? statusList : [],
-                                sortType:sortValue ? sortValue : undefined,
-                                page:pageNum,
-                            }
-                        )
-                    }else{
-                        inputSearchTitle.val('');
-                        rangeMinPrice = 1000;
-                        rangeMaxPrice = 6000;
-                        inputCategoryCheckBox.forEach(item =>{
-                           item.checked = false;
-                        });
-                        inputArtistCheckBox.forEach(item =>{
-                            item.checked = false;
-                        })
-                        inputStatusCheckBox.forEach(item =>{
-                            item.checked = false;
-                        })
-                        $('#select-product-sort-type').val('');
-                        genderSlider();
-                        genderDisplayPrice();
-                        statusList      = [];
-                        categoryList    = [];
-                        artistList = [];
-                        getProducts(searchProductField);
-                    }
+                      if(!clear){
+                          getProducts(
+                              {
+                                  name:inputSearchTitle.val() ? inputSearchTitle.val() : undefined,
+                                  artist:artistList.length > 0 ? artistList : [],
+                                  category:categoryList.length > 0 ? categoryList : [],
+                                  priceMin:rangeMinPrice ? rangeMinPrice : undefined,
+                                  priceMax:rangeMaxPrice ? rangeMaxPrice : undefined,
+                                  status:statusList.length > 0 ? statusList : [],
+                                  sortType:sortValue ? sortValue : undefined,
+                                  page:pageNum,
+                              }
+                          )
+                      }else{
+                          inputSearchTitle.val('');
+                          rangeMinPrice = 1000;
+                          rangeMaxPrice = 6000;
+                          inputCategoryCheckBox.forEach(item =>{
+                              item.checked = false;
+                          });
+                          inputArtistCheckBox.forEach(item =>{
+                              item.checked = false;
+                          })
+                          inputStatusCheckBox.forEach(item =>{
+                              item.checked = false;
+                          })
+                          $('#select-product-sort-type').val('');
+                          genderSlider();
+                          genderDisplayPrice();
+                          statusList      = [];
+                          categoryList    = [];
+                          artistList = [];
+                          getProducts(searchProductField);
+                      }
             }
 
 
