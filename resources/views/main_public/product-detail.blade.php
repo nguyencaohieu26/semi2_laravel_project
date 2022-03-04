@@ -289,6 +289,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
         //Php variables
         let idProduct = {!! json_encode($product->id) !!};
         let isUserLogin = {!! json_encode($isLogin) !!};
@@ -409,6 +410,7 @@
                 $('.product-bid-message').removeClass('active');
             },2200);
         }
+        //Function handle get current price every time
         getCurrentPrice();
         setInterval(getCurrentPrice,1000);
         function getCurrentPrice(){
@@ -430,10 +432,11 @@
                     bidInputEle.value = formatPriceInput(format2);
             });
         }
-
         function formatPriceInput(num){
             return num.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
         }
+
+        //Add validation for form
         (function() {
             'use strict';
             // window.addEventListener('load', function() {
@@ -477,10 +480,9 @@
                 });
             // }, false);
         })();
-        //
-
+        //Add plugin zoom image
         $('#product-thumbnail-img').imageZoom();
-        //
+        //Add Ckeditor for textarea
         CKEDITOR.replace( 'exampleFormControlTextarea1' );
     </script>
 @endsection

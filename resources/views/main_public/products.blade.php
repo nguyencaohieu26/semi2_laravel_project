@@ -12,7 +12,10 @@
             <div class="row">
                 <div class="col-12 col-sm-4 col-lg-2 d-flex align-items-center">
                     <h4 class="mr-2 mb-0 font-weight-bold">Filter by</h4>
-                    <div class="border d-block d-xl-none auction-lot-filter-btn"><i class="fa-solid fa-filter"></i></div>
+                    <div class="border d-block d-xl-none auction-lot-filter-btn position-relative">
+                        <div class="position-absolute text-white rounded-circle auction-lot-filter-status font-weight-bold" id="auction-lot-filter-status"></div>
+                        <i class="fa-solid fa-filter"></i>
+                    </div>
                 </div>
                 <div class="col-12 col-sm-8 col-lg-10 d-flex align-items-center mt-2 mt-sm-0 justify-content-sm-end">
                     <div class="mr-3">
@@ -175,6 +178,7 @@
             getProducts(searchProductField);
             //
             function getProducts(search){
+                fillAuctionFilterStatus();
                 $.ajax({
                     url:`products_resource`,
                     method:'GET',
@@ -333,6 +337,32 @@
             $('#clearSearch').click(function (){
                submitFilter(1,true)
             });
+            fillAuctionFilterStatus();
+            function fillAuctionFilterStatus(){
+                $('#auction-lot-filter-status').hide();
+                let total = 0;
+                if(inputSearchTitle.val()){
+                    total++;
+                }
+                if(statusList.length > 0){
+                    statusList.forEach(item=>{
+                       total++;
+                    });
+                }
+                if(artistList.length > 0){
+                    artistList.forEach(item=>{
+                        total++;
+                    })
+                }
+                if(categoryList.length > 0){
+                    categoryList.forEach(item=>{
+                        total++;
+                    })
+                }
+                if(total){
+                    $('#auction-lot-filter-status').show().text(total);
+                }
+            }
             //
             function submitFilter(pageNum = 1,clear = false){
                     if(!clear){

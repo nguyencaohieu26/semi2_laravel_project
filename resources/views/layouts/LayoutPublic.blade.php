@@ -225,7 +225,7 @@
         </div>
     </div>
 </footer>
-<script defer src="{{mix('js/app.js')}}"></script>
+<script  src="{{mix('js/app.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.js"></script>
@@ -297,7 +297,16 @@
         },1200)
     });
     //####################
+    window.addEventListener('click',function (e){
+        const filterProductContainer = document.querySelector('.lot-filter-container');
+        const btnOpenFilterContainer =document.querySelector('.auction-lot-filter-btn');
+        if(e.target !== filterProductContainer
+            && e.target !== btnOpenFilterContainer
+            && e.target !== btnOpenFilterContainer.querySelector('i')
+            &&  !filterProductContainer.contains(e.target)
+        ){document.querySelector('.lot-filter-container').classList.remove('active');}
 
+    })
     let numberBidUser = $('#user-auction-number');
     let cartUserContainer = $('#user-auction-cart');
     let accountID = {!! Auth::check() ? $accountID : "undefined" !!};
