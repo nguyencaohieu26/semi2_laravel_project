@@ -122,6 +122,7 @@
                             </tr>
                             `
                             userListContainer.append(userItem);
+                        })
                             //#######
                             paginationContainer.html('');
                             const totalPage = result.total;
@@ -130,7 +131,6 @@
                                 let pageItem = `<li onclick="getUsers({id:${search.id},name:${search.name},email:${search.email},role:${search.role},page:${i}})" class="page-item-custom ${i === search.page ? "active" : ""}">${i}</li>`;
                                 paginationContainer.append(pageItem);
                             }
-                        })
                     }else{
                         userListContainer.html('');
                         paginationContainer.html('');

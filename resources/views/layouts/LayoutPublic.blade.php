@@ -324,7 +324,7 @@
             success: result=>{
                 if(result.data.length > 0){
                     cartUserContainer.html("");
-                    numberBidUser.children('p').text(result.data.length);
+                    numberBidUser.children('p').text(result.total);
                     result.data.forEach((item,index) =>{
                         if(index < 5){
                             let bid_status = `${item.bid_status_id === 1 ? "bidding" : (item.bid_status_id === 2 ? "giveup" : (item.bid_status_id === 3 ? "payment" : "success"))}`;

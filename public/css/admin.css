@@ -251,3 +251,27 @@ input:checked + .slider:before {
     font-size: 12px;
     line-height: 1.3;
 }
+.payment,.bidding{
+    font-size: 9px;
+    padding: 3px;
+    font-weight: bold;
+    border-radius: 2px;
+}
+.bidding{
+    color: #0b2c4f;
+    border: 1px solid #777;
+}
+.payment{
+    color: #2d7fd3;
+    border: 1px solid #2d7fd3;
+}
+
+.product-cart-user-name{
+    max-width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+}

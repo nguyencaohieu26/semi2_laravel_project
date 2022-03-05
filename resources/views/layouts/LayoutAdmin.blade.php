@@ -278,6 +278,7 @@
 <!-- others plugins -->
 <script src="{!! asset('admin/assets/js/plugins.js') !!}"></script>
 <script src="{!! asset('admin/assets/js/scripts.js') !!}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.countdown/2.2.0/jquery.countdown.min.js"></script>
 <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
 {{----}}
 @yield('script_tag')
