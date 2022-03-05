@@ -297,55 +297,61 @@
         },1200)
     });
     //####################
-    window.addEventListener('click',function (e){
-        const filterProductContainer = document.querySelector('.lot-filter-container');
-        const btnOpenFilterContainer =document.querySelector('.auction-lot-filter-btn');
-        if(e.target !== filterProductContainer
-            && e.target !== btnOpenFilterContainer
-            && e.target !== btnOpenFilterContainer.querySelector('i')
-            &&  !filterProductContainer.contains(e.target)
-        ){document.querySelector('.lot-filter-container').classList.remove('active');}
-
-    })
+    const filterProductContainer = document.querySelector('.lot-filter-container');
+    const btnOpenFilterContainer =document.querySelector('.auction-lot-filter-btn');
     let numberBidUser = $('#user-auction-number');
     let cartUserContainer = $('#user-auction-cart');
     let accountID = {!! Auth::check() ? $accountID : "undefined" !!};
+    if(btnOpenFilterContainer && filterProductContainer){
+        window.addEventListener('click',function (e){
+            if(e.target !== filterProductContainer
+                && e.target !== btnOpenFilterContainer
+                && e.target !== btnOpenFilterContainer.querySelector('i')
+                &&  !filterProductContainer.contains(e.target)
+            ){document.querySelector('.lot-filter-container').classList.remove('active');}
+
+        })
+    }
 
     if(accountID){
         getCartUser();
     }
-
     function getCartUser(){
         $.ajax({
             url:`/userCart`,
             data:{account:accountID ? accountID : undefined},
             method:'GET',
             success: result=>{
-                if(result.length > 0){
+                if(result.data.length > 0){
                     cartUserContainer.html("");
-                    numberBidUser.children('p').text(result.length);
-                    result.forEach(item =>{
-                    let bid_status = `${item.bid_status_id === 1 ? "bidding" : (item.bid_status_id === 2 ? "giveup" : (item.bid_status_id === 3 ? "payment" : "success"))}`;
-                        let itemBid = `
-                            <div class="mb-3 p-1 cartuser-item rounded">
-                                 <a href="/products/${item.product_id}">
-                                    <div class="d-flex">
-                                        <div class="mr-2">
-                                            <img height="100%" width="70px" class="rounded" src="/images_store/products/${item.image}" alt="${item.name}"/>
-                                        </div>
-                                        <div class="w-100">
-                                            <h6 class="mb-1" style="color: #0c5460">${item.name}</h6>
-                                            <div class="d-flex justify-content-between">
-                                                <p style="font-size: 13px" class="mb-0 text-secondary">Current price: <span class="font-italic text-success">${item.current_price}</span></p>
-                                                <p style="font-size: 12px" class="mb-0 border p-1 rounded">${bid_status}</p>
+                    numberBidUser.children('p').text(result.data.length);
+                    result.data.forEach((item,index) =>{
+                        if(index < 5){
+                            let bid_status = `${item.bid_status_id === 1 ? "bidding" : (item.bid_status_id === 2 ? "giveup" : (item.bid_status_id === 3 ? "payment" : "success"))}`;
+                                let itemBid = `
+                                    <div class="mb-3 p-1 cartuser-item rounded">
+                                         <a href="/products/${item.product_id}?Art=${(item.name).replaceAll(' ','-')}">
+                                            <div class="d-flex">
+                                                <div class="mr-2">
+                                                    <img height="100%" width="70px" class="rounded" src="/images_store/products/${item.image}" alt="${item.name}"/>
+                                                </div>
+                                                <div class="w-100">
+                                                    <h6 class="mb-1" style="color: #0c5460">${item.name}</h6>
+                                                    <div class="d-flex justify-content-between">
+                                                        <p style="font-size: 13px" class="mb-0 text-secondary">Current price: <span class="font-italic text-success">${item.current_price}</span></p>
+                                                        <p style="font-size: 12px" class="mb-0 border p-1 rounded">${bid_status}</p>
+                                                    </div>
+                                                    <p style="font-size: 13px" class="mb-0 text-secondary">Your Bid: <span class="font-italic text-danger">${item.max_bid}</span></p>
+                                                </div>
                                             </div>
-                                            <p style="font-size: 13px" class="mb-0 text-secondary">Your Bid: <span class="font-italic text-danger">${item.max_bid}</span></p>
-                                        </div>
-                                    </div>
-                                 </a>
-                            <div>
-                        `
-                        cartUserContainer.append(itemBid);
+                                         </a>
+                                    <div>
+                                `
+                                cartUserContainer.append(itemBid);
+                        }else{
+                            $('.view-more-auction-user').remove();
+                            cartUserContainer.append(`<div class="view-more-auction-user text-center"><a style="font-size:13px" href="{{route('user-cart')}}">view more</a></div>`)
+                        }
                     });
                 }else{
                     numberBidUser.hide();

@@ -73,6 +73,10 @@ Route::group(['prefix'=>'/'],function(){
 
     Route::get('userCart',[BidsController::class,'showBidUser']);
 
+    Route::get('userProductBidPrice',[BidsController::class,'getUserBidProduct']);
+
+    Route::get('userProductHistoryBid',[BidsController::class,'userBidHistoryProduct']);
+
     Route::get('getUsersAuction',[AccountsController::class,'getUsers']);
     //Route Api Admin
     Route::get('changeArtistStatus',[ArtistController::class,'changeStatus']);

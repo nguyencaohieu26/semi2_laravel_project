@@ -150,13 +150,19 @@
                                         <div class="count-down-container count-down-container--3" data-countdown="{{$product->date_end}}"></div>
                                     </div>
                                     <div class="mt-3">
-                                        <p class="mb-2">
-                                            <span>Current Price: $</span>
-                                            <span class="text-danger d-inline-block ml-1" style="font-size: 17px" id="product-current-price"></span>
-                                        </p>
+                                        <div class="d-flex justify-content-between align-items-center flex-wrap">
+                                            <p class="mb-2">
+                                                <span>Current Price: $</span>
+                                                <span class="text-danger d-inline-block ml-1" style="font-size: 17px" id="product-current-price"></span>
+                                            </p>
+                                            <p class="mb-2" id="your-bid-container">
+                                                <span>Your Price: $</span>
+                                                <span class="text-danger d-inline-block ml-1" id="your-bid-price" style="font-size: 17px"></span>
+                                            </p>
+                                        </div>
                                         <form id="form-bid-product" class="form-bid-product d-flex align-items-center">
                                             <div class="position-relative">
-                                                <input aria-label="input-bid" id="bid-input" class="pl-4" type="text" value="{{$product->current_price}}"/>
+                                                <input aria-label="input-bid" id="bid-input" class="pl-4" type="text" value="{{number_format($product->current_price , 0, ',', '.')}}"/>
                                                 <div class="position-absolute" style="top: 8px;left: 10px"><i class="fa-solid fa-dollar-sign"></i></div>
                                             </div>
                                             <button class="ml-2" type="submit" id="button-bid"><span>Bid</span></button>
@@ -169,7 +175,7 @@
                                             <span>
                                                 <i class="fa-solid fa-gavel"></i>The last price:
                                             </span>
-                                            <span class="text-success" style="font-size: 17px">${{$product->current_price}}</span>
+                                            <span class="text-success" style="font-size: 17px">${{number_format($product->current_price , 0, ',', '.')}}</span>
                                         </p>
                                     </div>
                                 @endif
@@ -222,12 +228,12 @@
                                         <div class="mt-2">
                                             <p class="lot-content-start-price mb-1">
                                                 <span class="font-weight-bold mr-1 d-inline-block" style="width: 80px;color: black;font-size: 13px">Starting bid: </span>
-                                                <span class="text-success font-italic p-1 font-weight-bold" style="font-size: 12px">$<span class="price">{{$relaProduct->start_price}}</span></span>
+                                                <span class="text-success font-italic p-1 font-weight-bold" style="font-size: 12px">$<span class="price">{{number_format($relaProduct->start_price , 0, ',', '.')}}</span></span>
                                             </p>
-                                            <p class="lot-content-current-bid mb-1">
-                                                <span class="font-weight-bold mr-1 d-inline-block" style="width: 80px;color: black;font-size: 13px">Current bid:</span>
-                                                <span class="text-danger font-italic font-weight-bold p-1" style="font-size: 12px"><span class="price">{{$relaProduct->current_price > 0 ? "$".$relaProduct->current_price : "No bid"}}</span></span>
-                                            </p>
+                                                <p class="lot-content-current-bid mb-1">
+                                                    <span class="font-weight-bold mr-1 d-inline-block" style="width: 80px;color: black;font-size: 13px">Current bid:</span>
+                                                    <span class="text-danger font-italic font-weight-bold p-1" style="font-size: 12px"><span class="price">{{$relaProduct->current_price > 0 ? "$".number_format($relaProduct->current_price, 0, ',', '.') : "No bid"}}</span></span>
+                                                </p>
                                         </div>
                                     </div>
                                 </a>
@@ -296,13 +302,13 @@
         let currentPrice = 0;
         let startPrice = {!! json_encode($product->start_price) !!};
         let account_id = {!! json_encode(Auth::check() ? Auth::user()->id : 'undefined') !!};
-
-        //
         let productDescriptionEle = $('.product-description');
+        let userBidPrice = $('#your-bid-price');
         let openProductInfoEle = document.querySelector('.btn-open-product-info');
         let closeProductInfoEle = document.querySelector('#btn-close-product-info');
         let productInfoEle = document.querySelector('.product-info-small');
-        //
+
+        //handle view more description
         $('.btn-view-more-description').click(function (){
             if(productDescriptionEle.hasClass('active')){
                 $(this).text('view more')
@@ -318,7 +324,7 @@
         closeProductInfoEle.addEventListener('click',()=>{
            productInfoEle.classList.remove('active');
         });
-        //
+        //Handle countdown time product
         $('[data-countdown]').each(function() {
             let $this = $(this), finalDate = $(this).data('countdown');
             $this.countdown(finalDate, function(event) {
@@ -332,8 +338,26 @@
                 $this.html(countDownTimeEle);
             });
         });
+        //Handle get account product bid
+        $('#your-bid-container').hide();
+        if(account_id){
+            getYourBid();
+            function getYourBid(){
+                $.ajax({
+                    url:`/userProductBidPrice`,
+                    method:`GET`,
+                    data:{account:account_id,productID:idProduct},
+                    success:result=>{
+                        if(result){
+                            $('#your-bid-container').show();
+                            userBidPrice.text((result.amount_of_bid).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
 
-        //
+                        }
+                    }
+                })
+            }
+        }
+        //Handle bid form
         $('#form-bid-product').submit(e=>{
             e.preventDefault();
             let max = 10000;
@@ -372,11 +396,11 @@
                                         method:'GET',
                                         data:{product_id:idProduct,bid:bidValue.replaceAll(',',''),account_id:account_id},
                                         success:result =>{
-                                            console.log(result);
                                             if(result.status === 1){
                                                 $('#product-current-price').addClass('animate__animated animate__bounceIn animate__infinite');
                                                 chooseNotification(true,`${result.message}`);
                                                 getCartUser();
+                                                getYourBid();
                                                 $('#button-bid').attr('disabled','disable');
                                                 setTimeout(()=>{
                                                     $('#product-current-price').removeClass('animate__animated animate__bounceIn animate__infinite');
