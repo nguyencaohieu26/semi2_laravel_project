@@ -14,7 +14,8 @@ class BidsController extends Controller
         $query = DB::table('bids')
             ->join('products','bids.product_id','=','products.id')
             ->select(DB::raw('max(amount_of_bid) as max_bid,product_id,bid_status_id,bids.created_at,products.name,products.image,products.date_end,products.current_price'))
-            ->where('account_id','=',$request->account);
+            ->where('account_id','=',$request->account)
+            ->whereNotIn('bids.bid_status_id',[2,4]);
 
         if(isset($request->bidStatus)){
             $query = $query->where('bids.bid_status_id','=',$request->bidStatus);
@@ -43,7 +44,37 @@ class BidsController extends Controller
             }
             $query = $query->orderBy('products.current_price',$typeHighestPrice);
         }
-        return $query->groupBy('product_id')->paginate(10);
+        $result = $query->groupBy('product_id')->paginate(10);
+        return [
+            "data"=>$result,
+            "total"=>$result->total(),
+            "perPage"=>$result->perPage(),
+            "currentPage"=>$result->currentPage()
+        ];
+    }
+
+    public function getProductBids(Request $request){
+        $subCondition = [];
+        $maxBids = DB::table('bids')
+            ->select(DB::raw('max(bids.amount_of_bid) as max_bid,product_id'))
+            ->groupBy('bids.product_id')->paginate(12);
+        foreach ($maxBids->items() as $ele){
+            $test = DB::table('bids')
+                ->join('products','products.id','=','bids.product_id')
+                ->join('accounts','accounts.id','=','bids.account_id')
+                ->join('users','users.id','=','accounts.user_id')
+                ->select('products.name','bids.amount_of_bid as max_bid','bids.product_id','users.email','bids.created_at','products.date_end','bids.bid_status_id')
+                ->where('product_id','=',$ele->product_id)
+                ->where('amount_of_bid','=',$ele->max_bid)
+                ->get();
+            $subCondition[] = $test[0];
+        }
+       return [
+           "data" =>$subCondition,
+           "total"=>$maxBids->total(),
+            "perPage"=>$maxBids->perPage(),
+            "currentPage"=>$maxBids->currentPage()
+       ];
     }
 
     public function getUserBidProduct(Request $request){
@@ -65,6 +96,23 @@ class BidsController extends Controller
             "total"=>$history->total(),
             "perPage"=>$history->perPage(),
             "currentPage"=>$history->currentPage()
+        ];
+    }
+
+    public function getHistoryBid(Request $request){
+        $query  = DB::table('bids')
+            ->join('products','products.id','=','bids.product_id')
+            ->join('accounts','bids.account_id','=','accounts.id')
+            ->join('users','users.id','=','accounts.user_id')
+            ->select(DB::raw('bids.amount_of_bid,bids.created_at,users.email'))
+            ->where('bids.product_id','=',$request->product);
+
+        $result =$query->orderBy('bids.created_at','DESC')->paginate(15);
+        return [
+            "data"=>$result,
+            "total"=>$result->total(),
+            "perPage"=>$result->perPage(),
+            "currentPage"=>$result->currentPage()
         ];
     }
     /** */

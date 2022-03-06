@@ -157,15 +157,15 @@
                     page:search.page
                 },
                 success:result =>{
-                    if(result.data.length > 0){
+                    if(result.data.data.length > 0){
                         userCartAuction.html("")
-                        result.data.forEach((item,index) =>{
+                        result.data.data.forEach((item,index) =>{
                             let textBidStatus = item.bid_status_id === 1 ? 'bidding' : 'payment'
                             let cartItem = `
                             <tr>
-                                <td>${index + 1}</td>
+                                <td>${(result.currentPage - 1)*result.perPage + index + 1}</td>
                                 <td><img width="50px" class="rounded" src="/images_store/products/${item.image}" alt="${item.name}"></td>
-                                <td ><a href="/products/${item.product_id}?Art=${item.name}"></a><span class="product-cart-user-name">${item.name}</span></td>
+                                <td ><a class="text-dark" href="/products/${item.product_id}?Art=${item.name}"><span class="product-cart-user-name">${item.name}</span></a></td>
                                 <td style="color: rebeccapurple;font-size: 12px" class="font-italic">${formatter.format(item.max_bid)}</td>
                                 <td style="color: #DD4A48;font-size: 12px" class="font-italic">${formatter.format(item.current_price)}</td>
                                 <td style="font-size: 12px" class="text-secondary">${item.created_at}</td>
@@ -199,7 +199,7 @@
                         //#######
                         cartPagination.html('');
                         const totalPage = result.total;
-                        const numberPerPage = result.per_page;
+                        const numberPerPage = result.perPage;
                         if(totalPage > 10){
                             for(let i =1; i<= Math.ceil(totalPage/numberPerPage);i++){
                                 let pageItem = `<li  class="page-item-custom ${i === search.page ? "active" : ""}" onclick="getCartUserAuction({account:${accountID},productName:${search.productName},timeEndBid:${search.timeEndBid},timeBid:${search.timeBid},highestPrice:${search.highestPrice},bidStatus:${search.bidStatus},page:${i}})">${i}</li>`;

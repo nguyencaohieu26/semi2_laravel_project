@@ -35,7 +35,7 @@
 }
 /**/
 .artist-name,.artist-description,.category-list,.products-admin-list,
-.product-category-item,.blogs-admin-list,.users-list,.user-carts,#history-bid-container{
+.product-category-item,.blogs-admin-list,.users-list,.user-carts,.bids-list,#history-bid-container{
     font-family: 'Poppins', sans-serif;
 }
 .artist-description{
@@ -215,6 +215,8 @@ input:checked + .slider:before {
     background: rgba(137, 150, 227, 0.8);
     color: white;
 }
+/**/
+
 /*dashboard user*/
 .change-password-form label{
     position: absolute;
@@ -266,7 +268,8 @@ input:checked + .slider:before {
     border: 1px solid #2d7fd3;
 }
 
-.product-cart-user-name{
+.product-cart-user-name,
+.product-bid-name{
     max-width: 220px;
     overflow: hidden;
     text-overflow: ellipsis;
