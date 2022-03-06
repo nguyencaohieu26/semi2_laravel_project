@@ -108,7 +108,9 @@
                         </thead>
                         <tbody id="table-history-bid"></tbody>
                     </table>
-
+                    <div class="pagination-container">
+                        <ul></ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -130,6 +132,7 @@
         let paginationBidProduct        = $('.pagination-custom ul');
         let noDataContainerBidProduct   = $('.no-data-container');
         let tableHistoryBidContainer    = $('#table-history-bid');
+        let paginationBidHistoryList    = $('.pagination-container ul');
 
         let searchBidProductFilter = {
             productName:undefined,
@@ -210,12 +213,13 @@
             })
         }
         //
-        function getProductBidsList(productID){
+        function getProductBidsList(productID,page = 1){
             $.ajax({
                 url:`/getHistoryBid`,
                 method:'GET',
-                data:{product:productID},
+                data:{product:productID,page:page},
                 success:result=>{
+                    console.log(result);
                     tableHistoryBidContainer.html('');
                     if(result.data.data.length > 0){
                         result.data.data.forEach((item,index) =>{
@@ -229,6 +233,14 @@
                             `
                             tableHistoryBidContainer.append(historyItem);
                         });
+                        paginationBidHistoryList.html("");
+                        if(result.perPage > 12){
+                            for(let i = 1; i<=Math.ceil(result.total/result.perPage);i++){
+                                let classPageActive = i === page ? "active" : "";
+                                let pageItem = `<li onclick="getProductBidsList({page: ${i},product:${productID}})" class="page-item-custom ${classPageActive}">${i}</li>`;
+                                paginationBidHistoryList.append(pageItem);
+                            }
+                        }
                     }
                 }
             })

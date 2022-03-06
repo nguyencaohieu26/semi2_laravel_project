@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AccountDeposit;
+use App\Models\Accounts;
 use App\Models\Artist;
 use App\Models\Bids;
 use App\Models\Category;
@@ -178,7 +179,12 @@ class ProductController extends Controller
             "bid" =>$request->bid,
         );
 
-        $this->createDeposit($bidItem);
+        if(!$this->createDeposit($bidItem)){
+            return $result = array(
+                "status" => 0,
+                "message"=>"Balance is not enough to deposit!",
+            );
+        };
         $isValidTimeBid = $this->checkCurrentBid($bidItem);
         if($isValidTimeBid){
             $bid = new Bids();
@@ -205,26 +211,34 @@ class ProductController extends Controller
 
     public function createDeposit($bidItem){
         $depositExist = AccountDeposit::where('account_id','=',$bidItem['account_id'])->where('product_id','=',$bidItem['product_id'])->get();
+        $balance = Accounts::where('id','=',$bidItem['account_id'])->get();
         $depositCount = $depositExist->count();
         if($depositCount == 0){
-            $bidAccountDeposit = new AccountDeposit();
-            $bidAccountDeposit->account_id     = $bidItem['account_id'];
-            $bidAccountDeposit->product_id     = $bidItem['product_id'];
-            $bidAccountDeposit->deposit_amount = floatval($bidItem['bid']) * 0.2;
-            $bidAccountDeposit->save();
+            $amountDeposit = floatval($bidItem['bid']) * 0.2;
+            if(($balance[0]->balance - $amountDeposit) > 0 ){
+                $bidAccountDeposit = new AccountDeposit();
+                $bidAccountDeposit->account_id     = $bidItem['account_id'];
+                $bidAccountDeposit->product_id     = $bidItem['product_id'];
+                $bidAccountDeposit->deposit_amount = $amountDeposit;
+                $bidAccountDeposit->save();
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return true;
         }
     }
     public function checkCurrentBid($bidItem){
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $bid = Bids::where('account_id','=',$bidItem['account_id'])->where('product_id','=',$bidItem['product_id'])->get()->last();
         if(isset($bid)){
-            $timeValidBid = $bid->created_at;
-            $timeNow =  date('d-m-y h:i:s');
-            if(strtotime("+15 minutes",strtotime(date_format($timeValidBid,"d-m-y H:i:s"))) <= strtotime($timeNow)){
+            $timeValidBid =date_create($bid->created_at)->format('Y-m-d H:i:s');//current time bid + 15 minutes
+            $dateNow = date("Y-m-d H:i:s");
+            $newTime = date("Y-m-d H:i:s",strtotime("+15 minutes", strtotime($timeValidBid)));
+            if(strtotime($dateNow) >= strtotime($newTime)){
                 return true;
-            }else{
-                return false;
-            }
+            }else{ return false;}
         }
         return  true;
     }

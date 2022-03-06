@@ -107,7 +107,7 @@ class BidsController extends Controller
             ->select(DB::raw('bids.amount_of_bid,bids.created_at,users.email'))
             ->where('bids.product_id','=',$request->product);
 
-        $result =$query->orderBy('bids.created_at','DESC')->paginate(15);
+        $result =$query->orderBy('bids.created_at','DESC')->paginate(12);
         return [
             "data"=>$result,
             "total"=>$result->total(),
