@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bids;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class BidsController extends Controller
@@ -106,7 +108,9 @@ class BidsController extends Controller
             ->join('users','users.id','=','accounts.user_id')
             ->select(DB::raw('bids.amount_of_bid,bids.created_at,users.email'))
             ->where('bids.product_id','=',$request->product);
-
+        if(isset($request->emailSearch)){
+            $query = $query->where('users.email','like','%'.$request->emailSearch.'%');
+        }
         $result =$query->orderBy('bids.created_at','DESC')->paginate(12);
         return [
             "data"=>$result,
@@ -114,6 +118,16 @@ class BidsController extends Controller
             "perPage"=>$result->perPage(),
             "currentPage"=>$result->currentPage()
         ];
+    }
+
+    public function checkOutProductBid(Request  $request){
+        $user = \App\Models\Users::with(['accounts'])->where('id', Auth::user()->user_id)->first();
+        $product = Product::findOrFail($request->productID);
+//        if($product->status_id != 3){
+//            return redirect()->route('user-cart')->with('error-pay','The Auction is not end! Can\'t not payment');
+//        }
+        return view('user.checkout',compact('user','product'));
+
     }
     /** */
     public function create(){}

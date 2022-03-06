@@ -87,11 +87,17 @@
     <div class="modal fade" id="modalHistoryProductBid" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header d-flex align-items-center">
                     <h6 class="modal-title font-italic" id="modal-title">
                         <i class="ti-file"></i>
                         <span>History Product Bids</span>
                     </h6>
+                    <div class="ml-3 d-none d-md-block w-50">
+                        <form id="search-form-history" class="d-flex align-items-center">
+                            <input aria-label="search-user-email-input" id="search-user-email-input" class="form-control" type="text" placeholder="Search user email..."/>
+                            <button class="btn-submit border-0 rounded ml-2">Search</button>
+                        </form>
+                    </div>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -108,8 +114,10 @@
                         </thead>
                         <tbody id="table-history-bid"></tbody>
                     </table>
-                    <div class="pagination-container">
-                        <ul></ul>
+                    <div>
+                        <nav class="pagination-container" aria-label="Page navigation example">
+                            <ul class="pagination"></ul>
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -161,6 +169,7 @@
                     if(result.data.length > 0){
                         bidProductContainer.html("")
                         result.data.forEach((item,index) =>{
+                            let textBidStatus = item.bid_status_id === 1 ? 'bidding' : 'payment'
                             let itemBid = `
                              <tr>
                                     <th scope="row">${(result.currentPage - 1) * result.perPage + index + 1}</th>
@@ -171,9 +180,11 @@
                                     <td style="font-size: 12px" class="text-secondary">
                                         <div class="d-flex justify-content-between" data-countdown="${item.date_end}"></div>
                                     </td>
-                                    <td>${item.bid_status_id}</td>
-                                    <td class="d-flex">
-                                      <div><a class="text-success" onclick="getProductBidsList(${item.product_id})" data-toggle="modal" data-target="#modalHistoryProductBid"><i class="ti-eye border-right pr-1"></i></a></div>
+                                    <td><span class="${item.bid_status_id === 1 ? 'bidding' : 'payment'}">${textBidStatus}</span></td>
+                                    <td class="d-flex align-items-center justify-content-end">
+                                        <div><a class="text-success" onclick="getProductBidsList(${item.product_id})" data-toggle="modal" data-target="#modalHistoryProductBid"><i class="ti-eye border-right pr-1"></i></a></div>
+                                        <div><a class="text-primary"><i class="ti-medall border-right px-1"></i></a></div>
+                                        <div style="position: relative;top: -1px"><a class="text-danger"><i class="fa fa-pause pl-1" aria-hidden="true"></i></a></div>
                                     </td>
                              <tr>
                             `
@@ -213,11 +224,11 @@
             })
         }
         //
-        function getProductBidsList(productID,page = 1){
+        function getProductBidsList(productID,page = 1,emailSearch = undefined){
             $.ajax({
                 url:`/getHistoryBid`,
                 method:'GET',
-                data:{product:productID,page:page},
+                data:{product:productID,page:page,emailSearch:emailSearch},
                 success:result=>{
                     console.log(result);
                     tableHistoryBidContainer.html('');
@@ -234,15 +245,19 @@
                             tableHistoryBidContainer.append(historyItem);
                         });
                         paginationBidHistoryList.html("");
-                        if(result.perPage > 12){
-                            for(let i = 1; i<=Math.ceil(result.total/result.perPage);i++){
-                                let classPageActive = i === page ? "active" : "";
-                                let pageItem = `<li onclick="getProductBidsList({page: ${i},product:${productID}})" class="page-item-custom ${classPageActive}">${i}</li>`;
+                        console.log(Math.ceil(result.total/result.perPage));
+                        if(result.total > 12){
+                            for(let i = 1; i <= Math.ceil(result.total/result.perPage);i++){
+                                let pageItem = `<li class="page-item ${i === page ? "active" : ''}"><a class="page-link"  onclick="getProductBidsList(${productID},${i},undefined)" href="#">${i}</a></li>`;
                                 paginationBidHistoryList.append(pageItem);
                             }
                         }
                     }
                 }
+            });
+            $('#search-form-history').submit(e=>{
+                e.preventDefault();
+                getProductBidsList(productID,1,$('#search-user-email-input').val());
             })
         }
     </script>

@@ -13,6 +13,15 @@
 
 @section('content')
     <section class="user-cart-container">
+        {{--  message  --}}
+        <div class="response-message position-fixed" style="right: 1rem;top: 5.5rem;z-index: 1000">
+            @if(session('create-artist'))
+                <div class="alert alert-success">{{session('create-artist')}}</div>
+            @endif
+            @if(session('error-pay'))
+                <div class="alert alert-danger">{{session('error-pay')}}</div>
+            @endif
+        </div>
         <div class="pt-3 px-4">
             <div class="user-cart-filter">
                 <form id="user-cart-search-form">
@@ -175,7 +184,7 @@
                                 <td><span class="${item.bid_status_id === 1 ? 'bidding' : 'payment'}">${textBidStatus}</span></td>
                                 <td class="d-flex">
                                       <div><a class="text-success" onclick="getHistoryBidUser(${item.product_id})" data-toggle="modal" data-target="#modalHistoryBid"><i class="ti-eye border-right pr-1"></i></a></div>
-                                      <div><a class="text-primary" onclick="payAuctionArt(${item.product_id})"><i class="ti-money border-right px-1"></i></a></div>
+                                      <div><a class="text-primary" onclick="payAuctionArt(${item.product_id},2)"><i class="ti-money border-right px-1"></i></a></div>
                                       <div class="text-danger" onclick="giveUpAuctionArt(${item.product_id})"><i class="ti-close pl-1"></i></div>
                                 </td>
                             </tr>
@@ -259,12 +268,20 @@
             })
         }
 
-        function payAuctionArt(productID){
-
+        function payAuctionArt(productID,status){
+            if(status === 1){alert('Can\'t not pay now');}else{
+                window.location.replace(`http://127.0.0.1:8000/user/checkout/${productID}`);
+            }
         }
 
         function giveUpAuctionArt(productID){
 
+        }
+        //
+        setTimeout(clearMessage,1000);
+        function clearMessage(){
+            $('.response-message').addClass('active')
+            setTimeout(()=>{$('.response-message').removeClass('active')},3000);
         }
     </script>
 @endsection

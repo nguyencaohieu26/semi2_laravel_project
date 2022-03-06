@@ -167,6 +167,8 @@ Route::group(['prefix' => 'user','middleware' => ['CheckLogedOut','CheckRoleUser
         return view('user.cart',compact('user'));
     })->name('user-cart');
 
+    Route::get('checkout/{productID}',[BidsController::class,'checkOutProductBid'])->name('user-checkout');
+
     Route::post('changePassword',[AccountsController::class,''])->name('user-change-password');
 });
 
