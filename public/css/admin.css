@@ -282,6 +282,24 @@ input:checked + .slider:before {
 #check-out-image-product{
     height: 230px;
 }
+#form-check-out input{
+    padding-top: 12px;
+    font-size: 14px;
+}
+#form-check-out input::placeholder{
+    font-style: italic;
+    font-size: 13px;
+}
+.label-checkout{
+    position: absolute;
+    border-radius: 3px;
+    background: #f8f8f8;
+    font-weight: 600;
+    top: -13px;
+    left: 1rem;
+    font-size: 12px;
+    padding: 3px 14px;
+}
 @media only screen and (max-width: 767px){
     #check-out-image-product{
         height: 320px;

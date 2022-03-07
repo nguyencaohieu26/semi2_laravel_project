@@ -78,6 +78,8 @@ Route::group(['prefix'=>'/'],function(){
     Route::get('userProductHistoryBid',[BidsController::class,'userBidHistoryProduct']);
 
     Route::get('getUsersAuction',[AccountsController::class,'getUsers']);
+
+    Route::post('checkOutOrder',[BidsController::class,'checkOutAuction'])->name('CheckOutAuction');
     //Route Api Admin
 
     Route::get('getHistoryBid',[BidsController::class,'getHistoryBid']);

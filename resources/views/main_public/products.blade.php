@@ -235,7 +235,7 @@
                                                         <p class="m-0 border p-1 font-weight-bold text-white rounded" style="background: rgba(0,0,0,0.3)">LOT <span class="lot-id">${item.id}</span></p>
                                                     </div>
                                                     <div class="d-flex position-absolute" style="top: 1.2rem;right: 5px">${userAuctionGet ? userRender : ''}</div>
-                                                    <div class="count-down-container count-down-container--lot position-absolute p-0"  data-countdown="${dayCount}"></div>
+                                                        <div class="count-down-container count-down-container--lot position-absolute p-0"  data-countdown="${dayCount}"></div>
                                                     <div class="auction-lot-item-btn position-absolute"><button class="border-0 rounded">View bid</button></div>
                                                 </div>
                                                 <div class="lot-content mt-2 p-2">

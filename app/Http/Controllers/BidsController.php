@@ -123,12 +123,21 @@ class BidsController extends Controller
     public function checkOutProductBid(Request  $request){
         $user = \App\Models\Users::with(['accounts'])->where('id', Auth::user()->user_id)->first();
         $product = Product::findOrFail($request->productID);
-//        if($product->status_id != 3){
-//            return redirect()->route('user-cart')->with('error-pay','The Auction is not end! Can\'t not payment');
-//        }
+        if($product->status_id != 3){
+            return redirect()->route('user-cart')->with('error-pay','The Auction is not end! Can\'t not payment');
+        }
         return view('user.checkout',compact('user','product'));
 
     }
+
+    public function checkOutAuction(Request $request){
+        //validate info
+
+        //change status bid -> success
+
+        //create auction result
+    }
+
     /** */
     public function create(){}
 
