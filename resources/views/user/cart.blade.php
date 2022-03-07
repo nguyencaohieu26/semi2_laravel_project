@@ -184,7 +184,7 @@
                                 <td><span class="${item.bid_status_id === 1 ? 'bidding' : 'payment'}">${textBidStatus}</span></td>
                                 <td class="d-flex">
                                       <div><a class="text-success" onclick="getHistoryBidUser(${item.product_id})" data-toggle="modal" data-target="#modalHistoryBid"><i class="ti-eye border-right pr-1"></i></a></div>
-                                      <div><a class="text-primary" onclick="payAuctionArt(${item.product_id},2)"><i class="ti-money border-right px-1"></i></a></div>
+                                      <div><a class="text-primary" onclick="payAuctionArt(${item.product_id},${item.bid_status_id})"><i class="ti-money border-right px-1"></i></a></div>
                                       <div class="text-danger" onclick="giveUpAuctionArt(${item.product_id})"><i class="ti-close pl-1"></i></div>
                                 </td>
                             </tr>
@@ -269,13 +269,27 @@
         }
 
         function payAuctionArt(productID,status){
-            if(status === 1){alert('Can\'t not pay now');}else{
+            if(status === 1){
+                setTimeout(clearMessage,1000);
+                $('.response-message').html('').append(`
+                    <div class="alert alert-danger">Can not payment now</div>
+                `)
+            }else{
                 window.location.replace(`http://127.0.0.1:8000/user/checkout/${productID}`);
             }
         }
 
         function giveUpAuctionArt(productID){
+            $.ajax({
+                url:`/giveUpAuctionBid`,
+                method:`GET`,
+                data:{product:productID,account:accountID},
+                success:result=>{
+                    if(result.status === 1){
 
+                    }
+                }
+            })
         }
         //
         setTimeout(clearMessage,1000);

@@ -80,6 +80,8 @@ Route::group(['prefix'=>'/'],function(){
     Route::get('getUsersAuction',[AccountsController::class,'getUsers']);
 
     Route::post('checkOutOrder',[BidsController::class,'checkOutAuction'])->name('CheckOutAuction');
+
+    Route::get('giveUpAuctionBid',[BidsController::class,'giveUpAuction']);
     //Route Api Admin
 
     Route::get('getHistoryBid',[BidsController::class,'getHistoryBid']);
@@ -89,6 +91,8 @@ Route::group(['prefix'=>'/'],function(){
     Route::get('changeArtistStatus',[ArtistController::class,'changeStatus']);
 
     Route::get('changeCategoryStatus',[CategoryController::class,'changeStatus']);
+
+    Route::get('changeBidAccountStatus',[BidsController::class,'changeStatusBid']);
 });
 
 //|--------------------------------------------------------------------------

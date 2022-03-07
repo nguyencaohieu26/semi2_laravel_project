@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             [
                 "id" =>1,
-                "avatar"=>"avatar-no-img.png",
+                "avatar"=>"user-1-img.jpg",
                 "firstname" => "nguyen",
                 "lastname" => "hieu",
                 "address" => "Ha Noi",
@@ -31,7 +31,7 @@ class UserSeeder extends Seeder
             ],
             [
                 "id" =>2,
-                "avatar"=>"avatar-no-img.png",
+                "avatar"=>"user-2-img.jpg",
                 "firstname" => "nguyen",
                 "lastname" => "huy",
                 "address" => "Ha Noi",
@@ -45,7 +45,7 @@ class UserSeeder extends Seeder
             ],
             [
                 "id" =>3,
-                "avatar"=>"avatar-no-img.png",
+                "avatar"=>"user-3-img.jpg",
                 "firstname" => "nguyen",
                 "lastname" => "hieu",
                 "address" => "Ha Noi",
@@ -59,7 +59,7 @@ class UserSeeder extends Seeder
             ],
             [
                 "id" =>4,
-                "avatar"=>"avatar-no-img.png",
+                "avatar"=>"user-4-img.jpg",
                 "firstname" => "nguyen",
                 "lastname" => "thanh phong",
                 "address" => "Ha Noi",
@@ -73,7 +73,7 @@ class UserSeeder extends Seeder
             ],
             [
                 "id" =>5,
-                "avatar"=>"avatar-no-img.png",
+                "avatar"=>"user-5-img.jpg",
                 "firstname" => "nguyen",
                 "lastname" => "quang minh",
                 "address" => "Nam Dinh",
@@ -87,7 +87,7 @@ class UserSeeder extends Seeder
             ],
             [
                 "id" =>6,
-                "avatar"=>"avatar-no-img.png",
+                "avatar"=>"user-6-img.jpg",
                 "firstname" => "nguyen",
                 "lastname" => "my linh",
                 "address" => "Thai Binh",
@@ -101,7 +101,7 @@ class UserSeeder extends Seeder
             ],
             [
                 "id" =>7,
-                "avatar"=>"avatar-no-img.png",
+                "avatar"=>"user-7-img.jpg",
                 "firstname" => "nguyen",
                 "lastname" => "quynh anh",
                 "address" => "Nghe An",
@@ -115,7 +115,7 @@ class UserSeeder extends Seeder
             ],
             [
                 "id" =>8,
-                "avatar"=>"avatar-no-img.png",
+                "avatar"=>"user-8-img.jpg",
                 "firstname" => "nguyen",
                 "lastname" => "quang dao",
                 "address" => "Ha Noi",
@@ -129,7 +129,7 @@ class UserSeeder extends Seeder
             ],
             [
                 "id" =>9,
-                "avatar"=>"avatar-no-img.png",
+                "avatar"=>"user-9-img.jpg",
                 "firstname" => "nguyen",
                 "lastname" => "cam tu",
                 "address" => "Hai Phong",
@@ -143,7 +143,7 @@ class UserSeeder extends Seeder
             ],
             [
                 "id" =>10,
-                "avatar"=>"avatar-no-img.png",
+                "avatar"=>"user-10-img.jpg",
                 "firstname" => "nguyen",
                 "lastname" => "mai anh",
                 "address" => "Nam Dinh",
@@ -157,7 +157,7 @@ class UserSeeder extends Seeder
             ],
             [
                 "id" =>11,
-                "avatar"=>"avatar-no-img.png",
+                "avatar"=>"user-11-img.jpg",
                 "firstname" => "nguyen",
                 "lastname" => "van hung",
                 "address" => "Bac Giang",
@@ -171,7 +171,7 @@ class UserSeeder extends Seeder
             ],
             [
                 "id" =>12,
-                "avatar"=>"avatar-no-img.png",
+                "avatar"=>"user-12-img.jpg",
                 "firstname" => "nguyen",
                 "lastname" => "trung kien",
                 "address" => "Ha Noi",
@@ -185,7 +185,7 @@ class UserSeeder extends Seeder
             ],
             [
                 "id" =>13,
-                "avatar"=>"avatar-no-img.png",
+                "avatar"=>"user-13-img.jpg",
                 "firstname" => "nguyen",
                 "lastname" => "trung hieu",
                 "address" => "Ha Noi",
@@ -199,7 +199,7 @@ class UserSeeder extends Seeder
             ],
             [
                 "id" =>14,
-                "avatar"=>"avatar-no-img.png",
+                "avatar"=>"user-14-img.jpg",
                 "firstname" => "nguyen",
                 "lastname" => "thuy tien",
                 "address" => "Ha Noi",
@@ -213,7 +213,7 @@ class UserSeeder extends Seeder
             ],
             [
                 "id" =>15,
-                "avatar"=>"avatar-no-img.png",
+                "avatar"=>"user-15-img.jpg",
                 "firstname" => "nguyen",
                 "lastname" => "hoang giang",
                 "address" => "Thai Binh",
@@ -227,7 +227,7 @@ class UserSeeder extends Seeder
             ],
             [
                 "id" =>16,
-                "avatar"=>"avatar-no-img.png",
+                "avatar"=>"user-16-img.jpg",
                 "firstname" => "nguyen",
                 "lastname" => "binh minh",
                 "address" => "Ha Noi",
@@ -241,7 +241,7 @@ class UserSeeder extends Seeder
             ],
             [
                 "id" =>17,
-                "avatar"=>"avatar-no-img.png",
+                "avatar"=>"user-17-img.jpg",
                 "firstname" => "nguyen",
                 "lastname" => "mai trang",
                 "address" => "Ha Noi",
@@ -255,7 +255,7 @@ class UserSeeder extends Seeder
             ],
             [
                 "id" =>18,
-                "avatar"=>"avatar-no-img.png",
+                "avatar"=>"user-18-img.jpg",
                 "firstname" => "vu",
                 "lastname" => "duc nam",
                 "address" => "Ha Noi",
@@ -269,7 +269,7 @@ class UserSeeder extends Seeder
             ],
             [
                 "id" =>19,
-                "avatar"=>"avatar-no-img.png",
+                "avatar"=>"user-19-img.jpg",
                 "firstname" => "nguyen",
                 "lastname" => "thu phuong",
                 "address" => "Ha Noi",
@@ -282,7 +282,7 @@ class UserSeeder extends Seeder
                 "updated_at" =>"2022-02-13 21:39:12"
             ], [
                 "id" =>20,
-                "avatar"=>"avatar-no-img.png",
+                "avatar"=>"user-20-img.jpg",
                 "firstname" => "nguyen",
                 "lastname" => "hoai linh",
                 "address" => "Ha Noi",

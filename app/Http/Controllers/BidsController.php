@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AccountDeposit;
+use App\Models\Accounts;
+use App\Models\AuctionResult;
 use App\Models\Bids;
 use App\Models\Product;
+use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -65,7 +69,7 @@ class BidsController extends Controller
                 ->join('products','products.id','=','bids.product_id')
                 ->join('accounts','accounts.id','=','bids.account_id')
                 ->join('users','users.id','=','accounts.user_id')
-                ->select('products.name','bids.amount_of_bid as max_bid','bids.product_id','users.email','bids.created_at','products.date_end','bids.bid_status_id')
+                ->select('products.name','bids.amount_of_bid as max_bid','bids.product_id','users.email','bids.created_at','products.date_end','bids.bid_status_id','bids.id')
                 ->where('product_id','=',$ele->product_id)
                 ->where('amount_of_bid','=',$ele->max_bid)
                 ->get();
@@ -138,6 +142,84 @@ class BidsController extends Controller
         //create auction result
     }
 
+    public function giveUpAuction(Request $request){
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $product = Product::where('deleted_at','=',null)->where('id','=',$request->product)->get();
+        //Time Auction End
+        $timeBidStart   = date_create($product[0]->date_start)->format('Y-m-d H:i:s');
+        $timeBidEnd     = date_create($product[0]->date_end)->format('Y-m-d H:i:s');
+        $timeNow        = date("Y-m-d H:i:s");
+        $diff1          = strtotime($timeBidEnd)  - strtotime($timeBidStart);
+        $diff2          = strtotime($timeBidEnd)  - strtotime($timeNow);
+        $dayPlus1       = round($diff1 / (60 * 60 * 24) / 2);
+        $dayPlus2       = round($diff2 / (60 * 60 * 24));
+        $highestBidProduct = Bids::where('deleted_at','=',null)->where('product_id','=',$request->product)->select(DB::raw('max(bids.amount_of_bid) as max_bid'))->get();
+        $highestBidUser    = Bids::where('deleted_at','=',null)
+            ->where('product_id','=',$request->product)
+            ->where('amount_of_bid','=',$highestBidProduct[0]->max_bid)
+            ->get();
+        if($dayPlus1 >= $dayPlus2){
+            //check isHighest Bidder -> lost deposit
+            if($highestBidUser[0]->account_id === intval($request->account)){
+                return [
+                    "status"   => 1,
+                    "message"  => "You are the highest bidder! If you want to giveup, you will lost the deposit"
+                ];
+            }
+            //-> return deposit
+            else{
+                $this->returnDeposit(intval($request->account),$request->product);
+                $this->changeStatusBid($request->account,$request->product,1);
+                return [
+                    "status" =>  2,
+                    "message" => "You are successfully giveup bidding for ".$product[0]->name
+                ];
+            }
+        }else{
+            //lost deposit
+            return [
+                "status"   => 1,
+                "message"  => "If you want to giveup before bidding end! You will lose the deposit"
+            ];
+        }
+    }
+
+    public function returnDeposit($accountID,$productID){
+        $account = Accounts::where('deleted_at','=',null)->where('id','=',$accountID)->get();
+        $depositAccountProduct = AccountDeposit::where("account_id",'=',$accountID)->where('product_id','=',$productID)->get();
+        $deposit = $depositAccountProduct[0]->deposit_amount;
+        $oldBalance = $account[0]->balance;
+        $account->balance = $oldBalance + $deposit;
+        $depositAccountProduct->delete();
+    }
+    public function paymentAuctionProduct($accountID,$productID){
+
+    }
+
+    public function changeStatusBid(Request $request){
+        $bid = Bids::where('deleted_at','=',null)->where('id','=',$request->bidID)->get();
+        $user = DB::table('users')
+        ->join('accounts','accounts.user_id','=','users.id')
+            ->where('accounts.id','=',$bid[0]->account_id)
+            ->get();
+        if($request->bidStatus == 3){
+            $product= Product::findOrFail($request->productID);
+            $product->status_id = 3;
+            $product->save();
+            $bid[0]->bid_status_id = 3;
+            $bid[0]->save();
+            return [
+                "status" => 1,
+                "message" =>"Send email confirm payment successes! For account: ".$user[0]->firstname.' '.$user[0]->lastname
+            ];
+        }else if($request->bidStatus == 2){
+            $bid[0]->bid_status_id = 2;
+            $bid[0]->save();
+        }else{
+            $bid[0]->bid_status_id = 4;
+            $bid[0]->save();
+        }
+    }
     /** */
     public function create(){}
 

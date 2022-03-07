@@ -14,6 +14,7 @@
 @section('content')
     <section class="bids-admin-container">
         {{--  message  --}}
+        <div class="response-message position-fixed" style="right: 1rem;top: 5.5rem;z-index: 1000"></div>
         <div class="py-3 px-4 d-flex flex-column">
             <div class="bids-admin-filter">
                 <form id="bids-admin-search-form">
@@ -165,10 +166,11 @@
                 },
                 success:result=>{
                     noDataContainerBidProduct.hide();
-                    console.log(result);
                     if(result.data.length > 0){
-                        bidProductContainer.html("")
+                        bidProductContainer.html("");
                         result.data.forEach((item,index) =>{
+                            console.log(item);
+                            let date = new Date(item.date_end);
                             let textBidStatus = item.bid_status_id === 1 ? 'bidding' : 'payment'
                             let itemBid = `
                              <tr>
@@ -183,7 +185,7 @@
                                     <td><span class="${item.bid_status_id === 1 ? 'bidding' : 'payment'}">${textBidStatus}</span></td>
                                     <td class="d-flex align-items-center justify-content-end">
                                         <div><a class="text-success" onclick="getProductBidsList(${item.product_id})" data-toggle="modal" data-target="#modalHistoryProductBid"><i class="ti-eye border-right pr-1"></i></a></div>
-                                        <div><a class="text-primary"><i class="ti-medall border-right px-1"></i></a></div>
+                                        <div><a class="text-primary" onclick="paymentBidAuction(${date.getTime()},${item.id},${item.product_id},${item.bid_status_id})"><i class="ti-medall border-right px-1"></i></a></div>
                                         <div style="position: relative;top: -1px"><a class="text-danger"><i class="fa fa-pause pl-1" aria-hidden="true"></i></a></div>
                                     </td>
                              <tr>
@@ -260,5 +262,35 @@
                 getProductBidsList(productID,1,$('#search-user-email-input').val());
             })
         }
+        //
+        function paymentBidAuction(dateEnd,bidID,productID,bidStatusGet){
+            console.log(bidStatusGet);
+            //check date end
+            if(bidStatusGet !== 3){
+                let today = new Date();
+                if(today.getTime() >= dateEnd){
+                    $.ajax({
+                        url:`/changeBidAccountStatus`,
+                        method:'GET',
+                        data:{bidID,bidStatus:3,productID},
+                        success:result =>{
+                            getProductAuction(searchBidProductFilter);
+                            $('.response-message').html('').addClass('active').append(`
+                                        <div class="alert alert-success">${result.message}</div>`);
+                            setTimeout(()=>{$('.response-message').removeClass('active')},4000);
+                        }
+                    });
+                }else{
+                    $('.response-message').html('').addClass('active').append(`
+                                        <div class="alert alert-danger">Auction time is not end!</div>`);
+                    setTimeout(()=>{$('.response-message').removeClass('active')},4000);
+                }
+            }else{
+                $('.response-message').html('').addClass('active').append(`
+                                        <div class="alert alert-danger">Email already send to the user</div>`);
+                setTimeout(()=>{$('.response-message').removeClass('active')},4000);
+            }
+        }
+
     </script>
 @endsection
