@@ -17,42 +17,54 @@ class BidsController extends Controller
     /** */public function index(){}
 
     public function showBidUser(Request $request){
-        $query = DB::table('bids')
+        $arr = [];
+        $findBidUser = DB::table('bids')
             ->join('products','bids.product_id','=','products.id')
-            ->select(DB::raw('max(amount_of_bid) as max_bid,product_id,bid_status_id,bids.created_at,products.name,products.image,products.date_end,products.current_price'))
-            ->where('account_id','=',$request->account)
-            ->whereNotIn('bids.bid_status_id',[2,4]);
+            ->select(DB::raw('max(amount_of_bid) as max_bid,bids.product_id'))
+            ->where('account_id','=',$request->account);
 
         if(isset($request->bidStatus)){
-            $query = $query->where('bids.bid_status_id','=',$request->bidStatus);
+            $findBidUser = $findBidUser->where('bids.bid_status_id','=',$request->bidStatus);
         }
         if(isset($request->productName)){
-            $query = $query->where('products.name','like','%'.$request->productName.'%');
+            $findBidUser = $findBidUser->where('products.name','like','%'.$request->productName.'%');
         }
+        $findBidUser = $findBidUser->groupBy('product_id');
         if(isset($request->timeEndBid)){
                 $typeTimeEnd = 'DESC';
             if($request->timeEndBid == 0){
                 $typeTimeEnd = 'ASC';
             }
-            $query = $query->orderBy('products.date_end',$typeTimeEnd);
+            $findBidUser = $findBidUser->orderBy('products.date_end',$typeTimeEnd);
         }
         if(isset($request->timeBid)){
-            $typeTimeBid = 'ASC';
+            $typeTimeBid = 'asc';
             if($request->timeBid == 0){
-                $typeTimeBid = 'DESC';
+                $typeTimeBid = 'desc';
             }
-            $query = $query->orderBy('bids.created_at',$typeTimeBid);
+            $findBidUser = $findBidUser->orderBy('bids.created_at',$typeTimeBid);
         }
         if(isset($request->highestPrice)){
             $typeHighestPrice = 'DESC';
             if($request->highestPrice == 0){
                 $typeHighestPrice = 'ASC';
             }
-            $query = $query->orderBy('products.current_price',$typeHighestPrice);
+            $findBidUser = $findBidUser->orderBy('products.current_price',$typeHighestPrice);
         }
-        $result = $query->groupBy('product_id')->paginate(10);
+            $result = $findBidUser->paginate(10);
+            foreach ($result->items() as $element){
+                $test = DB::table('bids')
+                    ->join('products','products.id','=','bids.product_id')
+                    ->join('accounts','accounts.id','=','bids.account_id')
+                    ->join('users','users.id','=','accounts.user_id')
+                    ->select('products.name','bids.amount_of_bid as max_bid','bids.product_id','products.image','products.current_price','users.email','bids.created_at','products.date_end','bids.bid_status_id','bids.id')
+                    ->where('bids.product_id','=',$element->product_id)
+                    ->where('amount_of_bid','=',$element->max_bid)
+                    ->get();
+                $arr[] = $test[0];
+            }
         return [
-            "data"=>$result,
+            "data"=>$arr,
             "total"=>$result->total(),
             "perPage"=>$result->perPage(),
             "currentPage"=>$result->currentPage()

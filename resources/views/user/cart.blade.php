@@ -166,9 +166,10 @@
                     page:search.page
                 },
                 success:result =>{
-                    if(result.data.data.length > 0){
+                        console.log(result);
+                    if(result.data.length > 0){
                         userCartAuction.html("")
-                        result.data.data.forEach((item,index) =>{
+                        result.data.forEach((item,index) =>{
                             let textBidStatus = item.bid_status_id === 1 ? 'bidding' : 'payment'
                             let cartItem = `
                             <tr>
