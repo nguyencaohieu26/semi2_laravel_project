@@ -322,10 +322,10 @@
             data:{account:accountID ? accountID : undefined},
             method:'GET',
             success: result=>{
-                if(result.data.data.length > 0){
+                if(result.data.length > 0){
                     cartUserContainer.html("");
                     numberBidUser.children('p').text(result.total);
-                    result.data.data.forEach((item,index) =>{
+                    result.data.forEach((item,index) =>{
                         if(index < 5){
                             let bid_status = `${item.bid_status_id === 1 ? "bidding" : (item.bid_status_id === 2 ? "giveup" : (item.bid_status_id === 3 ? "payment" : "success"))}`;
                                 let itemBid = `

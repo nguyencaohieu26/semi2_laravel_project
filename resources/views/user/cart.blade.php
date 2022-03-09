@@ -179,7 +179,7 @@
                                 <td style="color: rebeccapurple;font-size: 12px" class="font-italic">${formatter.format(item.max_bid)}</td>
                                 <td style="color: #DD4A48;font-size: 12px" class="font-italic">${formatter.format(item.current_price)}</td>
                                 <td style="font-size: 12px" class="text-secondary">${item.created_at}</td>
-                                <td style="font-size: 12px" class="text-secondary">
+                                <td style="font-size: 12px" class="text-secondary date-auction-end">
                                     <div class="d-flex justify-content-between" data-countdown="${item.date_end}"></div>
                                 </td>
                                 <td><span class="${item.bid_status_id === 1 ? 'bidding' : 'payment'}">${textBidStatus}</span></td>
@@ -195,6 +195,8 @@
                             $('[data-countdown]').each(function() {
                                 let $this = $(this), finalDate = $(this).data('countdown');
                                 $this.countdown(finalDate, function(event) {
+                                    console.log(event.type);
+                                if(event.type === "update"){
                                     let dayFormat = `<div class="days d-flex flex-column align-items-center"><span class="font-weight-bolder">${event.offset.totalDays < 10 ? "0"+event.offset.totalDays : event.offset.totalDays}</span><p class="mb-0" style="font-size: 10px">days</p></div>`
                                     let countDownTimeEle = `
                                         ${dayFormat}
@@ -203,6 +205,9 @@
                                         <div class="seconds d-flex flex-column align-items-center"><span class="font-weight-bolder">${event.offset.seconds < 10 ? "0"+event.offset.seconds : event.offset.seconds}</span><p class="mb-0" style="font-size: 10px">seconds</p></div>
                                     `
                                     $this.html(countDownTimeEle);
+                                }else{
+                                    $this.html('Ended');
+                                }
                                 });
                             });
                         });

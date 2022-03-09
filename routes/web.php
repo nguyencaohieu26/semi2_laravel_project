@@ -93,6 +93,8 @@ Route::group(['prefix'=>'/'],function(){
     Route::get('changeCategoryStatus',[CategoryController::class,'changeStatus']);
 
     Route::get('changeBidAccountStatus',[BidsController::class,'changeStatusBid']);
+
+    Route::get('send-email',[\App\Http\Controllers\MailController::class,'sendEmail']);
 });
 
 //|--------------------------------------------------------------------------
