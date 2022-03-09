@@ -167,9 +167,9 @@
                 success:result=>{
                     noDataContainerBidProduct.hide();
                     if(result.data.length > 0){
+                        console.log(result);
                         bidProductContainer.html("");
                         result.data.forEach((item,index) =>{
-                            console.log(item);
                             let date = new Date(item.date_end);
                             let textBidStatus = item.bid_status_id === 1 ? 'bidding' : 'payment'
                             let itemBid = `
@@ -185,7 +185,7 @@
                                     <td><span class="${item.bid_status_id === 1 ? 'bidding' : 'payment'}">${textBidStatus}</span></td>
                                     <td class="d-flex align-items-center justify-content-end">
                                         <div><a class="text-success" onclick="getProductBidsList(${item.product_id})" data-toggle="modal" data-target="#modalHistoryProductBid"><i class="ti-eye border-right pr-1"></i></a></div>
-                                        <div><a class="text-primary" onclick="paymentBidAuction(${date.getTime()},${item.id},${item.product_id},${item.bid_status_id})"><i class="ti-medall border-right px-1"></i></a></div>
+                                        <div><a class="text-primary" onclick="paymentBidAuction( ${date.getTime()}, ${item.id}, ${item.product_id}, ${item.bid_status_id}, ${item.max_bid})"><i class="ti-medall border-right px-1"></i></a></div>
                                         <div style="position: relative;top: -1px"><a class="text-danger"><i class="fa fa-pause pl-1" aria-hidden="true"></i></a></div>
                                     </td>
                              <tr>
@@ -232,7 +232,6 @@
                 method:'GET',
                 data:{product:productID,page:page,emailSearch:emailSearch},
                 success:result=>{
-                    console.log(result);
                     tableHistoryBidContainer.html('');
                     if(result.data.data.length > 0){
                         result.data.data.forEach((item,index) =>{
@@ -259,12 +258,12 @@
             });
             $('#search-form-history').submit(e=>{
                 e.preventDefault();
+                console.log('run');
                 getProductBidsList(productID,1,$('#search-user-email-input').val());
             })
         }
         //
-        function paymentBidAuction(dateEnd,bidID,productID,bidStatusGet){
-            console.log(bidStatusGet);
+        function paymentBidAuction(dateEnd,bidID,productID,bidStatusGet,maxBid){
             //check date end
             if(bidStatusGet !== 3){
                 let today = new Date();
@@ -278,6 +277,7 @@
                             $('.response-message').html('').addClass('active').append(`
                                         <div class="alert alert-success">${result.message}</div>`);
                             setTimeout(()=>{$('.response-message').removeClass('active')},4000);
+                            sendEmailNotify(bidID,maxBid);
                         }
                     });
                 }else{
@@ -291,6 +291,25 @@
                 setTimeout(()=>{$('.response-message').removeClass('active')},4000);
             }
         }
+        //
+        function sendEmailNotify(bidID,maxBid){
+            $.ajax({
+                url:`/send-email`,
+                method:'GET',
+                data:{bidID,maxBid},
+                success:result=>{
+                    console.log(result);
+                }
+            })
+        }
+        //
+        $('#bids-admin-search-form').submit(function (e){
+            e.preventDefault();
 
+        })
+        $('#btn-clear-search').click(function (){
+            $('#bids-admin-search-form')[0].reset();
+            getProductAuction(searchBidProductFilter);
+        });
     </script>
 @endsection

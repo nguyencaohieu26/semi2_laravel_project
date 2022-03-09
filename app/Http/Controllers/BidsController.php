@@ -75,7 +75,8 @@ class BidsController extends Controller
         $subCondition = [];
         $maxBids = DB::table('bids')
             ->select(DB::raw('max(bids.amount_of_bid) as max_bid,product_id'))
-            ->groupBy('bids.product_id')->paginate(12);
+            ->groupBy('bids.product_id')
+            ->paginate(12);
         foreach ($maxBids->items() as $ele){
             $test = DB::table('bids')
                 ->join('products','products.id','=','bids.product_id')
@@ -139,16 +140,28 @@ class BidsController extends Controller
     public function checkOutProductBid(Request  $request){
         $user = \App\Models\Users::with(['accounts'])->where('id', Auth::user()->user_id)->first();
         $product = Product::findOrFail($request->productID);
+        $account = Accounts::where('user_id','=',$user->id)->first();
+        $accountDeposit = AccountDeposit::where('product_id','=',$request->productID)
+            ->where('account_id','=',$account->id)->first();
+        $deposit = $accountDeposit->deposit_amount;
         if($product->status_id != 3){
             return redirect()->route('user-cart')->with('error-pay','The Auction is not end! Can\'t not payment');
         }
-        return view('user.checkout',compact('user','product'));
+        return view('user.checkout',compact('user','product','deposit'));
 
     }
 
     public function checkOutAuction(Request $request){
         //validate info
-
+        $validate = $request->validate([
+            'email'         => 'bail|required|email',
+            'firstname'     => 'bail|required',
+            'lastname'      => 'bail|required',
+            'date-delivery' => [
+                'after: 6 day'
+            ],
+            'total-order'   => 'bail|required',
+        ]);
         //change status bid -> success
 
         //create auction result
