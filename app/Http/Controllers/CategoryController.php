@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
@@ -37,7 +38,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.create');
+        $user = \App\Models\Users::with(['accounts'])->where('id', Auth::user()->user_id)->first();
+        return view('admin.categories.create',compact('user'));
     }
 
     /**
@@ -83,8 +85,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
+        $user = \App\Models\Users::with(['accounts'])->where('id', Auth::user()->user_id)->first();
         $category = Category::findOrFail($id);
-        return view('admin.categories.edit',compact('category'));
+        return view('admin.categories.edit',compact('category','user'));
         //
     }
 

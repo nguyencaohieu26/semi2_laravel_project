@@ -111,7 +111,7 @@
                                 <td>${user.id}</td>
                                 <td><img width="40px" src="/images_store/accounts/${user.avatar}" alt="${user.firstname + " "+user.lastname}"/></td>
                                 <td>${user.firstname + " "+user.lastname}</td>
-                                <td>${user.email}</td>
+                                <td class="font-italic text-secondary" style="font-size: 12px">${user.email}</td>
                                 <td class="${genderClasses}" style="font-size: 12px">${gender}</td>
                                 <td class="font-italic" style="font-size: 12px;color: #0c5460">${new Date(user.date_of_birth).toLocaleDateString("en-US",{ year: 'numeric', month: 'long', day: 'numeric' })}</td>
                                 <td class="" style="font-size: 12px">${user.role}</td>

@@ -169,10 +169,10 @@
                                    <td class="product-image">
                                         <img width="70px" style="height: 50px" class="rounded" src="/images_store/products/${product.image}" alt=""/>
                                    </td>
-                                    <td class="product-name" >${product.name}</td>
-                                    <td class="product-name" >${product.artists.name}</td>
+                                    <td class="product-name font-italic" style="font-size: 13px" >${product.name}</td>
+                                    <td class="product-name" style="color: #4b5cbe;font-size: 13px">${product.artists.name}</td>
                                     <td class="product-start-price font-italic" style="font-size: 12px;color: #68329b">${formatter.format(product.start_price)}</td>
-                                    <td class="product-status" >${product.product_status.name}</td>
+                                    <td class="product-status" style="font-size: 12px">${product.product_status.name}</td>
                                     <td class="d-flex" >
                                         <div><a class="text-success" href="#" onclick="viewProductDetail(${product.id})" data-toggle="modal" data-target="#modalDetailProduct"><i class="ti-eye border-right pr-1"></i></a></div>
                                         <div><a class="text-primary" href="/products_resource/${product.id}/edit "><i class="ti-pencil-alt2 border-right px-1"></i></a></div>

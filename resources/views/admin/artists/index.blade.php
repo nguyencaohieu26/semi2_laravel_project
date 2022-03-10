@@ -110,12 +110,16 @@
                                 <tr>
                                     <th scope="row">${artist.id}</th>
                                     <td class="artist-name">${artist.name}</td>
-                                    <td class="font-italic" style="font-size: 12px">${new Date(artist.date_of_birth).toLocaleDateString("en-US",{ year: 'numeric', month: 'long', day: 'numeric' })}</td>
-                                    <td class="artist-description">${artist.description}</td>
+                                    <td class="font-italic" style="font-size: 12px;color: mediumpurple">${new Date(artist.date_of_birth).toLocaleDateString("en-US", {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                            })}</td>
+                                    <td class="artist-description font-italic" style="color: #40699d">${artist.description}</td>
                                     <td style="font-size: 13px" class="font-weight-bold ${artist.status === 1 ? "text-success" : "text-danger"}">${artist.status === 1 ? "Active" : "Inactive"}</td>
                                     <td class="">
                                           <label class="switch">
-                                            <input type="checkbox" ${artist.status === 1 ? "checked" :""} id="btn-artist-on-off" data-category-id="${artist.id}">
+                                            <input type="checkbox" ${artist.status === 1 ? "checked" : ""} id="btn-artist-on-off" data-category-id="${artist.id}">
                                             <span class="slider round"></span>
                                           </label>
                                     </td>

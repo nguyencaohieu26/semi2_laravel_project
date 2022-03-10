@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Artist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ArtistController extends Controller
 {
@@ -31,7 +32,9 @@ class ArtistController extends Controller
     public function create()
     {
         //
-        return  view('admin.artists.create');
+        $user = \App\Models\Users::with(['accounts'])->where('id', Auth::user()->user_id)->first();
+
+        return  view('admin.artists.create',compact('user'));
     }
 
     /**
@@ -67,7 +70,8 @@ class ArtistController extends Controller
     public function edit($id)
     {
         $artist = Artist::findOrFail($id);
-        return view('admin.artists.edit',compact('artist'));
+        $user = \App\Models\Users::with(['accounts'])->where('id', Auth::user()->user_id)->first();
+        return view('admin.artists.edit',compact('artist','user'));
     }
 
     /**

@@ -113,8 +113,8 @@
                                    <td class="category-image">
                                     <img width="70px" style="height: 50px" class="rounded" src="/images_store/categories/${category.image}" alt=""/>
                                    </td>
-                                   <td class="category-name">${category.name}</td>
-                                   <td class="category-code">${category.category_code}</td>
+                                   <td class="category-name text-secondary" style="font-size: 13px">${category.name}</td>
+                                   <td class="category-code font-italic" style="font-size: 12px">${category.category_code}</td>
                                    <td class="category-code ${category.status === 1 ? "text-success" : "text-danger"}" style="font-size: 13px">${category.status === 1 ? "Active":"Inactive"}</td>
                                    <td class="">
                                         <label class="switch">

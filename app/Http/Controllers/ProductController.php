@@ -12,6 +12,7 @@ use App\Models\ProductCategory;
 use App\Models\ProductStatus;
 use App\Models\Size;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
@@ -93,11 +94,12 @@ class ProductController extends Controller
      */
     public function create()
     {
+        $user = \App\Models\Users::with(['accounts'])->where('id', Auth::user()->user_id)->first();
         $artists = Artist::all();
         $product_status = ProductStatus::all();
         $sizes = Size::where('status','=',1)->get();
         $categories = Category::all();
-        return view('admin.products.create', compact('artists', 'product_status', 'categories','sizes'));
+        return view('admin.products.create', compact('artists', 'product_status', 'categories','sizes','user'));
     }
 
 
@@ -245,6 +247,7 @@ class ProductController extends Controller
     /** Show the form for editing the specified resource. */
     public function edit($id)
     {
+        $user = \App\Models\Users::with(['accounts'])->where('id', Auth::user()->user_id)->first();
         $product = Product::with(['categories', 'artists', 'product_status'])->where('id', $id)->first();
         $listArtists = Artist::where('status','=',1)->get();
         $sizes = Size::where('status','=',1)->get();
@@ -252,7 +255,7 @@ class ProductController extends Controller
         $categories = Category::where('status','=',1)->get();
 //        $product = Product::query()->where('id', $id)->first();
 
-        return view('admin.products.edit', compact('product','listArtists','sizes','product_status','categories'));
+        return view('admin.products.edit', compact('product','listArtists','sizes','product_status','categories','user'));
         //
     }
 

@@ -88,9 +88,6 @@
                 </div>
                 {{--    --}}
                 <div class="col-12 col-xl-10">
-                    <section class="container-loading-section">
-                        <div class="lds-ripple"><div></div><div></div></div>
-                    </section>
                     <div class="row" id="product_list"></div>
                     <div id="pagination-custom" class="pagination-custom mt-auto">
                         <ul class="d-flex list-unstyled"></ul>
@@ -179,9 +176,6 @@
                 page:1,
             }
             //
-            let snippetProduct = $('.container-loading-section');
-            snippetProduct.hide();
-            //
             getProducts(searchProductField);
             //
             function getProducts(search){
@@ -200,76 +194,57 @@
                         page:search.page,
                     },
                     success:(result)=>{
-                        productList.html('');
-                        // snippetProduct.show("slow");
+                        document.querySelector('#product_list').innerHTML = ' ';
                         if(result.data.length > 0){
-                            console.log(result.data);
                             result.data.forEach(item =>{
-                                let userAuctionGet = undefined;
-                                if(item.bids.length > 0){userAuctionGet = getUsersAuctionArt(item.bids);}
-                                let userRender ='';
-                                if(userAuctionGet){
-                                    userAuctionGet.forEach((user,index) =>{
-                                       if(index < 3){
-                                           let ite = `
-                                            <div class="d-flex align-items-center position-relative mr-2">
-                                                <img width="15px" class="rounded-circle" alt="${user.lastname}-${user.firstname}" src="/images_store/accounts/${user.avatar}"/>
-                                                <p class="mb-0 position-absolute d-none">${user.lastname} ${user.firstname}</p>
-                                            </div>`
-                                           userRender +=ite;
-                                       }
-                                    })
-                                }
-                                console.log(userAuctionGet);
-                                let today = new Date().getTime();
-                                let dayStart = new Date(item.date_start);
-                                let dayCount;
-                                if(dayStart.getTime() > today){dayCount = item.date_start;}else{dayCount = item.date_end;}
-                                let productItem = `
-                                   <div class="col-12 col-sm-6 col-md-4 col-xl-3">
-                                        <div class="auction-lot-item mb-3">
-                                            <a href="/products/${item.id}?Art=${(item.name).replaceAll(' ','-')}?Artist=${(item.artists.name).replaceAll(' ','-')}">
-                                                <div class="lot-thumbnail position-relative overflow-hidden">
-                                                    <img class="border" style="height: 300px" width="100%" src="images_store/products/${item.image}" alt="${item.name}"/>
-                                                    <div class="lot-id-container d-flex mb-2 position-absolute" style="top: 1rem;left: 10px">
-                                                        <p class="m-0 border p-1 font-weight-bold text-white rounded" style="background: rgba(0,0,0,0.3)">LOT <span class="lot-id">${item.id}</span></p>
+
+                                    let today = new Date().getTime();
+                                    let dayStart = new Date(item.date_start);
+                                    let dayCount;
+                                    if(dayStart.getTime() > today){dayCount = item.date_start;}else{dayCount = item.date_end;}
+                                    let productItem = `
+                                       <div class="col-12 col-sm-6 col-md-4 col-xl-3">
+                                            <div class="auction-lot-item mb-3">
+                                                <a href="/products/${item.id}?Art=${(item.name).replaceAll(' ','-')}?Artist=${(item.artists.name).replaceAll(' ','-')}">
+                                                    <div class="lot-thumbnail position-relative overflow-hidden">
+                                                        <img class="border" style="height: 300px" width="100%" src="images_store/products/${item.image}" alt="${item.name}"/>
+                                                        <div class="lot-id-container d-flex mb-2 position-absolute" style="top: 1rem;left: 10px">
+                                                            <p class="m-0 border p-1 font-weight-bold text-white rounded" style="background: rgba(0,0,0,0.3)">LOT <span class="lot-id">${item.id}</span></p>
+                                                        </div>
+                                                            <div class="count-down-container count-down-container--lot position-absolute p-0"  data-countdown="${dayCount}"></div>
+                                                        <div class="auction-lot-item-btn position-absolute"><button class="border-0 rounded">View bid</button></div>
                                                     </div>
-                                                    <div class="d-flex position-absolute" style="top: 1.2rem;right: 5px">${userAuctionGet ? userRender : ''}</div>
-                                                        <div class="count-down-container count-down-container--lot position-absolute p-0"  data-countdown="${dayCount}"></div>
-                                                    <div class="auction-lot-item-btn position-absolute"><button class="border-0 rounded">View bid</button></div>
-                                                </div>
-                                                <div class="lot-content mt-2 p-2">
-                                                    <h5 class="lot-content-name font-weight-bold">${item.name}</h5>
-                                                    <div class="my-2 d-flex flex-wrap justify-content-between border-bottom pb-1">
-                                                        <p style="font-size: 11px" class="font-italic text-dark font-weight-bold mb-0 mr-1">
-                                                            <i class="fas fa-tags text-danger"></i>
-                                                            <span>${item.product_status.name}</span>
-                                                        </p>
-                                                        <p style="font-size: 11px" class="lot-content-artist text-dark font-italic font-weight-bold mb-0">
-                                                            <i class="fas fa-user-tag text-primary"></i>
-                                                            <span>${item.artists.name}</span>
-                                                        </p>
+                                                    <div class="lot-content mt-2 p-2">
+                                                        <h5 class="lot-content-name font-weight-bold">${item.name}</h5>
+                                                        <div class="my-2 d-flex flex-wrap justify-content-between border-bottom pb-1">
+                                                            <p style="font-size: 11px" class="font-italic text-dark font-weight-bold mb-0 mr-1">
+                                                                <i class="fas fa-tags text-danger"></i>
+                                                                <span>${item.product_status.name}</span>
+                                                            </p>
+                                                            <p style="font-size: 11px" class="lot-content-artist text-dark font-italic font-weight-bold mb-0">
+                                                                <i class="fas fa-user-tag text-primary"></i>
+                                                                <span>${item.artists.name}</span>
+                                                            </p>
+                                                        </div>
+                                                        <div class="">
+                                                            <p class="lot-content-start-price mb-1">
+                                                                <span class="font-weight-bold mr-1 d-inline-block text-dark" style="width: 80px;font-size: 13px">Starting bid: </span>
+                                                                <span class="text-success font-italic font-weight-bold" style="font-size: 12px">$<span class="price">${(item.start_price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span></span>
+                                                            </p>
+                                                            <p class="lot-content-current-bid mb-1">
+                                                                <span class="font-weight-bold mr-1 d-inline-block text-dark" style="width: 80px;font-size: 13px">Current bid:</span>
+                                                                <span class="font-italic font-weight-bold p-1" style="font-size: 12px"><span class="price" style="color:#EF6D6D">${item.current_price > 0 ? "$ "+(item.current_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")) : "No bid"}</span></span>
+                                                            </p>
+                                                        </div>
                                                     </div>
-                                                    <div class="">
-                                                        <p class="lot-content-start-price mb-1">
-                                                            <span class="font-weight-bold mr-1 d-inline-block text-dark" style="width: 80px;font-size: 13px">Starting bid: </span>
-                                                            <span class="text-success font-italic font-weight-bold" style="font-size: 12px">$<span class="price">${(item.start_price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span></span>
-                                                        </p>
-                                                        <p class="lot-content-current-bid mb-1">
-                                                            <span class="font-weight-bold mr-1 d-inline-block text-dark" style="width: 80px;font-size: 13px">Current bid:</span>
-                                                            <span class="font-italic font-weight-bold p-1" style="font-size: 12px"><span class="price" style="color:#EF6D6D">${item.current_price > 0 ? "$ "+(item.current_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")) : "No bid"}</span></span>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </a>
+                                                </a>
+                                            </div>
                                         </div>
-                                    </div>
-                                `
-                                productList.append(productItem);
-                                // setTimeout(()=>{
-                                //     snippetProduct.hide("slow");
-                                // },2000)
-                                //show paginate
+                                    `
+                                    productList.append(productItem);
+
+
+                            });
                                 paginateContainer.html('');
                                 const totalPage = result.total;
                                 const numberPerPage = result.per_page;
@@ -296,7 +271,6 @@
                                         }
                                     });
                                 });
-                            });
                         }else{
                             paginateContainer.html('');
                             productList.html('').append(`
@@ -309,22 +283,6 @@
                     }
 
                 })
-            }
-            //
-            function getUsersAuctionArt(listBid){
-                let userGet =[];
-                let listUser = listBid.map(item =>{return item.account_id;})
-                $.ajax({
-                    url:`getUsersAuction`,
-                    async: false,
-                    method:'GET',
-                    data:{accounts:listUser},
-                    success:result=>{
-                       userGet = result;
-                    }
-                })
-
-                return userGet;
             }
             //
             openFilterButtonEle.addEventListener('click',()=>{

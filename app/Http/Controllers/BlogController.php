@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class BlogController extends Controller
@@ -37,7 +38,8 @@ class BlogController extends Controller
      */
     public function create()
     {
-        return view('admin.blogs.create');
+        $user = \App\Models\Users::with(['accounts'])->where('id', Auth::user()->user_id)->first();
+        return view('admin.blogs.create',compact('user'));
     }
 
     /**
@@ -115,7 +117,8 @@ class BlogController extends Controller
     public function edit($id)
     {
         $blog = Blog::findOrFail($id);
-        return view('admin.blogs.edit', compact('blog'));
+        $user = \App\Models\Users::with(['accounts'])->where('id', Auth::user()->user_id)->first();
+        return view('admin.blogs.edit', compact('blog','user'));
     }
 
     /**
